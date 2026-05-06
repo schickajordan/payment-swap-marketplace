@@ -15,7 +15,6 @@ import { MarketingShell } from "@/components/layout/marketing-shell";
 import { getCurrentSession } from "@/lib/auth/session";
 import { listMyAddresses, getMyProfileRow } from "@/lib/profiles/queries";
 import { getMyPayoutAccount } from "@/lib/payouts/queries";
-import { APP_NAME } from "@/lib/config/marketplace";
 import { MARKETPLACE_DEAL_LANE_ENTRIES } from "@/lib/marketplace/deal-lanes";
 import { authRoutes, signInUrlWithNext } from "@/lib/navigation";
 
@@ -77,8 +76,8 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Account hub</p>
           <h1 className="text-3xl font-black uppercase tracking-tight text-white md:text-4xl">Your account</h1>
           <p className="text-sm text-slate-400">
-            {APP_NAME} mirrors the Amazon / Uber / Turo playbook: self-serve profile, security, saved addresses, email
-            prefs, and payouts status in one place.
+            Manage the same profile credentials and payout posture your swap deals reference—security, saved addresses,
+            notification preferences, and Connect status in one place.
           </p>
         </header>
 
