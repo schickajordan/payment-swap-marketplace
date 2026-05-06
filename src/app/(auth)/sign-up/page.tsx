@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { signInWithGoogleAction, signUpAction } from "@/app/(auth)/actions";
+import { signInWithGoogleAction } from "@/app/(auth)/actions";
+import { SignUpEmailForm } from "@/components/auth/sign-up-email-form";
 import { authRoutes } from "@/lib/navigation";
 
 const allowPublicAdminSignUp = process.env.ALLOW_PUBLIC_ADMIN_SIGNUP === "true";
@@ -22,9 +23,30 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
           Create your business account
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Choose buyer or seller. After email confirmation, you&apos;ll use the matching dashboard to browse inventory or
-          publish listings. Operations (admin) access is invite-only in production.
+          Pick buyer or seller. When your project sends a confirmation email, finish that link once—then{" "}
+          <Link href={authRoutes.signIn} className="font-semibold text-[var(--link)] underline-offset-4 hover:underline">
+            sign in
+          </Link>{" "}
+          with the password you chose. Admin access is invite-only in production.
         </p>
+
+        <ol className="mt-4 space-y-1.5 rounded-md border border-[var(--input-border)] bg-[var(--card-muted)] px-4 py-3 text-xs leading-relaxed text-foreground [&>li]:ps-1">
+          <li className="flex gap-2">
+            <span className="font-display font-bold tabular-nums text-muted">1.</span>
+            <span>
+              Submit this form — we queue your account at the auth provider.
+            </span>
+          </li>
+          <li className="flex gap-2">
+            <span className="font-display font-bold tabular-nums text-muted">2.</span>
+            <span>Open the inbox (and spam folder) — click verify when your project requires it.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="font-display font-bold tabular-nums text-muted">3.</span>
+            <span>Come back to sign in — your profile finishes on first successful login.</span>
+          </li>
+        </ol>
+
         <p className="mt-3 text-xs leading-relaxed text-muted">
           New here? Read{" "}
           <Link href="/about" className="font-semibold text-[var(--link)] underline-offset-4 hover:underline">
@@ -63,59 +85,10 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
           <div className="h-px flex-1 bg-[var(--steel-line)]" />
         </div>
 
-        <form action={signUpAction} className="flex flex-col gap-4">
-          <label className="flex flex-col gap-1 text-sm font-medium text-foreground">
-            Display name (optional)
-            <input
-              type="text"
-              name="fullName"
-              maxLength={200}
-              placeholder="How we greet you in threads"
-              className="input-field rounded-md px-3 py-2.5"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm font-medium text-foreground">
-            Email
-            <input
-              type="email"
-              name="email"
-              required
-              autoComplete="email"
-              className="input-field rounded-md px-3 py-2.5"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm font-medium text-foreground">
-            Password
-            <input
-              type="password"
-              name="password"
-              minLength={8}
-              required
-              autoComplete="new-password"
-              className="input-field rounded-md px-3 py-2.5"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm font-medium text-foreground">
-            Account role
-            <select
-              name="role"
-              defaultValue={defaultRole}
-              className="input-field rounded-md px-3 py-2.5"
-            >
-              <option value="buyer">Buyer</option>
-              <option value="seller">Seller</option>
-              {allowPublicAdminSignUp ?
-                <option value="admin">Admin (staging only)</option>
-              : null}
-            </select>
-          </label>
-          <button
-            type="submit"
-            className="rounded-md bg-[var(--button-primary-bg)] px-4 py-2.5 text-sm font-semibold text-[var(--button-primary-fg)] transition-colors hover:opacity-[0.93] active:translate-y-px"
-          >
-            Create account
-          </button>
-        </form>
+        <SignUpEmailForm
+          defaultRole={defaultRole}
+          allowPublicAdminSignUp={allowPublicAdminSignUp}
+        />
 
         <p className="mt-4 text-sm text-muted">
           Already have an account?{" "}

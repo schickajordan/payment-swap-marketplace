@@ -1,6 +1,15 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import type { AuthCredentialFormState, ForgotEmailFormState } from "@/lib/auth/auth-form-state";
+import {
+  isForgotEmailValidated,
+  isSignInValidated,
+  isSignUpValidated,
+  validateForgotEmailForm,
+  validateSignInForm,
+  validateSignUpForm,
+} from "@/lib/auth/auth-form-state";
 import { sanitizeAppPath } from "@/lib/auth/sanitize-app-path";
 import { authRoutes } from "@/lib/navigation";
 import { ensureMyProfile } from "@/lib/profiles/queries";
@@ -8,30 +17,48 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { DEFAULT_ROLE, isUserRole } from "@/lib/types/roles";
 import { getCanonicalSiteUrl } from "@/lib/seo/site-url";
 
-export async function signInAction(formData: FormData) {
-  const email = String(formData.get("email") ?? "");
-  const password = String(formData.get("password") ?? "");
+export async function signInAction(
+  _prevState: AuthCredentialFormState,
+  formData: FormData,
+): Promise<AuthCredentialFormState> {
+  const checked = validateSignInForm(formData);
+  if (!isSignInValidated(checked)) {
+    return checked;
+  }
+  const { email, password } = checked;
 
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    redirect(`${authRoutes.signIn}?error=${encodeURIComponent(error.message)}`);
+    return { formError: error.message };
   }
 
   const roleCandidate = data.user?.user_metadata?.role;
   const role = isUserRole(roleCandidate) ? roleCandidate : DEFAULT_ROLE;
-  await ensureMyProfile({ role });
+
+  try {
+    await ensureMyProfile({ role });
+  } catch (profileErr) {
+    const msg =
+      profileErr instanceof Error ? profileErr.message : "Could not finish account setup.";
+    return { formError: msg };
+  }
 
   const next = sanitizeAppPath(formData.get("next"));
   redirect(next ?? "/");
 }
 
-export async function signUpAction(formData: FormData) {
-  const email = String(formData.get("email") ?? "");
-  const password = String(formData.get("password") ?? "");
-  const fullNameRaw = String(formData.get("fullName") ?? "").trim();
-  const roleCandidate = formData.get("role");
+export async function signUpAction(
+  _prevState: AuthCredentialFormState,
+  formData: FormData,
+): Promise<AuthCredentialFormState> {
+  const validated = validateSignUpForm(formData);
+  if (!isSignUpValidated(validated)) {
+    return validated;
+  }
+
+  const { email, password, fullNameRaw, roleCandidate } = validated;
   const allowAdminSignUp = process.env.ALLOW_PUBLIC_ADMIN_SIGNUP === "true";
   let role = isUserRole(roleCandidate) ? roleCandidate : DEFAULT_ROLE;
   if (!allowAdminSignUp && role === "admin") {
@@ -39,6 +66,8 @@ export async function signUpAction(formData: FormData) {
   }
 
   const supabase = await createServerSupabaseClient();
+
+  const site = getCanonicalSiteUrl();
 
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -48,15 +77,31 @@ export async function signUpAction(formData: FormData) {
         role,
         ...(fullNameRaw ? { full_name: fullNameRaw } : {}),
       },
+      /**
+       * Lands the user on your domain after they click the inbox link. Must be listed in Supabase
+       * Dashboard → Authentication → URL configuration → Redirect URLs.
+       */
+      emailRedirectTo: `${site}${authRoutes.account}`,
     },
   });
 
   if (error) {
-    redirect(`${authRoutes.signUp}?error=${encodeURIComponent(error.message)}`);
+    return { formError: error.message };
   }
 
-  if (data.user) {
-    await ensureMyProfile({ role, fullName: fullNameRaw || undefined });
+  /**
+   * When “Confirm email” is enabled in Supabase, `signUp` returns a user but often **no session** until
+   * the inbox link is clicked. `ensureMyProfile` requires a session—running it here threw and broke signup.
+   * Profile is created on first successful `signIn` (and OAuth callback) instead.
+   */
+  if (data.user && data.session) {
+    try {
+      await ensureMyProfile({ role, fullName: fullNameRaw || undefined });
+    } catch (profileErr) {
+      const msg =
+        profileErr instanceof Error ? profileErr.message : "Could not create profile row.";
+      return { formError: msg };
+    }
   }
 
   redirect(`${authRoutes.signIn}?success=account-created&hint=confirm-email`);
@@ -68,14 +113,24 @@ export async function signOutAction() {
   redirect(authRoutes.signIn);
 }
 
-export async function requestPasswordResetAction(formData: FormData) {
-  const email = String(formData.get("email") ?? "").trim();
+export async function requestPasswordResetAction(
+  _prevState: ForgotEmailFormState,
+  formData: FormData,
+): Promise<ForgotEmailFormState> {
+  const checked = validateForgotEmailForm(formData);
+  if (!isForgotEmailValidated(checked)) {
+    return checked;
+  }
 
   const supabase = await createServerSupabaseClient();
 
-  await supabase.auth.resetPasswordForEmail(email, {
+  const { error } = await supabase.auth.resetPasswordForEmail(checked.email, {
     redirectTo: `${getCanonicalSiteUrl()}${authRoutes.updatePassword}`,
   });
+
+  if (error) {
+    return { formError: error.message };
+  }
 
   redirect(`${authRoutes.forgotPassword}?success=sent`);
 }

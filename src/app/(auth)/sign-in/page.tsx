@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { signInAction, signInWithGoogleAction } from "@/app/(auth)/actions";
+import { signInWithGoogleAction } from "@/app/(auth)/actions";
+import { SignInEmailForm } from "@/components/auth/sign-in-email-form";
 import { sanitizeAppPath } from "@/lib/auth/sanitize-app-path";
 import { authRoutes } from "@/lib/navigation";
 
@@ -13,7 +14,8 @@ type SignInPageProps = {
 };
 
 const successCopy: Record<string, string> = {
-  "account-created": "Account created. Sign in to continue.",
+  "account-created":
+    "We sent a confirmation link if your project requires email verification. Finish that email, then sign in below.",
   "password-reset": "Password updated. Sign in with your new password.",
   "account-deleted": "Your account has been permanently deleted.",
 };
@@ -32,7 +34,8 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
           Sign in
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Sign in with the business credentials issued at registration. Operational staff use separate onboarding.
+          Use the email and password you registered. If email confirmation is on in Supabase, you must complete the
+          inbox link once before passwords work here.
         </p>
         {nextPath ? (
           <p className="mt-2 text-xs font-semibold text-foreground">
@@ -53,9 +56,14 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
         ) : null}
 
         {params.hint === "confirm-email" ? (
-          <p className="mt-3 rounded-md border-l-4 border-amber-600 bg-[var(--card-muted)] p-3 text-xs font-medium leading-relaxed text-foreground">
-            If Supabase requires email confirmation, finish the inbox link before seller or buyer workspaces unlock.
-          </p>
+          <ol className="mt-3 list-decimal space-y-2 rounded-md border-l-4 border-amber-600 bg-[var(--card-muted)] p-3 ps-8 text-xs font-medium leading-relaxed text-foreground marker:font-semibold">
+            <li>Open the verification email from your auth provider.</li>
+            <li>
+              Click confirm — you should return here on <span className="font-mono text-[11px]">/account</span> or the
+              home page.
+            </li>
+            <li>Return here and sign in—then buyer or seller tools unlock.</li>
+          </ol>
         ) : null}
 
         <form action={signInWithGoogleAction} className="mt-6">
@@ -74,43 +82,7 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
           <div className="h-px flex-1 bg-[var(--steel-line)]" />
         </div>
 
-        <form action={signInAction} className="flex flex-col gap-4">
-          <input type="hidden" name="next" value={params.next ?? ""} />
-          <label className="flex flex-col gap-1 text-sm font-medium text-foreground">
-            Email
-            <input
-              type="email"
-              name="email"
-              required
-              autoComplete="email"
-              className="input-field rounded-md px-3 py-2.5"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm font-medium text-foreground">
-            Password
-            <input
-              type="password"
-              name="password"
-              required
-              autoComplete="current-password"
-              className="input-field rounded-md px-3 py-2.5"
-            />
-          </label>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <Link
-              href={authRoutes.forgotPassword}
-              className="text-xs font-semibold text-[var(--link)] underline-offset-4 hover:underline"
-            >
-              Forgot password?
-            </Link>
-          </div>
-          <button
-            type="submit"
-            className="rounded-md bg-[var(--button-primary-bg)] px-4 py-2.5 text-sm font-semibold text-[var(--button-primary-fg)] transition-opacity hover:opacity-95 active:translate-y-px"
-          >
-            Sign in
-          </button>
-        </form>
+        <SignInEmailForm nextQueryValue={typeof params.next === "string" ? params.next : ""} />
 
         <p className="mt-4 text-sm text-muted">
           No account yet?{" "}

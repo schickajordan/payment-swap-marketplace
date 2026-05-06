@@ -30,6 +30,22 @@ export async function proxy(request: NextRequest) {
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
+  const authConfigured = url.trim().length > 0 && anonKey.trim().length > 0;
+
+  const allowedRoles = requiredRoles(pathname);
+
+  /**
+   * Without URL + anon key, `@supabase/ssr` can throw during `getUser()`, which turned `/sign-in` and `/sign-up`
+   * into 500s on Vercel when env vars were missing. Public auth pages must still render so operators can fix config.
+   * Role-gated areas fail closed: send guests to sign-in (we cannot verify a session without Supabase).
+   */
+  if (!authConfigured) {
+    if (allowedRoles) {
+      const signTarget = `${authRoutes.signIn}?next=${encodeURIComponent(pathname)}`;
+      return NextResponse.redirect(new URL(signTarget, request.url));
+    }
+    return response;
+  }
 
   const supabase = createServerClient(url, anonKey, {
     cookies: {
@@ -44,7 +60,6 @@ export async function proxy(request: NextRequest) {
     },
   });
 
-  const allowedRoles = requiredRoles(pathname);
   const {
     data: { user },
   } = await supabase.auth.getUser();
