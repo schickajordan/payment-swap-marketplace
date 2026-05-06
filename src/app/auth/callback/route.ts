@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import type { Database } from "@/lib/supabase/database.types";
 import { sanitizeAppPath } from "@/lib/auth/sanitize-app-path";
 import { authRoutes } from "@/lib/navigation";
-import { getSupabaseEnv } from "@/lib/supabase/env";
+import { getSupabaseEnv, isSupabaseConfigured } from "@/lib/supabase/env";
 import { DEFAULT_ROLE, isUserRole } from "@/lib/types/roles";
 
 export async function GET(request: NextRequest) {
@@ -13,6 +13,16 @@ export async function GET(request: NextRequest) {
   const origin = requestUrl.origin;
   const code = requestUrl.searchParams.get("code");
   const next = sanitizeAppPath(requestUrl.searchParams.get("next")) ?? authRoutes.account;
+
+  if (!isSupabaseConfigured()) {
+    return NextResponse.redirect(
+      new URL(
+        `${authRoutes.signIn}?error=${encodeURIComponent("Server auth is not configured (missing Supabase URL or anon key).")}`,
+        origin,
+      ),
+    );
+  }
+
   const { url: supabaseUrl, anonKey } = getSupabaseEnv();
   const cookieStore = await cookies();
 
