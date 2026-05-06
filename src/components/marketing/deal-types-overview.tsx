@@ -24,7 +24,7 @@ export function DealTypesOverview() {
   return (
     <section
       id="ways-to-equip"
-      className="rounded-xl border border-[var(--steel-line)] bg-[var(--charcoal-panel)] p-6 md:p-8"
+      className="rounded-xl border border-[var(--steel-line)] bg-[var(--card)] p-6 shadow-[0_8px_28px_rgba(5,27,53,0.06)] md:p-8"
       aria-labelledby="ways-to-equip-heading"
     >
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -51,7 +51,7 @@ export function DealTypesOverview() {
         {DEAL_ROWS.map((row) => (
           <div
             key={row.heading}
-            className="rounded-lg border border-[var(--steel-line)] bg-[var(--card)] p-5 shadow-inner shadow-black/10"
+            className="rounded-lg border border-[var(--steel-line)] bg-[var(--card-muted)] p-5"
           >
             <p className="text-xs font-semibold uppercase tracking-wide text-gold">{row.heading}</p>
             <p className="mt-2 text-lg font-bold text-foreground">{row.summary}</p>

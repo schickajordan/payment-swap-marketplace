@@ -13,7 +13,7 @@ export function CategoryNavStrip() {
         >
           <Link
             href="/marketplace"
-            className="rounded px-2 py-1.5 font-semibold text-foreground transition-colors hover:bg-white/10 hover:text-gold"
+            className="rounded px-2 py-1.5 font-semibold text-foreground transition-colors hover:bg-[var(--card-muted)] hover:text-[var(--gold-strong)]"
           >
             All inventory
           </Link>
@@ -24,7 +24,7 @@ export function CategoryNavStrip() {
             <Link
               key={cat}
               href={`/marketplace${marketplaceQueryString({ category: cat })}`}
-              className="rounded px-2 py-1.5 capitalize text-[var(--muted)] transition-colors hover:bg-white/10 hover:text-foreground"
+              className="rounded px-2 py-1.5 capitalize text-[var(--muted)] transition-colors hover:bg-[var(--card-muted)] hover:text-[var(--foreground)]"
             >
               {cat}
             </Link>
@@ -38,7 +38,7 @@ export function CategoryNavStrip() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded px-1.5 py-1 text-[var(--muted)] transition-colors hover:bg-white/10 hover:text-gold"
+              className="rounded px-1.5 py-1 text-[var(--muted)] transition-colors hover:bg-[var(--card-muted)] hover:text-[var(--gold-strong)]"
             >
               {item.label}
             </Link>

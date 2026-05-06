@@ -1,61 +1,88 @@
 @import "tailwindcss";
 
-/* Institutional palette: high contrast, paper / ink, minimal accent noise. */
+/* Investor palette: deep navy (#051B35 / #001E42 family) + warm gold (#FFB81C / #FFC627). */
 :root {
-  --background: #0c0f14;
-  --foreground: #f2f0ec;
-  --card: #151a22;
-  --card-muted: #1c222c;
-  --muted: #c8c4bc;
-  --gold: #e3c76a;
-  --gold-strong: #d4af37;
-  --steel: #9aa3ad;
-  --charcoal-panel: rgba(20, 26, 34, 0.92);
-  --steel-line: rgba(242, 240, 236, 0.16);
-  --input-border: rgba(242, 240, 236, 0.28);
-  --button-primary-bg: #1e3a5f;
-  --button-primary-fg: #ffffff;
-  --link: #b8d4ff;
+  --navy-950: #02101f;
+  --navy-900: #051b35;
+  --navy-800: #0a2540;
+  --background: #04121f;
+  --foreground: #f4f7f9;
+  --card: #0a2540;
+  --card-muted: #0d314d;
+  --muted: rgba(244, 247, 249, 0.78);
+  --gold: #ffb81c;
+  --gold-strong: #ffc627;
+  --steel: #94a3b8;
+  --charcoal-panel: #051b35;
+  --steel-line: rgba(255, 255, 255, 0.12);
+  --input-border: rgba(255, 255, 255, 0.22);
+  --button-primary-bg: #ffb81c;
+  --button-primary-fg: #051b35;
+  --nav-bg: var(--navy-900);
+  --nav-text: #ffffff;
+  --nav-muted: rgba(255, 255, 255, 0.78);
+  --nav-border: rgba(255, 255, 255, 0.14);
+  --footer-bg: var(--navy-900);
+  --footer-text: rgba(255, 255, 255, 0.78);
+  --footer-heading: #ffffff;
+  --footer-link-hover: #ffc627;
+  --link: #8ec5ff;
   --danger-border: rgba(248, 113, 113, 0.55);
   --danger-bg: rgba(127, 29, 29, 0.35);
   --danger-text: #fecaca;
 }
 
 [data-theme="light"] {
-  --background: #faf8f4;
-  --foreground: #14181d;
+  --background: #eff3f8;
+  --foreground: var(--navy-900);
   --card: #ffffff;
-  --card-muted: #f0ebe3;
-  --muted: #3d4450;
-  --gold: #6b5a1e;
-  --gold-strong: #4a3f15;
-  --steel: #5c6370;
-  --charcoal-panel: rgba(255, 253, 249, 0.97);
-  --steel-line: rgba(20, 24, 29, 0.14);
-  --input-border: rgba(20, 24, 29, 0.28);
-  --button-primary-bg: #1a2f4a;
-  --button-primary-fg: #ffffff;
-  --link: #0f3d7a;
+  --card-muted: #e8eef4;
+  --muted: #4f5f72;
+  --gold: #ffb81c;
+  --gold-strong: #e29a00;
+  --steel: #5c6b7f;
+  --charcoal-panel: var(--navy-900);
+  --steel-line: rgba(5, 27, 53, 0.12);
+  --input-border: rgba(5, 27, 53, 0.2);
+  --button-primary-bg: #ffb81c;
+  --button-primary-fg: var(--navy-900);
+  --nav-bg: var(--navy-900);
+  --nav-text: #ffffff;
+  --nav-muted: rgba(255, 255, 255, 0.78);
+  --nav-border: rgba(255, 255, 255, 0.14);
+  --footer-bg: var(--navy-900);
+  --footer-text: rgba(255, 255, 255, 0.78);
+  --footer-heading: #ffffff;
+  --footer-link-hover: #ffb81c;
+  --link: #0a4580;
   --danger-border: rgba(185, 28, 28, 0.45);
   --danger-bg: rgba(254, 226, 226, 0.95);
   --danger-text: #7f1d1d;
 }
 
 [data-theme="dark"] {
-  --background: #0c0f14;
-  --foreground: #f2f0ec;
-  --card: #151a22;
-  --card-muted: #1c222c;
-  --muted: #c8c4bc;
-  --gold: #e3c76a;
-  --gold-strong: #d4af37;
-  --steel: #9aa3ad;
-  --charcoal-panel: rgba(20, 26, 34, 0.92);
-  --steel-line: rgba(242, 240, 236, 0.16);
-  --input-border: rgba(242, 240, 236, 0.28);
-  --button-primary-bg: #2a4a6f;
-  --button-primary-fg: #ffffff;
-  --link: #93c5fd;
+  --background: #02080f;
+  --foreground: #f4f7f9;
+  --card: #0a2540;
+  --card-muted: #0d314d;
+  --muted: rgba(244, 247, 249, 0.75);
+  --gold: #ffb81c;
+  --gold-strong: #ffc627;
+  --steel: #94a3b8;
+  --charcoal-panel: #051b35;
+  --steel-line: rgba(255, 255, 255, 0.14);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --button-primary-bg: #ffb81c;
+  --button-primary-fg: #051b35;
+  --nav-bg: var(--navy-900);
+  --nav-text: #ffffff;
+  --nav-muted: rgba(255, 255, 255, 0.78);
+  --nav-border: rgba(255, 255, 255, 0.14);
+  --footer-bg: #030d18;
+  --footer-text: rgba(255, 255, 255, 0.78);
+  --footer-heading: #ffffff;
+  --footer-link-hover: #ffc627;
+  --link: #9dc6ff;
   --danger-border: rgba(248, 113, 113, 0.55);
   --danger-bg: rgba(127, 29, 29, 0.35);
   --danger-text: #fecaca;
@@ -63,27 +90,35 @@
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
-    --background: #faf8f4;
-    --foreground: #14181d;
+    --background: #eff3f8;
+    --foreground: #051b35;
     --card: #ffffff;
-    --card-muted: #f0ebe3;
-    --muted: #3d4450;
-    --gold: #6b5a1e;
-    --gold-strong: #4a3f15;
-    --steel: #5c6370;
-    --charcoal-panel: rgba(255, 253, 249, 0.97);
-    --steel-line: rgba(20, 24, 29, 0.14);
-    --input-border: rgba(20, 24, 29, 0.28);
-    --button-primary-bg: #1a2f4a;
-    --button-primary-fg: #ffffff;
-    --link: #0f3d7a;
+    --card-muted: #e8eef4;
+    --muted: #4f5f72;
+    --gold: #ffb81c;
+    --gold-strong: #e29a00;
+    --steel: #5c6b7f;
+    --charcoal-panel: #051b35;
+    --steel-line: rgba(5, 27, 53, 0.12);
+    --input-border: rgba(5, 27, 53, 0.2);
+    --button-primary-bg: #ffb81c;
+    --button-primary-fg: #051b35;
+    --nav-bg: #051b35;
+    --nav-text: #ffffff;
+    --nav-muted: rgba(255, 255, 255, 0.78);
+    --nav-border: rgba(255, 255, 255, 0.14);
+    --footer-bg: #051b35;
+    --footer-text: rgba(255, 255, 255, 0.78);
+    --footer-heading: #ffffff;
+    --footer-link-hover: #ffb81c;
+    --link: #0a4580;
     --danger-border: rgba(185, 28, 28, 0.45);
     --danger-bg: rgba(254, 226, 226, 0.95);
     --danger-text: #7f1d1d;
   }
 
   :root:not([data-theme]) .text-premium-muted {
-    color: rgba(45, 52, 62, 0.82);
+    color: rgba(5, 27, 53, 0.65);
   }
 }
 
@@ -105,7 +140,7 @@
 .panel-elevated {
   border: 1px solid var(--steel-line);
   background: var(--card);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 48px rgba(5, 27, 53, 0.08);
 }
 
 [data-theme="dark"] .panel-elevated {
@@ -141,7 +176,7 @@
   }
 
   [data-theme="light"] .text-premium-muted {
-    color: rgba(45, 52, 62, 0.82);
+    color: rgba(5, 27, 53, 0.65);
   }
 }
 
@@ -178,54 +213,52 @@ a {
 }
 
 .gold-gradient {
-  background: linear-gradient(120deg, var(--gold-strong), #e8d5a3);
+  background: linear-gradient(120deg, #ffb81c, #ffc627);
 }
 
 .navy-gradient {
-  background: linear-gradient(140deg, #0c0f14 0%, #152033 55%, #1a2f4a 100%);
+  background: linear-gradient(140deg, #001e42 0%, #051b35 52%, #0a2540 100%);
 }
 
 .app-shell-bg {
-  background: linear-gradient(180deg, #0c0f14 0%, #121820 45%, #152033 100%);
+  background: linear-gradient(180deg, #eff3f8 0%, #e8eef4 45%, #e2eaf2 100%);
 }
 
-[data-theme="light"] .app-shell-bg {
-  background: linear-gradient(180deg, #faf8f4 0%, #f3eee6 50%, #ebe4d9 100%);
+[data-theme="dark"] .app-shell-bg {
+  background: linear-gradient(180deg, #02080f 0%, #05101c 48%, #030d18 100%);
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) .app-shell-bg {
-    background: linear-gradient(180deg, #faf8f4 0%, #f3eee6 50%, #ebe4d9 100%);
+    background: linear-gradient(180deg, #eff3f8 0%, #e8eef4 45%, #e2eaf2 100%);
+  }
+
+  :root:not([data-theme]) .marketing-hero {
+    box-shadow: 0 24px 80px rgba(5, 27, 53, 0.14), 0 0 0 1px rgba(5, 27, 53, 0.08);
   }
 }
 
 [data-theme="light"] .marketing-hero {
-  box-shadow: 0 24px 80px rgba(20, 24, 29, 0.12), 0 0 0 1px rgba(20, 24, 29, 0.08);
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) .marketing-hero {
-    box-shadow: 0 24px 80px rgba(20, 24, 29, 0.12), 0 0 0 1px rgba(20, 24, 29, 0.08);
-  }
+  box-shadow: 0 24px 80px rgba(5, 27, 53, 0.14), 0 0 0 1px rgba(5, 27, 53, 0.08);
 }
 
 .hero-scrim-strong {
-  background: linear-gradient(to top, rgba(8, 10, 14, 0.92) 0%, rgba(8, 10, 14, 0.55) 45%, transparent 82%);
+  background: linear-gradient(to top, rgba(5, 27, 53, 0.94) 0%, rgba(5, 27, 53, 0.55) 48%, transparent 82%);
 }
 
 .hero-grid-overlay {
   background-image:
-    linear-gradient(rgba(5, 10, 20, 0.25) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(5, 10, 20, 0.2) 1px, transparent 1px);
+    linear-gradient(rgba(3, 12, 24, 0.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(3, 12, 24, 0.22) 1px, transparent 1px);
   background-size: 48px 48px;
   mix-blend-mode: soft-light;
-  opacity: 0.35;
+  opacity: 0.32;
 }
 
 .hero-vignette {
   background:
-    radial-gradient(ellipse 92% 70% at 50% 58%, transparent 42%, rgba(3, 6, 12, 0.78) 100%),
-    linear-gradient(to top, rgba(3, 6, 12, 0.96), transparent 52%);
+    radial-gradient(ellipse 92% 70% at 50% 58%, transparent 42%, rgba(3, 10, 20, 0.82) 100%),
+    linear-gradient(to top, rgba(2, 8, 16, 0.96), transparent 52%);
 }
 
 @keyframes hero-zoom-in {

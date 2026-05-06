@@ -21,11 +21,11 @@ export function GlobalCatalogSearch({ defaultQuery = "" }: GlobalCatalogSearchPr
         defaultValue={defaultQuery}
         placeholder="Try make, model, city, or category…"
         autoComplete="off"
-        className="min-h-10 w-full min-w-0 rounded-l-md border border-r-0 border-slate-600 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+        className="min-h-10 w-full min-w-0 rounded-l-md border border-r-0 border-[#cfd8e3] bg-white px-3 py-2 text-sm text-[#051b35] placeholder:text-[#64748b] focus:border-[var(--gold)] focus:outline-none focus:ring-1 focus:ring-[var(--gold)]"
       />
       <button
         type="submit"
-        className="shrink-0 rounded-r-md border border-gold bg-gold px-4 py-2 text-sm font-semibold text-[#071733] hover:bg-[#ffd14d] focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-[#071733]"
+        className="shrink-0 rounded-r-md border border-[var(--gold)] bg-[var(--gold)] px-4 py-2 text-sm font-bold text-[#051b35] hover:brightness-105 focus:outline-none focus:ring-2 focus:ring-[var(--gold)] focus:ring-offset-2 focus:ring-offset-[#051b35]"
       >
         Search
       </button>

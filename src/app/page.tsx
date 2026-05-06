@@ -43,22 +43,24 @@ export default async function Home() {
           }
           aside={
             <div className="space-y-4 text-sm leading-snug">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">Swap-desk standards</p>
-              <ul className="space-y-3 text-foreground">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--gold-strong)]">
+                Swap-desk standards
+              </p>
+              <ul className="space-y-3 text-[var(--foreground)]">
                 <li className="flex gap-2">
-                  <span className="font-bold text-gold">•</span>
+                  <span className="font-bold text-[var(--gold-strong)]">•</span>
                   <span>Sellers publish remaining payments, transfer fees, and lessor constraints—not just photos.</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="font-bold text-gold">•</span>
+                  <span className="font-bold text-[var(--gold-strong)]">•</span>
                   <span>Buyers file qualification snapshots so credit, insurance, and counsel review one package.</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="font-bold text-gold">•</span>
+                  <span className="font-bold text-[var(--gold-strong)]">•</span>
                   <span>Milestones unlock funding, handoff, and payouts only when your agreement says they should.</span>
                 </li>
               </ul>
-              <p className="border-t border-[var(--steel-line)] pt-4 text-xs text-muted">
+              <p className="border-t border-[var(--steel-line)] pt-4 text-xs text-[var(--muted)]">
                 Need the full policy narrative? See{" "}
                 <Link href="/about" className="font-semibold text-[var(--link)] underline-offset-2 hover:underline">
                   About & verification
@@ -75,19 +77,19 @@ export default async function Home() {
             <>
               <Link
                 href="/marketplace"
-                className="rounded-md bg-[var(--button-primary-bg)] px-5 py-3 text-sm font-semibold text-[var(--button-primary-fg)] shadow-lg shadow-black/35 transition-opacity hover:opacity-95 active:translate-y-px"
+                className="inline-flex items-center gap-2 rounded-md bg-[var(--gold)] px-5 py-3 text-sm font-bold text-[#051b35] shadow-lg shadow-black/35 transition-[filter] hover:brightness-105 active:translate-y-px"
               >
                 Browse swap listings
               </Link>
               <Link
                 href={signUpSeller}
-                className="rounded-md border-2 border-white/90 bg-black/30 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-black/45 active:translate-y-px"
+                className="rounded-md border-2 border-white px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 active:translate-y-px"
               >
                 List inventory
               </Link>
               <Link
                 href={authRoutes.signUp}
-                className="rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#14181d] transition-colors hover:bg-[#f0ebe3] active:translate-y-px"
+                className="rounded-md bg-white px-5 py-3 text-sm font-bold text-[#051b35] transition-colors hover:bg-[#e8eef4] active:translate-y-px"
               >
                 Create account
               </Link>
@@ -131,7 +133,10 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="marketplace-stats" className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <section
+          id="marketplace-stats"
+          className="grid gap-4 rounded-xl border border-[var(--steel-line)] bg-[var(--card)] p-6 shadow-[0_12px_40px_rgba(5,27,53,0.08)] md:grid-cols-2 xl:grid-cols-4"
+        >
           <StatCard
             label="Market context"
             value="$100B+"
@@ -154,7 +159,7 @@ export default async function Home() {
           />
         </section>
 
-        <section className="rounded-xl border border-[var(--steel-line)] bg-[var(--charcoal-panel)] p-6 md:p-8">
+        <section className="rounded-xl border border-[var(--steel-line)] bg-[var(--card)] p-6 shadow-[0_8px_28px_rgba(5,27,53,0.06)] md:p-8">
           <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">Why firms keep paperwork here</h2>
           <ul className="mt-6 grid gap-3 md:grid-cols-2">
             {MOAT_PILLARS.map((line) => (

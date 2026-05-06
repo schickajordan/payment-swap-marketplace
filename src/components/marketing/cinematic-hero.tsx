@@ -33,7 +33,7 @@ export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: Cinemat
       <div className="relative z-10 flex flex-col gap-8 lg:min-h-[420px] lg:flex-row lg:items-stretch lg:justify-between lg:gap-12">
         <div className="flex flex-1 flex-col justify-end p-6 pb-10 md:p-10 lg:pb-12 lg:pl-12 lg:pr-8 lg:pt-16">
           <div className="animate-fade-up max-w-xl">
-            <div className="text-[12px] font-semibold tracking-wide text-[#f8efd2] drop-shadow-md md:text-[13px]">
+            <div className="text-[12px] font-semibold tracking-wide text-[var(--gold)] drop-shadow-md md:text-[13px]">
               {eyebrow}
             </div>
             <h1 className="font-display mt-4 text-balance text-3xl font-bold leading-[1.12] tracking-tight text-white shadow-black/90 drop-shadow-[0_4px_28px_rgba(0,0,0,0.92)] md:text-[2.5rem] lg:text-[3rem] lg:leading-[1.08]">
@@ -46,7 +46,7 @@ export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: Cinemat
           <div className="animate-fade-up motion-delay-md mt-6 flex flex-wrap gap-3">{ctas}</div>
         </div>
 
-        <div className="relative border-t border-[var(--steel-line)] bg-[var(--charcoal-panel)] p-6 backdrop-blur-xl md:border-t-0 md:border-l lg:max-w-sm lg:flex-none xl:max-w-md">
+        <div className="relative border-t border-[var(--steel-line)] bg-[var(--card-muted)] p-6 backdrop-blur-xl md:border-t-0 md:border-l lg:max-w-sm lg:flex-none xl:max-w-md">
           <div className="animate-fade-up">{aside}</div>
         </div>
       </div>

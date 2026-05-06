@@ -48,7 +48,7 @@ export default async function PricingPage() {
           </Link>
         </div>
 
-        <section className="rounded-xl border border-[var(--steel-line)] bg-[var(--charcoal-panel)] p-5">
+        <section className="rounded-xl border border-[var(--steel-line)] bg-[var(--card)] p-5 shadow-[0_8px_28px_rgba(5,27,53,0.06)]">
           <h2 className="text-sm font-bold uppercase tracking-wide text-foreground">Shop by swap lane</h2>
           <p className="mt-2 text-sm font-medium text-muted">
             Filters mirror seller-declared templates—straight to inventory without resetting the sidebar.
