@@ -52,6 +52,10 @@
     --charcoal-panel: rgba(255, 255, 255, 0.82);
     --steel-line: rgba(65, 95, 149, 0.18);
   }
+
+  :root:not([data-theme]) .text-premium-muted {
+    color: rgba(55, 65, 95, 0.78);
+  }
 }
 
 @theme inline {
@@ -68,6 +72,10 @@
 @layer utilities {
   .text-premium-muted {
     color: rgba(214, 224, 244, 0.72);
+  }
+
+  [data-theme="light"] .text-premium-muted {
+    color: rgba(55, 65, 95, 0.78);
   }
 }
 
@@ -116,6 +124,53 @@ a {
     #0f2b58 76%,
     #133f72 115%
   );
+}
+
+/** Marketing layout: follows `data-theme` / system light so the homepage doesn’t stay “night mode only.” */
+.app-shell-bg {
+  background: linear-gradient(
+    140deg,
+    #050914 0%,
+    #06183a 40%,
+    #0f2b58 76%,
+    #133f72 115%
+  );
+}
+
+[data-theme="light"] .app-shell-bg {
+  background: linear-gradient(
+    140deg,
+    #f8fbff 0%,
+    #eef3ff 38%,
+    #e4ecfb 72%,
+    #dce6f8 100%
+  );
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .app-shell-bg {
+    background: linear-gradient(
+      140deg,
+      #f8fbff 0%,
+      #eef3ff 38%,
+      #e4ecfb 72%,
+      #dce6f8 100%
+    );
+  }
+}
+
+[data-theme="light"] .marketing-hero {
+  box-shadow:
+    0 32px 120px -24px rgba(15, 40, 90, 0.18),
+    0 0 0 1px rgba(65, 95, 149, 0.12);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .marketing-hero {
+    box-shadow:
+      0 32px 120px -24px rgba(15, 40, 90, 0.18),
+      0 0 0 1px rgba(65, 95, 149, 0.12);
+  }
 }
 
 .hero-grid-overlay {

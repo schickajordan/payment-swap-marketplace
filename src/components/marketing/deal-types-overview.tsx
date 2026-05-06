@@ -24,27 +24,27 @@ export function DealTypesOverview() {
   return (
     <section
       id="ways-to-equip"
-      className="rounded-xl border border-gold/25 bg-[#071733]/55 p-6 md:p-8"
+      className="rounded-xl border border-[var(--steel-line)] bg-[var(--charcoal-panel)] p-6 md:p-8"
       aria-labelledby="ways-to-equip-heading"
     >
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 id="ways-to-equip-heading" className="text-xl font-bold text-white md:text-2xl">
+          <h2 id="ways-to-equip-heading" className="text-xl font-bold text-foreground md:text-2xl">
             Rent, lease, or buy—with the terms surfaced up front
           </h2>
-          <p className="mt-2 max-w-3xl text-sm text-slate-300 md:text-base">
+          <p className="mt-2 max-w-3xl text-sm text-muted md:text-base">
             Same fullness people expect after peer marketplaces rewired passenger cars—but here those habits map to cranes,
             trailers, fleets, deposits, payoff math, escrow when enabled, inspectors, lien conversations, invoicing—all
             in one flow. Every live listing declares a swap lane (
-            <span className="text-slate-200">assumption</span>,{" "}
-            <span className="text-slate-200">private payment takeover</span>, or{" "}
-            <span className="text-slate-200">lease-to-own</span>) so filters, checklists, and milestones stay aligned with
+            <span className="font-medium text-foreground">assumption</span>,{" "}
+            <span className="font-medium text-foreground">private payment takeover</span>, or{" "}
+            <span className="font-medium text-foreground">lease-to-own</span>) so filters, checklists, and milestones stay aligned with
             the paperwork.
           </p>
         </div>
         <Link
           href="/about"
-          className="shrink-0 rounded-md border border-white/25 px-4 py-2 text-sm font-semibold text-white hover:border-gold/50 hover:bg-white/5"
+          className="shrink-0 rounded-md border border-[var(--steel-line)] px-4 py-2 text-sm font-semibold text-foreground hover:border-gold/50 hover:bg-[var(--card-muted)]"
         >
           About us →
         </Link>
@@ -53,29 +53,29 @@ export function DealTypesOverview() {
         {DEAL_ROWS.map((row) => (
           <div
             key={row.heading}
-            className="rounded-lg border border-white/10 bg-[#091c3d]/70 p-5 shadow-inner shadow-black/20"
+            className="rounded-lg border border-[var(--steel-line)] bg-[var(--card)] p-5 shadow-inner shadow-black/10"
           >
             <p className="text-xs font-semibold uppercase tracking-wide text-gold">{row.heading}</p>
-            <p className="mt-2 text-lg font-bold text-white">{row.summary}</p>
-            <p className="mt-3 text-sm leading-relaxed text-slate-300">{row.body}</p>
+            <p className="mt-2 text-lg font-bold text-foreground">{row.summary}</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted">{row.body}</p>
           </div>
         ))}
       </div>
-      <div className="mt-6 flex flex-col items-center gap-3 border-t border-white/10 pt-5">
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">Jump to lane</p>
+      <div className="mt-6 flex flex-col items-center gap-3 border-t border-[var(--steel-line)] pt-5">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted">Jump to lane</p>
         <div className="flex flex-wrap justify-center gap-2">
           {MARKETPLACE_DEAL_LANE_ENTRIES.map((lane) => (
             <Link
               key={lane.deal}
               href={lane.href}
-              className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold text-slate-200 hover:border-gold/40 hover:text-gold"
+              className="rounded-full border border-[var(--steel-line)] px-3 py-1 text-xs font-semibold text-foreground hover:border-gold/40 hover:text-gold"
             >
               {lane.pillLabel}
             </Link>
           ))}
         </div>
       </div>
-      <p className="mt-4 text-center text-sm text-slate-400">
+      <p className="mt-4 text-center text-sm text-muted">
         Ready to poke around?{" "}
         <Link href="/marketplace" className="font-semibold text-gold hover:text-[#ffd14d]">
           Browse live listings →

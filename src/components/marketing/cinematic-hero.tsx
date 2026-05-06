@@ -15,7 +15,7 @@ type CinematicHeroProps = {
  */
 export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: CinematicHeroProps) {
   return (
-    <section className="relative isolate overflow-hidden rounded-3xl border border-white/15 shadow-[0_32px_120px_-24px_rgba(0,0,0,0.75)] lg:rounded-[2rem]">
+    <section className="marketing-hero relative isolate overflow-hidden rounded-3xl border border-[var(--steel-line)] shadow-[0_32px_120px_-24px_rgba(0,0,0,0.75)] lg:rounded-[2rem]">
       <div className="absolute inset-0">
         <Image
           src="/marketing/hero-industrial-nightshift.png"
@@ -44,7 +44,7 @@ export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: Cinemat
           <div className="animate-fade-up motion-delay-md mt-6 flex flex-wrap gap-3">{ctas}</div>
         </div>
 
-        <div className="relative border-t border-white/10 bg-[#070f22]/82 p-6 backdrop-blur-xl md:border-t-0 md:border-l lg:max-w-sm lg:flex-none xl:max-w-md">
+        <div className="relative border-t border-[var(--steel-line)] bg-[var(--charcoal-panel)] p-6 backdrop-blur-xl md:border-t-0 md:border-l lg:max-w-sm lg:flex-none xl:max-w-md">
           <div className="animate-fade-up">{aside}</div>
         </div>
       </div>

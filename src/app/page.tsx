@@ -46,7 +46,7 @@ export default async function Home() {
             </>
           }
           aside={
-            <div className="space-y-5 text-sm text-slate-200">
+            <div className="space-y-5 text-sm text-foreground">
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">Why people use us</p>
               <ul className="space-y-3 text-sm leading-snug">
                 <li className="flex gap-3">
@@ -62,8 +62,8 @@ export default async function Home() {
                   <span>Designed for phones on the hood of a pickup—readable at a glance, easy to tap through.</span>
                 </li>
               </ul>
-              <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs leading-relaxed text-slate-300">
-                <span className="font-semibold text-white">Built for crews and yards</span>
+              <div className="rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-3 text-xs leading-relaxed text-muted">
+                <span className="font-semibold text-foreground">Built for crews and yards</span>
                 Owner-operators, small fleets, and dealers who need listings, paperwork, payouts, and support in one
                 place—not five apps and a spreadsheet.
               </div>
@@ -126,13 +126,13 @@ export default async function Home() {
               </Link>
               <Link
                 href="/about#transfer-playbook"
-                className="rounded-md border border-white/25 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-white/10"
+                className="rounded-md border border-[var(--steel-line)] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card-muted)]"
               >
                 Transfer playbook
               </Link>
               <Link
                 href="/pricing"
-                className="rounded-md border border-white/25 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-white/10"
+                className="rounded-md border border-[var(--steel-line)] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card-muted)]"
               >
                 Pricing clarity
               </Link>
@@ -142,9 +142,9 @@ export default async function Home() {
 
         <DealTypesOverview />
 
-        <section className="rounded-xl border border-white/10 bg-card p-6 md:p-8" aria-labelledby="shop-by-category">
+        <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6 md:p-8" aria-labelledby="shop-by-category">
           <div className="flex flex-wrap items-end justify-between gap-3">
-            <h2 id="shop-by-category" className="text-xl font-bold text-white">
+            <h2 id="shop-by-category" className="text-xl font-bold text-foreground">
               Shop by category
             </h2>
             <Link
@@ -159,18 +159,18 @@ export default async function Home() {
               <Link
                 key={cat}
                 href={`/marketplace${marketplaceQueryString({ category: cat })}`}
-                className="group rounded-xl border border-white/10 bg-[#091c3d]/60 p-5 transition-colors hover:border-gold/35 hover:bg-[#091c3d]"
+                className="group rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] p-5 transition-colors hover:border-gold/35 hover:bg-[var(--card)]"
               >
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Browse</p>
-                <p className="mt-2 text-lg font-bold capitalize leading-snug text-white group-hover:text-gold">{cat}</p>
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">Browse</p>
+                <p className="mt-2 text-lg font-bold capitalize leading-snug text-foreground group-hover:text-gold">{cat}</p>
               </Link>
             ))}
           </div>
         </section>
 
-        <section className="rounded-xl border border-white/10 bg-card p-6 md:p-8">
-          <h2 className="text-xl font-bold text-white">Equipment we’re focused on now</h2>
-          <p className="mt-3 max-w-3xl text-sm text-slate-300 md:text-base">
+        <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6 md:p-8">
+          <h2 className="text-xl font-bold text-foreground">Equipment we’re focused on now</h2>
+          <p className="mt-3 max-w-3xl text-sm text-muted md:text-base">
             We concentrate on categories where listings stack up fastest—starting with skid steers, trailers, mini
             excavators, and dump trucks—before we widen into everything else contractors run.
           </p>
@@ -187,23 +187,23 @@ export default async function Home() {
         </section>
 
         <section className="rounded-xl border border-gold/20 bg-[var(--charcoal-panel)] p-6 md:p-8">
-          <h2 className="text-xl font-bold text-white">What we optimize for behind the scenes</h2>
-          <p className="mt-2 max-w-3xl text-sm text-slate-400">
+          <h2 className="text-xl font-bold text-foreground">What we optimize for behind the scenes</h2>
+          <p className="mt-2 max-w-3xl text-sm text-muted">
             First: listings that convert to real conversations and deposits. Second: tools that keep money movement and
             paperwork above board for everyone involved.
           </p>
           <div className="mt-6 grid gap-6 md:grid-cols-2">
-            <div className="rounded-lg border border-white/10 bg-card p-5">
+            <div className="rounded-lg border border-[var(--steel-line)] bg-card p-5">
               <p className="text-xs font-semibold uppercase tracking-wide text-gold">Healthy marketplace rhythm</p>
-              <h3 className="mt-2 text-lg font-bold text-white">{NORTH_STAR_LIQUIDITY.label}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">{NORTH_STAR_LIQUIDITY.definition}</p>
-              <p className="mt-3 text-xs text-slate-500">{NORTH_STAR_LIQUIDITY.why}</p>
+              <h3 className="mt-2 text-lg font-bold text-foreground">{NORTH_STAR_LIQUIDITY.label}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{NORTH_STAR_LIQUIDITY.definition}</p>
+              <p className="mt-3 text-xs text-muted opacity-90">{NORTH_STAR_LIQUIDITY.why}</p>
             </div>
-            <div className="rounded-lg border border-white/10 bg-card p-5">
+            <div className="rounded-lg border border-[var(--steel-line)] bg-card p-5">
               <p className="text-xs font-semibold uppercase tracking-wide text-gold">Peace of mind on money & messages</p>
-              <h3 className="mt-2 text-lg font-bold text-white">{NORTH_STAR_MOAT.label}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">{NORTH_STAR_MOAT.definition}</p>
-              <p className="mt-3 text-xs text-slate-500">{NORTH_STAR_MOAT.why}</p>
+              <h3 className="mt-2 text-lg font-bold text-foreground">{NORTH_STAR_MOAT.label}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{NORTH_STAR_MOAT.definition}</p>
+              <p className="mt-3 text-xs text-muted opacity-90">{NORTH_STAR_MOAT.why}</p>
             </div>
           </div>
         </section>
@@ -236,12 +236,12 @@ export default async function Home() {
           />
         </section>
 
-        <section className="rounded-xl border border-white/10 bg-card p-6 md:p-8">
-          <h2 className="text-xl font-bold text-white">Different from Craigslist vibes or rental-only catalogs</h2>
+        <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6 md:p-8">
+          <h2 className="text-xl font-bold text-foreground">Different from Craigslist vibes or rental-only catalogs</h2>
           <div className="mt-4 grid gap-6 md:grid-cols-2">
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wide text-gold">What you often find today</h3>
-              <ul className="mt-3 space-y-2 text-sm text-slate-300">
+              <ul className="mt-3 space-y-2 text-sm text-muted">
                 <li>Lease-marketplaces glued to passenger cars—not heavy iron.</li>
                 <li>Big rental fleets built for counters, not the owner texting from the cab.</li>
                 <li>Peer-to-peer chatter with no disciplined payout path.</li>
@@ -249,7 +249,7 @@ export default async function Home() {
             </div>
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wide text-gold">What we stitch into one workflow</h3>
-              <ul className="mt-3 space-y-2 text-sm text-slate-300">
+              <ul className="mt-3 space-y-2 text-sm text-muted">
                 <li>Regional inventory dense enough that search feels worth it.</li>
                 <li>Rentals, lease-to-own routes, or payment swaps on one business-friendly storefront.</li>
                 <li>Buyers, sellers, and backers steered toward clear agreements instead of orphaned texts.</li>
@@ -259,13 +259,13 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="rounded-xl border border-white/10 bg-card p-6 md:p-8">
-          <h2 className="text-xl font-bold text-white">Beyond the listings grid</h2>
+        <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6 md:p-8">
+          <h2 className="text-xl font-bold text-foreground">Beyond the listings grid</h2>
           <ul className="mt-4 grid gap-3 md:grid-cols-2">
             {MOAT_PILLARS.map((line) => (
               <li
                 key={line}
-                className="rounded-lg border border-white/10 bg-[#091c3d]/50 px-4 py-3 text-sm text-slate-200"
+                className="rounded-lg border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-3 text-sm text-foreground"
               >
                 {line}
               </li>
@@ -275,10 +275,10 @@ export default async function Home() {
 
         <section
           id="how-it-works"
-          className="scroll-mt-24 rounded-xl border border-white/10 bg-card p-6 md:scroll-mt-28 md:p-8"
+          className="scroll-mt-24 rounded-xl border border-[var(--steel-line)] bg-card p-6 md:scroll-mt-28 md:p-8"
         >
-          <h2 className="text-xl font-bold text-white">How it works</h2>
-          <ol className="mt-4 list-inside list-decimal space-y-2 text-sm text-slate-300 md:text-base">
+          <h2 className="text-xl font-bold text-foreground">How it works</h2>
+          <ol className="mt-4 list-inside list-decimal space-y-2 text-sm text-muted md:text-base">
             <li>Seller publishes equipment—we review flagged listings.</li>
             <li>Buyer engages; inspection notes, lien questions, insurer docs stay in one thread tied to that deal.</li>
             <li>When paperwork checks out, payment plans spin up automatically from the approved contract.</li>
@@ -288,10 +288,10 @@ export default async function Home() {
 
         <section
           id="legal-overview"
-          className="scroll-mt-24 rounded-xl border border-white/10 bg-card p-6 md:scroll-mt-28 md:p-8"
+          className="scroll-mt-24 rounded-xl border border-[var(--steel-line)] bg-card p-6 md:scroll-mt-28 md:p-8"
         >
-          <h2 className="text-xl font-bold text-white">Legal & responsibilities</h2>
-          <p className="mt-4 text-sm text-slate-300 md:text-base">
+          <h2 className="text-xl font-bold text-foreground">Legal & responsibilities</h2>
+          <p className="mt-4 text-sm text-muted md:text-base">
             Payment Swap Marketplace helps businesses coordinate—not replace your banker, lienholder, DOT office, OSHA
             adviser, insurer, or attorney. Transparent timelines simply make it easier for everyone to reconstruct what was
             said and promised if questions come up later.
@@ -299,13 +299,13 @@ export default async function Home() {
           <div className="mt-5 flex flex-wrap gap-2">
             <Link
               href="/about#verification"
-              className="rounded-md border border-white/20 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-white/10"
+              className="rounded-md border border-[var(--steel-line)] px-3 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card-muted)]"
             >
               Verification details
             </Link>
             <Link
               href="/messages"
-              className="rounded-md border border-white/20 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-white/10"
+              className="rounded-md border border-[var(--steel-line)] px-3 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card-muted)]"
             >
               Messaging workflow
             </Link>

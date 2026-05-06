@@ -11,7 +11,7 @@ type DashboardShellProps = {
 
 export async function DashboardShell({ title, subtitle, children }: DashboardShellProps) {
   return (
-    <div className="flex min-h-screen flex-col navy-gradient">
+    <div className="app-shell-bg flex min-h-screen flex-col">
       <TopNav />
       <div className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 pb-10 pt-6 md:gap-10 md:px-8 md:pb-14 md:pt-8">
         <SidebarNav />
