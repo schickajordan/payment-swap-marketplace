@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
   },
   /** Baseline headers for deployed sites; CSP omitted to avoid blocking Stripe/Supabase embeddings. */
   async headers() {
+    /** Makes it obvious in `curl -I` whether traffic hits the Git-linked deployment (wrong Vercel project = header missing/mismatched old HTML). */
+    const vercelCommit =
+      typeof process.env.VERCEL_GIT_COMMIT_SHA === "string"
+        ? process.env.VERCEL_GIT_COMMIT_SHA.slice(0, 7)
+        : "";
+    const deployStamp: Array<{ key: string; value: string }> =
+      vercelCommit ? [{ key: "X-PSM-Deploy-Commit", value: vercelCommit }] : [];
+
     const enableHsts =
       process.env.VERCEL_ENV === "production" || process.env.ENABLE_HSTS === "1";
 
@@ -32,6 +40,7 @@ const nextConfig: NextConfig = {
             key: "Cache-Control",
             value: "no-store, no-cache, must-revalidate, max-age=0",
           },
+          ...deployStamp,
         ],
       },
       {
@@ -45,6 +54,7 @@ const nextConfig: NextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
           },
+          ...deployStamp,
           ...extras,
         ],
       },
