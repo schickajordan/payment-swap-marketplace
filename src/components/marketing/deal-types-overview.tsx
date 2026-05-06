@@ -29,17 +29,15 @@ export function DealTypesOverview() {
     >
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 id="ways-to-equip-heading" className="text-xl font-bold text-foreground md:text-2xl">
-            Rent, lease, or buy—with the terms surfaced up front
+          <h2 id="ways-to-equip-heading" className="font-display text-xl font-bold text-foreground md:text-2xl">
+            Deal lanes—not vague “contact seller” placeholders
           </h2>
-          <p className="mt-2 max-w-3xl text-sm text-muted md:text-base">
-            Same fullness people expect after peer marketplaces rewired passenger cars—but here those habits map to cranes,
-            trailers, fleets, deposits, payoff math, escrow when enabled, inspectors, lien conversations, invoicing—all
-            in one flow. Every live listing declares a swap lane (
-            <span className="font-medium text-foreground">assumption</span>,{" "}
-            <span className="font-medium text-foreground">private payment takeover</span>, or{" "}
-            <span className="font-medium text-foreground">lease-to-own</span>) so filters, checklists, and milestones stay aligned with
-            the paperwork.
+          <p className="mt-2 max-w-3xl text-sm font-medium leading-relaxed text-muted md:text-base">
+            Each lane defines how obligation and collateral move (
+            <span className="text-foreground">assumption</span>,{" "}
+            <span className="text-foreground">private payment takeover</span>,{" "}
+            <span className="text-foreground">lease-to-own</span>). Filters, checklists, and servicing milestones inherit
+            the lane automatically so operating partners read one consistent file.
           </p>
         </div>
         <Link
@@ -77,11 +75,11 @@ export function DealTypesOverview() {
       </div>
       <p className="mt-4 text-center text-sm text-muted">
         Ready to poke around?{" "}
-        <Link href="/marketplace" className="font-semibold text-gold hover:text-[#ffd14d]">
+        <Link href="/marketplace" className="font-semibold text-[var(--link)] underline-offset-4 hover:underline">
           Browse live listings →
         </Link>{" "}
-        Need the longer story—including verification—read{" "}
-        <Link href="/about" className="font-semibold text-gold hover:text-[#ffd14d]">
+        Policy detail lives in{" "}
+        <Link href="/about" className="font-semibold text-[var(--link)] underline-offset-4 hover:underline">
           About Payment Swap Marketplace
         </Link>
         .

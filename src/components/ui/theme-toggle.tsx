@@ -7,10 +7,10 @@ type ThemeMode = "light" | "dark";
 const STORAGE_KEY = "psm-theme-mode";
 
 function resolveInitialTheme(): ThemeMode {
-  if (typeof window === "undefined") return "dark";
+  if (typeof window === "undefined") return "light";
   const saved = window.localStorage.getItem(STORAGE_KEY);
   if (saved === "light" || saved === "dark") return saved;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "light";
 }
 
 export function ThemeToggle() {
@@ -33,7 +33,7 @@ export function ThemeToggle() {
       type="button"
       onClick={flipTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="inline-flex items-center gap-1.5 rounded-md border border-[var(--steel-line)] bg-white/10 px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-gold/45 hover:text-gold"
+      className="inline-flex items-center gap-1.5 rounded-md border border-[var(--steel-line)] bg-[var(--card-muted)] px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-foreground transition-colors hover:border-[var(--gold-strong)] hover:bg-[var(--card)]"
     >
       <span aria-hidden>{isDark ? "☀" : "☾"}</span>
       <span>{isDark ? "Light" : "Dark"}</span>

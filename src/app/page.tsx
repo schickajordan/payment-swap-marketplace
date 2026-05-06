@@ -4,18 +4,17 @@ import { CinematicHero } from "@/components/marketing/cinematic-hero";
 import { DealTypesOverview } from "@/components/marketing/deal-types-overview";
 import { StatCard } from "@/components/ui/stat-card";
 import {
+  HOME_HERO_LEAD,
+  HOME_HERO_TITLE,
   INITIAL_FOCUS_CATEGORIES,
-  LIQUIDITY_WEDGE_LINE,
   MOAT_PILLARS,
-  MOAT_WEDGE_LINE,
-  NORTH_STAR_LIQUIDITY,
-  NORTH_STAR_MOAT,
-  SHARE_ECONOMY_ANCHOR,
   VISION_HEADLINE,
 } from "@/lib/config/marketplace";
 import { getActiveListings } from "@/lib/listings/queries";
 import { marketplaceQueryString } from "@/lib/marketplace/url";
 import { authRoutes } from "@/lib/navigation";
+
+const signUpSeller = `${authRoutes.signUp}?role=seller`;
 
 export default async function Home() {
   let activeListingsCount = 0;
@@ -29,129 +28,89 @@ export default async function Home() {
 
   return (
     <MarketingShell>
-      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-10 px-4 py-10 md:gap-14 md:px-8 lg:gap-16">
+      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-10 px-4 py-10 md:gap-12 md:px-8">
         <CinematicHero
           eyebrow={<>{VISION_HEADLINE}</>}
-          title={<>Rent, lease, or buy heavy equipment—one marketplace with the numbers up front.</>}
+          title={<>{HOME_HERO_TITLE}</>}
           subtitle={
             <>
-              <span className="mb-3 block rounded-lg border border-gold/20 bg-black/35 px-4 py-3 text-sm font-medium leading-relaxed text-slate-50 md:text-base">
-                {SHARE_ECONOMY_ANCHOR}
+              <span className="mb-1 block rounded-md border border-white/25 bg-black/45 px-4 py-3 text-[15px] leading-snug text-white backdrop-blur-sm md:text-[1.05rem] md:leading-relaxed">
+                {HOME_HERO_LEAD}
               </span>
-              Shop like a normal catalog, but with business guts: searchable iron, secure checkout when you&apos;re ready,
-              and rent / installment / payoff lanes spelled per listing—not buried in voicemail. Conversations stay tied to
-              each deal so inspectors, partners, and your team see the same story.
-              <span className="mt-4 block text-xs leading-relaxed text-premium-muted md:text-sm">{LIQUIDITY_WEDGE_LINE}</span>
-              <span className="mt-2 block text-xs leading-relaxed text-premium-muted md:text-sm">{MOAT_WEDGE_LINE}</span>
             </>
           }
           aside={
-            <div className="space-y-5 text-sm text-foreground">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">Why people use us</p>
-              <ul className="space-y-3 text-sm leading-snug">
-                <li className="flex gap-3">
-                  <span className="text-xs font-bold text-gold">1</span>
-                  <span>Listings reviewed by ops when needed—pricing and terms shouldn’t feel like guessing games.</span>
+            <div className="space-y-4 text-sm leading-snug">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">Institutional discipline</p>
+              <ul className="space-y-3 text-foreground">
+                <li className="flex gap-2">
+                  <span className="font-bold text-gold">•</span>
+                  <span>Business verification and labeled deal templates—not anonymous listings.</span>
                 </li>
-                <li className="flex gap-3">
-                  <span className="text-xs font-bold text-gold">2</span>
-                  <span>Payments and installments use trusted card processing; sellers can get paid on platform rails when enabled.</span>
+                <li className="flex gap-2">
+                  <span className="font-bold text-gold">•</span>
+                  <span>Threads, milestones, and audit-friendly history on every transaction path.</span>
                 </li>
-                <li className="flex gap-3">
-                  <span className="text-xs font-bold text-gold">3</span>
-                  <span>Designed for phones on the hood of a pickup—readable at a glance, easy to tap through.</span>
+                <li className="flex gap-2">
+                  <span className="font-bold text-gold">•</span>
+                  <span>Card-present checkout and seller payouts on platform rails when your agreement enables them.</span>
                 </li>
               </ul>
-              <div className="rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-3 text-xs leading-relaxed text-muted">
-                <span className="font-semibold text-foreground">Built for crews and yards</span>
-                Owner-operators, small fleets, and dealers who need listings, paperwork, payouts, and support in one
-                place—not five apps and a spreadsheet.
-              </div>
+              <p className="border-t border-[var(--steel-line)] pt-4 text-xs text-muted">
+                Need the full policy narrative? See{" "}
+                <Link href="/about" className="font-semibold text-[var(--link)] underline-offset-2 hover:underline">
+                  About & verification
+                </Link>{" "}
+                and{" "}
+                <Link href="/pricing" className="font-semibold text-[var(--link)] underline-offset-2 hover:underline">
+                  published fees
+                </Link>
+                .
+              </p>
             </div>
           }
           ctas={
             <>
               <Link
                 href="/marketplace"
-                className="rounded-md bg-gold px-5 py-3 text-sm font-semibold text-[#071733] shadow-[0_20px_50px_-20px_rgba(242,183,5,0.7)] transition-colors hover:bg-[#ffd14d] active:translate-y-[1px]"
+                className="rounded-md bg-[var(--button-primary-bg)] px-5 py-3 text-sm font-semibold text-[var(--button-primary-fg)] shadow-lg shadow-black/35 transition-opacity hover:opacity-95 active:translate-y-px"
               >
-                Browse equipment
+                Browse inventory
               </Link>
               <Link
-                href="/seller"
-                className="rounded-md border border-white/35 bg-black/35 px-5 py-3 text-sm font-semibold text-white backdrop-blur-md transition-colors hover:border-gold/50 hover:bg-white/10 active:translate-y-[1px]"
+                href={signUpSeller}
+                className="rounded-md border-2 border-white/90 bg-black/30 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-black/45 active:translate-y-px"
               >
-                List what you&apos;re selling
+                List inventory
               </Link>
               <Link
                 href={authRoutes.signUp}
-                className="rounded-md border border-gold/55 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors hover:bg-gold/20"
+                className="rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#14181d] transition-colors hover:bg-[#f0ebe3] active:translate-y-px"
               >
                 Create account
               </Link>
               <Link
-                href="/about"
-                className="rounded-md px-2 py-3 text-sm font-semibold text-slate-300 transition-colors hover:text-gold"
-              >
-                About us →
-              </Link>
-              <Link
                 href="/pricing"
-                className="rounded-md px-2 py-3 text-sm font-semibold text-slate-300 transition-colors hover:text-gold"
+                className="rounded-md px-2 py-3 text-sm font-semibold text-white/90 underline-offset-4 drop-shadow-md hover:underline"
               >
-                Fees →
+                Fee schedule
               </Link>
             </>
           }
         />
 
-        <section className="rounded-2xl border border-[var(--steel-line)] bg-[var(--charcoal-panel)] p-6 md:p-8">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Enterprise-ready storefront</p>
-              <h2 className="mt-2 text-2xl font-black tracking-tight text-foreground md:text-3xl">
-                Built to look public-market serious on day one
-              </h2>
-              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted md:text-base">
-                Clean category rails, documented swap lanes, and operation-grade checkpoints so buyers, sellers, and
-                admins work from one version of the truth.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <Link
-                href="/marketplace"
-                className="rounded-md border border-gold/40 bg-gold/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-gold hover:bg-gold/20"
-              >
-                Open marketplace
-              </Link>
-              <Link
-                href="/about#transfer-playbook"
-                className="rounded-md border border-[var(--steel-line)] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card-muted)]"
-              >
-                Transfer playbook
-              </Link>
-              <Link
-                href="/pricing"
-                className="rounded-md border border-[var(--steel-line)] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card-muted)]"
-              >
-                Pricing clarity
-              </Link>
-            </div>
-          </div>
-        </section>
-
         <DealTypesOverview />
 
         <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6 md:p-8" aria-labelledby="shop-by-category">
           <div className="flex flex-wrap items-end justify-between gap-3">
-            <h2 id="shop-by-category" className="text-xl font-bold text-foreground">
-              Shop by category
+            <h2 id="shop-by-category" className="font-display text-xl font-bold text-foreground md:text-2xl">
+              Browse by equipment class
             </h2>
             <Link
               href="/marketplace"
-              className="text-sm font-semibold text-gold transition-colors hover:text-[#ffd14d]"
+              className="text-sm font-semibold text-[var(--link)] underline-offset-4 hover:underline"
             >
-              See all →
+              Full marketplace →
             </Link>
           </div>
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -159,113 +118,47 @@ export default async function Home() {
               <Link
                 key={cat}
                 href={`/marketplace${marketplaceQueryString({ category: cat })}`}
-                className="group rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] p-5 transition-colors hover:border-gold/35 hover:bg-[var(--card)]"
+                className="group rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] p-5 transition-colors hover:border-[var(--gold-strong)] hover:bg-[var(--card)]"
               >
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">Browse</p>
-                <p className="mt-2 text-lg font-bold capitalize leading-snug text-foreground group-hover:text-gold">{cat}</p>
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">Category</p>
+                <p className="mt-2 text-lg font-bold capitalize leading-snug text-foreground group-hover:text-gold">
+                  {cat}
+                </p>
               </Link>
             ))}
           </div>
         </section>
 
-        <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6 md:p-8">
-          <h2 className="text-xl font-bold text-foreground">Equipment we’re focused on now</h2>
-          <p className="mt-3 max-w-3xl text-sm text-muted md:text-base">
-            We concentrate on categories where listings stack up fastest—starting with skid steers, trailers, mini
-            excavators, and dump trucks—before we widen into everything else contractors run.
-          </p>
-          <ul className="mt-5 flex flex-wrap gap-2">
-            {INITIAL_FOCUS_CATEGORIES.map((c) => (
-              <li
-                key={c}
-                className="rounded-full border border-gold/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-gold"
-              >
-                {c}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="rounded-xl border border-gold/20 bg-[var(--charcoal-panel)] p-6 md:p-8">
-          <h2 className="text-xl font-bold text-foreground">What we optimize for behind the scenes</h2>
-          <p className="mt-2 max-w-3xl text-sm text-muted">
-            First: listings that convert to real conversations and deposits. Second: tools that keep money movement and
-            paperwork above board for everyone involved.
-          </p>
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            <div className="rounded-lg border border-[var(--steel-line)] bg-card p-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-gold">Healthy marketplace rhythm</p>
-              <h3 className="mt-2 text-lg font-bold text-foreground">{NORTH_STAR_LIQUIDITY.label}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{NORTH_STAR_LIQUIDITY.definition}</p>
-              <p className="mt-3 text-xs text-muted opacity-90">{NORTH_STAR_LIQUIDITY.why}</p>
-            </div>
-            <div className="rounded-lg border border-[var(--steel-line)] bg-card p-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-gold">Peace of mind on money & messages</p>
-              <h3 className="mt-2 text-lg font-bold text-foreground">{NORTH_STAR_MOAT.label}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{NORTH_STAR_MOAT.definition}</p>
-              <p className="mt-3 text-xs text-muted opacity-90">{NORTH_STAR_MOAT.why}</p>
-            </div>
-          </div>
-        </section>
-
         <section id="marketplace-stats" className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <StatCard
-            label="Industry scale (for context)"
+            label="Market context"
             value="$100B+"
-            description="Rough napkin math on idle heavy-equipment capital in North America—not a prediction about this marketplace."
+            description="Directional scale of heavy-equipment capital in service of serious buyers—not a forecast for this exchange."
           />
           <StatCard
-            label="Active listings here"
+            label="Live listings"
             value={String(activeListingsCount)}
-            description="Pieces of equipment shoppers can browse right now on this marketplace."
+            description="Equipment rows published and discoverable in this catalog today."
           />
           <StatCard
-            label="Typical onboarding window"
+            label="Publication window"
             value="24–72 hrs"
-            description="Publishing and first messages often land in this range when verification keeps up—not a guaranteed SLA."
+            description="Typical listing review when verification materials keep pace—operations vary by queue."
           />
           <StatCard
-            label="Ways the platform earns fees"
-            value="7+"
-            description="Publishing, swaps, escrow help, optional services for dealers—all broken out plainly on Pricing."
-          />
-          <StatCard
-            label="What makes us sticky"
-            value="Trust & follow-through"
-            description="Pictures help, but people stay when installments, escrow help, timelines, inspections, and support feel dependable."
+            label="Operating principles"
+            value="Documented"
+            description="Lanes, fees, and responsibilities are written down before money moves—see Pricing and Legal."
           />
         </section>
 
-        <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6 md:p-8">
-          <h2 className="text-xl font-bold text-foreground">Different from Craigslist vibes or rental-only catalogs</h2>
-          <div className="mt-4 grid gap-6 md:grid-cols-2">
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-gold">What you often find today</h3>
-              <ul className="mt-3 space-y-2 text-sm text-muted">
-                <li>Lease-marketplaces glued to passenger cars—not heavy iron.</li>
-                <li>Big rental fleets built for counters, not the owner texting from the cab.</li>
-                <li>Peer-to-peer chatter with no disciplined payout path.</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-gold">What we stitch into one workflow</h3>
-              <ul className="mt-3 space-y-2 text-sm text-muted">
-                <li>Regional inventory dense enough that search feels worth it.</li>
-                <li>Rentals, lease-to-own routes, or payment swaps on one business-friendly storefront.</li>
-                <li>Buyers, sellers, and backers steered toward clear agreements instead of orphaned texts.</li>
-                <li>Installments and payouts wired in now—with room for GPS/telematics later without rebuilding from scratch.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6 md:p-8">
-          <h2 className="text-xl font-bold text-foreground">Beyond the listings grid</h2>
-          <ul className="mt-4 grid gap-3 md:grid-cols-2">
+        <section className="rounded-xl border border-[var(--steel-line)] bg-[var(--charcoal-panel)] p-6 md:p-8">
+          <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">Why firms keep paperwork here</h2>
+          <ul className="mt-6 grid gap-3 md:grid-cols-2">
             {MOAT_PILLARS.map((line) => (
               <li
                 key={line}
-                className="rounded-lg border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-3 text-sm text-foreground"
+                className="rounded-lg border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-3 text-sm font-medium leading-relaxed text-foreground"
               >
                 {line}
               </li>
@@ -277,12 +170,12 @@ export default async function Home() {
           id="how-it-works"
           className="scroll-mt-24 rounded-xl border border-[var(--steel-line)] bg-card p-6 md:scroll-mt-28 md:p-8"
         >
-          <h2 className="text-xl font-bold text-foreground">How it works</h2>
-          <ol className="mt-4 list-inside list-decimal space-y-2 text-sm text-muted md:text-base">
-            <li>Seller publishes equipment—we review flagged listings.</li>
-            <li>Buyer engages; inspection notes, lien questions, insurer docs stay in one thread tied to that deal.</li>
-            <li>When paperwork checks out, payment plans spin up automatically from the approved contract.</li>
-            <li>Buyers check out securely on the platform; sellers receive payouts matching their onboarding and escrow settings.</li>
+          <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">How a transfer proceeds</h2>
+          <ol className="mt-5 list-inside list-decimal space-y-3 text-sm font-medium leading-relaxed text-muted md:text-base">
+            <li>Seller publishes under a declared deal lane; flagged listings undergo operations review.</li>
+            <li>Buyer qualifies and engages; underwriting, lien, insurer, and inspection artifacts stay tied to one thread.</li>
+            <li>Executed agreements drive checkout and disbursement rails consistent with onboarding and escrow settings.</li>
+            <li>Every milestone remains searchable for principals and counsel—nothing trapped in SMS.</li>
           </ol>
         </section>
 
@@ -290,24 +183,24 @@ export default async function Home() {
           id="legal-overview"
           className="scroll-mt-24 rounded-xl border border-[var(--steel-line)] bg-card p-6 md:scroll-mt-28 md:p-8"
         >
-          <h2 className="text-xl font-bold text-foreground">Legal & responsibilities</h2>
-          <p className="mt-4 text-sm text-muted md:text-base">
-            Payment Swap Marketplace helps businesses coordinate—not replace your banker, lienholder, DOT office, OSHA
-            adviser, insurer, or attorney. Transparent timelines simply make it easier for everyone to reconstruct what was
-            said and promised if questions come up later.
+          <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">Legal posture</h2>
+          <p className="mt-4 text-sm font-medium leading-relaxed text-muted md:text-base">
+            Payment Swap Marketplace provides coordination tooling. Lenders, lessors, carriers, lienholders, and regulators are
+            third parties unless your contracts bring them in explicitly. Obtain independent advice on DOT, OSHA, taxation,
+            insurance, titling, and cross-border shipments.
           </p>
-          <div className="mt-5 flex flex-wrap gap-2">
+          <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/about#verification"
-              className="rounded-md border border-[var(--steel-line)] px-3 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card-muted)]"
+              className="rounded-md border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card)]"
             >
-              Verification details
+              Verification
             </Link>
             <Link
-              href="/messages"
-              className="rounded-md border border-[var(--steel-line)] px-3 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card-muted)]"
+              href="/pricing"
+              className="rounded-md border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-[var(--card)]"
             >
-              Messaging workflow
+              Pricing & fees
             </Link>
           </div>
         </section>

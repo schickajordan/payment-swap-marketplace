@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 import { APP_NAME } from "@/lib/config/marketplace";
 import { OrganizationJsonLd, WebSiteSearchJsonLd } from "@/lib/seo/json-ld";
@@ -16,6 +16,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const libreDisplay = Libre_Baskerville({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-display",
+});
+
 const siteUrl =
   typeof process.env.NEXT_PUBLIC_APP_URL === "string" &&
   process.env.NEXT_PUBLIC_APP_URL.startsWith("http")
@@ -26,7 +32,10 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#050a14" }],
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf8f4" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0f14" },
+  ],
 };
 
 export const metadata: Metadata = {
@@ -82,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${libreDisplay.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Script id="theme-init" strategy="beforeInteractive">
@@ -90,8 +99,7 @@ export default function RootLayout({
             try {
               const k = 'psm-theme-mode';
               const saved = localStorage.getItem(k);
-              const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-              const next = saved === 'light' || saved === 'dark' ? saved : (systemDark ? 'dark' : 'light');
+              const next = saved === 'light' || saved === 'dark' ? saved : 'light';
               document.documentElement.setAttribute('data-theme', next);
             } catch {}
           })();`}

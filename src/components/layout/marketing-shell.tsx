@@ -34,9 +34,10 @@ export async function MarketingShell({
       : null}
       <TrustDeliveryStrip />
       {showComplianceStrip ? (
-        <aside className="border-b border-amber-500/25 bg-amber-500/10 px-4 py-2 text-center text-[11px] leading-snug text-amber-100 md:text-xs">
-          For registered businesses—not consumer garage sales. Every deal stays between buyer and seller; our fees (and any
-          optional escrow help) are shown before you pay. Questions about liens or loans belong with your attorney or lender.
+        <aside className="border-b border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-2.5 text-center text-[11px] font-medium leading-snug text-foreground md:text-xs">
+          <strong className="font-semibold">Business accounts only.</strong> This marketplace coordinates transactions between
+          counterparties; it does not replace your attorney, lender, insurer, or DOT counsel. Published fees apply before
+          you pay.
         </aside>
       ) : null}
       {children}

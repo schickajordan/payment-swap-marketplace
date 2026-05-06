@@ -50,10 +50,8 @@ export async function proxy(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (allowedRoles && !user) {
-    const signTarget =
-      pathname.startsWith(authRoutes.account) ?
-        `${authRoutes.signIn}?next=${encodeURIComponent(pathname)}`
-      : authRoutes.signIn;
+    /** Always preserve destination so sign-in returns to the intended dashboard (e.g. `/seller`, `/messages`). */
+    const signTarget = `${authRoutes.signIn}?next=${encodeURIComponent(pathname)}`;
     return NextResponse.redirect(new URL(signTarget, request.url));
   }
 

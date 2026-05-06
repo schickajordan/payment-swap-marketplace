@@ -4,7 +4,7 @@ import { getCurrentSession } from "@/lib/auth/session";
 import { CategoryNavStrip } from "@/components/layout/category-nav-strip";
 import { GlobalCatalogSearch } from "@/components/layout/global-catalog-search";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { APP_NAME } from "@/lib/config/marketplace";
+import { APP_NAME, NAV_TAGLINE } from "@/lib/config/marketplace";
 import { authRoutes, dashboardLinks } from "@/lib/navigation";
 
 type TopNavProps = {
@@ -29,9 +29,7 @@ export async function TopNav({ marketplaceSearchDefault }: TopNavProps) {
             className="flex shrink-0 flex-col gap-0 leading-tight rounded-sm transition-opacity hover:opacity-95"
           >
             <span className="text-[11px] font-bold uppercase tracking-widest text-gold">{APP_NAME}</span>
-            <span className="hidden text-[10px] text-[var(--muted)] sm:inline">
-              Payment swaps · assumptions · lease-to-own
-            </span>
+            <span className="hidden text-[10px] text-[var(--muted)] sm:inline">{NAV_TAGLINE}</span>
           </Link>
 
           <GlobalCatalogSearch defaultQuery={marketplaceSearchDefault ?? ""} />

@@ -10,8 +10,7 @@ type CinematicHeroProps = {
 };
 
 /**
- * Bloomberg-meets-job-site chrome: cinematic still + layered glass panel.
- * Uses `priority` image for LCP on home; prefers reduced motion via CSS.
+ * Marketing hero with strong foreground scrims for WCAG readability on photographic backgrounds.
  */
 export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: CinematicHeroProps) {
   return (
@@ -19,26 +18,29 @@ export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: Cinemat
       <div className="absolute inset-0">
         <Image
           src="/marketing/hero-industrial-nightshift.png"
-          alt="Heavy dump truck and excavator on a cinematic construction site at dusk"
+          alt="Heavy dump truck and excavator on a construction site"
           fill
           priority
           sizes="(max-width: 1024px) 100vw, 1200px"
           quality={82}
-          className="animate-hero-zoom object-cover object-center opacity-[0.58]"
+          className="animate-hero-zoom object-cover object-center opacity-[0.48]"
         />
         <div className="hero-grid-overlay absolute inset-0" aria-hidden />
         <div className="hero-vignette absolute inset-0" aria-hidden />
+        <div className="hero-scrim-strong absolute inset-0 z-[1]" aria-hidden />
       </div>
 
       <div className="relative z-10 flex flex-col gap-8 lg:min-h-[420px] lg:flex-row lg:items-stretch lg:justify-between lg:gap-12">
         <div className="flex flex-1 flex-col justify-end p-6 pb-10 md:p-10 lg:pb-12 lg:pl-12 lg:pr-8 lg:pt-16">
           <div className="animate-fade-up max-w-xl">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold md:text-xs">{eyebrow}</div>
-            <h1 className="mt-4 text-balance text-3xl font-black uppercase leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#f5e6a8] drop-shadow-md md:text-xs">
+              {eyebrow}
+            </div>
+            <h1 className="font-display mt-4 text-balance text-3xl font-bold leading-[1.12] tracking-tight text-white shadow-black/90 drop-shadow-[0_4px_28px_rgba(0,0,0,0.92)] md:text-[2.5rem] lg:text-[3rem] lg:leading-[1.08]">
               {title}
             </h1>
           </div>
-          <div className="animate-fade-up motion-delay-sm mt-5 max-w-2xl text-pretty text-sm leading-relaxed text-slate-200/95 md:text-base">
+          <div className="animate-fade-up motion-delay-sm mt-5 max-w-2xl text-pretty text-sm font-medium leading-relaxed text-white shadow-black/95 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] md:text-base">
             {subtitle}
           </div>
           <div className="animate-fade-up motion-delay-md mt-6 flex flex-wrap gap-3">{ctas}</div>

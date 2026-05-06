@@ -5,15 +5,22 @@ export const APP_NAME = "Payment Swap Marketplace";
 /** Reserved production apex host — set `NEXT_PUBLIC_APP_URL=https://paymentswap.net` (or `https://www…`) when live. */
 export const RESERVED_PUBLIC_DOMAIN = "paymentswap.net";
 
-/** Short line for marketing surfaces (homepage hero, SEO-friendly). */
-export const VISION_HEADLINE = "Heavy equipment marketplace for real contractors";
+/** Institutional line for marketing rails (homepage hero eyebrow). */
+export const VISION_HEADLINE = "Heavy equipment transfers · verified businesses";
 
-/**
- * Elevator riff: passenger peer-rentals as a metaphor only.
- * “Turo” is a registered trademark of Turo Inc.—we’re independent and not endorsed by them.
- */
+/** Compact subtitle under wordmark (desktop nav). */
+export const NAV_TAGLINE = "Industrial equipment · documented transfers";
+
+/** Homepage hero headline — sentence case, institution tone. */
+export const HOME_HERO_TITLE = "Lease, assumption, and payment transfers on contractor equipment.";
+
+/** Short promise under the title (readable on photographic hero). */
+export const HOME_HERO_LEAD =
+  "Structured deal lanes—assumption, private payment takeover, and lease-to-own—with terms surfaced before anyone commits. Messaging, checkpoints, and records stay on-platform for operators, insurers, and counsel.";
+
+/** Replaces informal “sharing economy” copy; About page + internal narrative */
 export const SHARE_ECONOMY_ANCHOR =
-  "Turo made peer car swaps feel turnkey on your phone—we’re swinging for that same unmistakable fullness, except contractor turf: skid steers, dumps, fleets, installments, escrow when enabled, lien threads, inspectors, invoicing—all the heavyweight workflow cars never demanded, between verified businesses only.";
+  "We apply the clarity of mature equipment and fleet finance practices online: documented lanes, disciplined verification, milestone tracking for liens and insurance, and payouts only after the counterparties—not the marketplace machine—establish their agreement with qualified advisers where needed.";
 
 /** First liquidity wedge — ship density here before broadening SKUs */
 export const INITIAL_FOCUS_CATEGORIES = [
