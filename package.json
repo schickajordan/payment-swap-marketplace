@@ -13,7 +13,13 @@
     "typecheck": "tsc --noEmit",
     "check:proxy-matchers": "node scripts/check-proxy-auth-matchers.mjs",
     "verify": "npm run check:proxy-matchers && npm run lint && npm run typecheck && npm run build",
-    "go-live": "node scripts/go-live-values.mjs"
+    "go-live": "node scripts/go-live-values.mjs",
+    "vercel": "vercel",
+    "vercel:login": "vercel login",
+    "vercel:link": "vercel link",
+    "vercel:pull-env": "vercel env pull .env.vercel.pull --yes",
+    "vercel:dev": "vercel dev",
+    "vercel:inspect": "vercel inspect --logs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",
@@ -31,6 +37,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vercel": "^53.1.1"
   }
 }
