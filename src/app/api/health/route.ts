@@ -26,17 +26,34 @@ export function GET() {
   const missingCore = missingKeys(CORE_KEYS);
   const missingPayments = missingKeys(PAYMENTS_KEYS);
 
-  return NextResponse.json({
-    ok: true,
-    service: "payment-swap-marketplace",
-    timestamp: new Date().toISOString(),
-    checks: {
-      core_config: missingCore.length === 0,
-      payments_pipeline: missingPayments.length === 0,
+  const sha = process.env.VERCEL_GIT_COMMIT_SHA;
+  const deploy =
+    sha ?
+      {
+        commit: sha.slice(0, 7),
+        branch: process.env.VERCEL_GIT_COMMIT_REF ?? null,
+      }
+    : null;
+
+  return NextResponse.json(
+    {
+      ok: true,
+      service: "payment-swap-marketplace",
+      timestamp: new Date().toISOString(),
+      deploy,
+      checks: {
+        core_config: missingCore.length === 0,
+        payments_pipeline: missingPayments.length === 0,
+      },
+      missing_env: {
+        core: missingCore.length > 0 ? missingCore : undefined,
+        payments: missingPayments.length > 0 ? missingPayments : undefined,
+      },
     },
-    missing_env: {
-      core: missingCore.length > 0 ? missingCore : undefined,
-      payments: missingPayments.length > 0 ? missingPayments : undefined,
-    },
-  });
+    {
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    }
+  );
 }
