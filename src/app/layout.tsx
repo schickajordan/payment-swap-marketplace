@@ -42,11 +42,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: APP_NAME,
   title: {
-    default: "Payment Swap Marketplace | Heavy equipment for contractors",
+    default: "Payment Swap Marketplace | Equipment lease & payment transfers",
     template: "%s · Payment Swap Marketplace",
   },
   description:
-    "Browse skid steers, dump trucks, excavators, and trailers. Rentals, lease-to-own, and payment-plan deals between businesses—with clear terms and secure checkout.",
+    "Heavy-equipment lease assumptions, payment takeovers, and lease-to-own swaps between verified businesses—advertised obligations, qualification snapshots, and documented milestones like mature lease-transfer desks.",
   keywords: [
     "dump truck rental near me",
     "skid steer rental marketplace",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     type: "website",
     title: APP_NAME,
     description:
-      "Regional heavy-equipment marketplace for crews and dealers. Rentals, leases, installments, and escrow help when enabled.",
+      "Lease assumptions, private payment takeovers, and lease-to-own exits on heavy equipment—between verified businesses, with milestones and paperwork on-platform.",
     siteName: APP_NAME,
     locale: "en_US",
     url: getOgSiteUrl(),
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: APP_NAME,
     description:
-      "Shop heavy equipment online with contractor-friendly terms, tracked conversations, and secure payments.",
+      "Equipment payment swaps modeled on mature lease-transfer desks: obligation up front, qualification captured, handoff documented.",
   },
   appleWebApp: {
     capable: true,

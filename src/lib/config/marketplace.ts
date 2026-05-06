@@ -5,22 +5,23 @@ export const APP_NAME = "Payment Swap Marketplace";
 /** Reserved production apex host — set `NEXT_PUBLIC_APP_URL=https://paymentswap.net` (or `https://www…`) when live. */
 export const RESERVED_PUBLIC_DOMAIN = "paymentswap.net";
 
-/** Institutional line for marketing rails (homepage hero eyebrow). */
-export const VISION_HEADLINE = "Heavy equipment transfers · verified businesses";
+/** Hero eyebrow — lease-transfer / payment-swap positioning (heavy equipment). */
+export const VISION_HEADLINE = "Heavy-equipment lease transfers & payment swaps";
 
 /** Compact subtitle under wordmark (desktop nav). */
-export const NAV_TAGLINE = "Industrial equipment · documented transfers";
+export const NAV_TAGLINE = "Assume payments · exit contracts · documented handoffs";
 
-/** Homepage hero headline — sentence case, institution tone. */
-export const HOME_HERO_TITLE = "Lease, assumption, and payment transfers on contractor equipment.";
+/** Homepage hero — mirrors auto lease-transfer desks, not generic classifieds. */
+export const HOME_HERO_TITLE =
+  "Take over—or exit—equipment payments with the same rigor lease-transfer platforms brought to cars.";
 
-/** Short promise under the title (readable on photographic hero). */
+/** Above-the-fold promise: obligation / lessor / payoff clarity before anyone applies. */
 export const HOME_HERO_LEAD =
-  "Structured deal lanes—assumption, private payment takeover, and lease-to-own—with terms surfaced before anyone commits. Messaging, checkpoints, and records stay on-platform for operators, insurers, and counsel.";
+  "Listings are organized around payment obligation: who pays whom, what the lessor or lienholder still expects, and whether an assumption, private takeover, or lease-to-own unwind is on the table. Verified business accounts, qualification snapshots, and milestone threads keep the swap auditable—exactly what mature swap desks insist on before keys move.";
 
-/** Replaces informal “sharing economy” copy; About page + internal narrative */
+/** About page lead; industry parallel without naming third-party brands. */
 export const SHARE_ECONOMY_ANCHOR =
-  "We apply the clarity of mature equipment and fleet finance practices online: documented lanes, disciplined verification, milestone tracking for liens and insurance, and payouts only after the counterparties—not the marketplace machine—establish their agreement with qualified advisers where needed.";
+  "Passenger lease-transfer marketplaces proved that buyers and sellers need one disciplined workflow—advertised payment terms, credit and insurance gates, lessor documentation, and a single paper trail. We rebuilt that playbook for iron: skid steers, dumps, rigs, trailers, and the other titled or financed assets contractors restructure every day.";
 
 /** First liquidity wedge — ship density here before broadening SKUs */
 export const INITIAL_FOCUS_CATEGORIES = [
@@ -30,18 +31,18 @@ export const INITIAL_FOCUS_CATEGORIES = [
   "dump trucks",
 ] as const;
 
-/** Why the product exists — plain English for shoppers and sellers. */
+/** Payment-swap value props (homepage + pricing context). */
 export const MOAT_PILLARS = [
-  "Verified business accounts—you’re dealing with companies, not random handles",
-  "Messages and milestones for each deal, so terms don’t disappear in a text chain",
-  "Optional escrow-style payouts to sellers when those tools are enabled",
-  "Inspections & reviews—with room to add logistics partners over time",
+  "Swap lanes are explicit—assumption, private payment takeover, or lease-to-own—before filters or applications begin",
+  "Buyer qualification and seller disclosures are captured up front so lessors and insurers see a coherent package",
+  "Messaging and operational checkpoints stay tied to each swap room, not scattered across personal phones",
+  "Structured payouts and optional escrow-style collections when those rails are activated for a deal",
 ] as const;
 
 export const POSITIONING_LINES = [
-  "We connect businesses that rent, lease-to-own, or restructure payments on skid steers, trailers, excavators, dump trucks—and the other iron that keeps crews working.",
-  `Right now we’re focused deeply on categories like ${INITIAL_FOCUS_CATEGORIES.slice(0, 3).join(", ")}, and ${INITIAL_FOCUS_CATEGORIES[3] ?? "dump trucks"}, so search results stay useful—not a mile wide and empty.`,
-  "The product isn’t just photos and a listing: it’s clear terms, tracked conversations, checkpoints for liens & insurance questions, optional escrow help, and a record everyone can revisit if something goes sideways.",
+  "We specialize in moving monthly obligation on contractor equipment: assumptions, private party takeovers, and lease-to-own exits—not casual weekend rentals.",
+  `Inventory depth starts with ${INITIAL_FOCUS_CATEGORIES.slice(0, 3).join(", ")}, and ${INITIAL_FOCUS_CATEGORIES[3] ?? "dump trucks"}—categories where payment swaps actually clear.`,
+  "Every serious transfer still runs through your attorneys, lienholders, and insurers; our job is to give them a clean, timestamped record instead of a scavenger hunt.",
 ] as const;
 
 /** Extra reassurance line on the homepage (internal discipline, customer-friendly wording). */
@@ -69,7 +70,7 @@ export const NORTH_STAR_MOAT = {
 
 /** Marketing-safe wording — platform does not originate or assume third-party secured debt. */
 export const LEGAL_SURFACE_DISCLAIMER =
-  "Payment Swap Marketplace facilitates business-to-business equipment transactions—including coordination of leases, rentals, lease-to-own, and private payment agreements between users—not as lender, insurer, carrier, title agent, or equipment custodian unless expressly contracted elsewhere. Financing or loan obligations documented with third parties remain solely between borrower and lender unless an approved assumption exists. Rentals and payment swaps remain between counterparties subject to contracts and applicable law. Verify insurance, liens, title, lienholder consent (where relevant), DOT & permit rules, jobsite logistics, and tax/title with qualified counsel.";
+  "Payment Swap Marketplace coordinates business-to-business equipment payment transfers—including lease assumptions, private payment takeovers, lease-to-own exits, and documented payment plans between users—not as lender, insurer, carrier, title agent, or equipment custodian unless expressly contracted elsewhere. Obligations owed to third-party financiers or lessors remain between those parties until an approved assumption or payoff path is satisfied. Verify insurance, liens, title, lienholder consent (where relevant), DOT & permit rules, jobsite logistics, and tax/title with qualified counsel.";
 
 export const FEE_STRUCTURE = [
   { name: "Standard listing", detail: "$99 publishing fee (pricing subject to tier)" },

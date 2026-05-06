@@ -16,6 +16,8 @@ import { authRoutes } from "@/lib/navigation";
 
 const signUpSeller = `${authRoutes.signUp}?role=seller`;
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   let activeListingsCount = 0;
 
@@ -41,19 +43,19 @@ export default async function Home() {
           }
           aside={
             <div className="space-y-4 text-sm leading-snug">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">Institutional discipline</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">Swap-desk standards</p>
               <ul className="space-y-3 text-foreground">
                 <li className="flex gap-2">
                   <span className="font-bold text-gold">•</span>
-                  <span>Business verification and labeled deal templates—not anonymous listings.</span>
+                  <span>Sellers publish remaining payments, transfer fees, and lessor constraints—not just photos.</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="font-bold text-gold">•</span>
-                  <span>Threads, milestones, and audit-friendly history on every transaction path.</span>
+                  <span>Buyers file qualification snapshots so credit, insurance, and counsel review one package.</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="font-bold text-gold">•</span>
-                  <span>Card-present checkout and seller payouts on platform rails when your agreement enables them.</span>
+                  <span>Milestones unlock funding, handoff, and payouts only when your agreement says they should.</span>
                 </li>
               </ul>
               <p className="border-t border-[var(--steel-line)] pt-4 text-xs text-muted">
@@ -75,7 +77,7 @@ export default async function Home() {
                 href="/marketplace"
                 className="rounded-md bg-[var(--button-primary-bg)] px-5 py-3 text-sm font-semibold text-[var(--button-primary-fg)] shadow-lg shadow-black/35 transition-opacity hover:opacity-95 active:translate-y-px"
               >
-                Browse inventory
+                Browse swap listings
               </Link>
               <Link
                 href={signUpSeller}

@@ -8,7 +8,7 @@ import { authRoutes } from "@/lib/navigation";
 
 export const metadata: Metadata = {
   title: "About us",
-  description: `Who ${APP_NAME} is for, how rent and lease lanes work, how to set up an account, and how we verify sellers and payouts.`,
+  description: `${APP_NAME} coordinates heavy-equipment lease assumptions, payment takeovers, and lease-to-own exits between verified businesses—documented milestones, not casual listings.`,
 };
 
 export default function AboutPage() {
@@ -17,22 +17,18 @@ export default function AboutPage() {
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-12 px-4 py-12 md:max-w-4xl md:px-8 md:py-14">
         <header className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">About us</p>
-          <h1 className="text-balance text-3xl font-black uppercase leading-tight tracking-tight text-white md:text-5xl">
-            Equipment deals shouldn&apos;t dissolve into texts and missed voicemails
+          <h1 className="font-display text-balance text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
+            Lease transfers deserve the same choreography auto swap desks perfected—applied to contractor iron
           </h1>
-          <p className="rounded-xl border border-gold/25 bg-[#091c3d]/40 px-4 py-3 text-lg font-medium leading-relaxed text-slate-50 md:text-xl">
+          <p className="rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-3 text-lg font-medium leading-relaxed text-muted md:text-xl">
             {SHARE_ECONOMY_ANCHOR}
           </p>
-          <p className="text-lg leading-relaxed text-slate-200 md:text-xl">
-            {APP_NAME} is built for crews, fleets, dealers, and owner-operators who already buy and sell serious iron—but want a{" "}
-            <span className="text-white">searchable storefront</span>,{" "}
-            <span className="text-white">straightforward monthly math</span>, and{" "}
-            <span className="text-white">one threaded record</span>
-            tied to each deal instead of juggling five inbox threads.
-          </p>
-          <p className="text-[11px] leading-relaxed text-slate-500">
-            Mention of Turo is a familiar shorthand for peer marketplaces—we are independent and not endorsed by or
-            affiliated with Turo Inc. or its marks.
+          <p className="text-lg font-medium leading-relaxed text-muted md:text-xl">
+            {APP_NAME} is intentionally narrow: we help principals advertise{" "}
+            <span className="text-foreground">who owes what next month</span>,{" "}
+            <span className="text-foreground">what lienholders require</span>, and{" "}
+            <span className="text-foreground">how the handoff progresses</span>—rather than scattering those facts across SMS
+            and voicemails.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
