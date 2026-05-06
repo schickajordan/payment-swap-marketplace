@@ -19,7 +19,8 @@
     "vercel:link": "vercel link",
     "vercel:pull-env": "vercel env pull .env.vercel.pull --yes",
     "vercel:dev": "vercel dev",
-    "vercel:inspect": "vercel inspect --logs"
+    "vercel:inspect": "vercel inspect --logs",
+    "vercel:deploy:prod": "vercel deploy --prod --yes --non-interactive"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",
