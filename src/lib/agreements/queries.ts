@@ -169,7 +169,7 @@ export async function getAdminAgreementQueue(): Promise<AdminAgreementQueueItem[
   const { data, error } = await supabase
     .from("payment_agreements")
     .select(
-      "id, listing_id, seller_id, buyer_id, status, deal_checkpoint, start_date, end_date, monthly_payment_cents, escrow_enabled, signed_contract_url, created_at, updated_at, listings(title, category, location_city, location_state, deal_template, collateral_is_titled)"
+      "id, listing_id, seller_id, buyer_id, status, contract_status, contract_version, contract_uploaded_at, contract_executed_at, deal_checkpoint, start_date, end_date, monthly_payment_cents, escrow_enabled, signed_contract_url, created_at, updated_at, listings(title, category, location_city, location_state, deal_template, collateral_is_titled)"
     )
     .in("status", ["draft", "signed", "active", "defaulted"])
     .order("created_at", { ascending: false });
@@ -271,5 +271,59 @@ export async function updateAgreementDealCheckpoint(
       from_checkpoint: existing.deal_checkpoint,
       to_checkpoint: deal_checkpoint,
     },
+  });
+}
+
+export async function updateAgreementContractMetadata(
+  agreementId: string,
+  input: {
+    contractVersion: string;
+    contractStatus: AgreementRow["contract_status"];
+    signedContractUrl?: string | null;
+  }
+) {
+  const supabase = await createServerSupabaseClient();
+  const { data: existing, error: existingError } = await supabase
+    .from("payment_agreements")
+    .select("id, contract_status, contract_version, signed_contract_url")
+    .eq("id", agreementId)
+    .single();
+
+  if (existingError || !existing) {
+    throw new Error("Agreement not found for contract metadata update.");
+  }
+
+  const nowIso = new Date().toISOString();
+  const contractUploadedAt =
+    input.contractStatus === "uploaded" || input.contractStatus === "executed" ? nowIso : null;
+  const contractExecutedAt = input.contractStatus === "executed" ? nowIso : null;
+
+  const { error } = await supabase
+    .from("payment_agreements")
+    .update({
+      contract_status: input.contractStatus,
+      contract_version: input.contractVersion,
+      signed_contract_url: input.signedContractUrl ?? null,
+      contract_uploaded_at: contractUploadedAt,
+      contract_executed_at: contractExecutedAt,
+    })
+    .eq("id", agreementId);
+
+  if (error) {
+    throw new Error(`Failed to update contract metadata: ${error.message}`);
+  }
+
+  await createAgreementEvent({
+    agreementId,
+    eventType: "contract_metadata_updated",
+    message: `Contract metadata updated: ${existing.contract_status} → ${input.contractStatus}, version ${input.contractVersion}.`,
+    metadata: {
+      from_contract_status: existing.contract_status,
+      to_contract_status: input.contractStatus,
+      from_contract_version: existing.contract_version,
+      to_contract_version: input.contractVersion,
+      signed_contract_url_set: Boolean(input.signedContractUrl),
+    },
+    isInternal: true,
   });
 }

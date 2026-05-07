@@ -2,6 +2,7 @@ import {
   approveAgreementAction,
   postAdminInternalNoteAction,
   rejectAgreementAction,
+  setAgreementContractAction,
   setDealCheckpointAction,
 } from "@/app/admin/actions";
 import { QualificationSnapshotPanel } from "@/components/agreements/qualification-snapshot-panel";
@@ -49,6 +50,7 @@ function adminSuccessMessage(success: string) {
     "agreement-approved": "Agreement approved; payment schedule generated.",
     "agreement-rejected": "Agreement cancelled/rejected.",
     "deal-checkpoint-updated": "Deal operational checkpoint saved.",
+    "contract-metadata-updated": "Contract metadata saved.",
   };
   return map[success] ?? "Changes saved.";
 }
@@ -148,6 +150,7 @@ export default async function AdminDashboardPage({ searchParams }: AdminDashboar
               <div className="mt-3 grid gap-2 text-sm text-slate-300 md:grid-cols-4">
                 <p>Monthly: {centsToUsd(agreement.monthly_payment_cents)}</p>
                 <p>Escrow: {agreement.escrow_enabled ? "Enabled" : "Disabled"}</p>
+                <p>Contract: {agreement.contract_status}</p>
                 <p>
                   Location: {agreement.listings?.location_city ?? "N/A"},{" "}
                   {agreement.listings?.location_state ?? "N/A"}
@@ -166,6 +169,50 @@ export default async function AdminDashboardPage({ searchParams }: AdminDashboar
                   : <span className="text-slate-500"> · serial / UCC path</span>}
                 </p>
               : null}
+
+              <div className="mt-4 rounded-lg border border-white/10 bg-[#091c3d]/40 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                  Contract governance
+                </p>
+                <form action={setAgreementContractAction} className="mt-3 grid gap-2 md:grid-cols-3">
+                  <input type="hidden" name="agreementId" value={agreement.id} />
+                  <label className="flex flex-col gap-1 text-xs text-slate-400">
+                    Contract version
+                    <input
+                      name="contractVersion"
+                      defaultValue={agreement.contract_version ?? "v1"}
+                      className="rounded-md border border-white/20 bg-[#091c3d] px-2 py-2 text-sm text-white outline-none focus:border-gold"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-1 text-xs text-slate-400">
+                    Contract status
+                    <select
+                      name="contractStatus"
+                      defaultValue={agreement.contract_status}
+                      className="rounded-md border border-white/20 bg-[#091c3d] px-2 py-2 text-sm text-white outline-none focus:border-gold"
+                    >
+                      <option value="draft">draft</option>
+                      <option value="uploaded">uploaded</option>
+                      <option value="executed">executed</option>
+                    </select>
+                  </label>
+                  <label className="flex flex-col gap-1 text-xs text-slate-400 md:col-span-3">
+                    Signed contract URL
+                    <input
+                      name="signedContractUrl"
+                      defaultValue={agreement.signed_contract_url ?? ""}
+                      placeholder="https://..."
+                      className="rounded-md border border-white/20 bg-[#091c3d] px-2 py-2 text-sm text-white outline-none focus:border-gold"
+                    />
+                  </label>
+                  <button
+                    type="submit"
+                    className="mt-1 w-fit rounded-md border border-gold/50 px-4 py-2 text-sm font-semibold text-gold hover:bg-gold/10"
+                  >
+                    Save contract fields
+                  </button>
+                </form>
+              </div>
 
               {qualification ? (
                 <QualificationSnapshotPanel

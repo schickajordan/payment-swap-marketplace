@@ -190,6 +190,10 @@ export type Database = {
           seller_id: string;
           buyer_id: string;
           status: "draft" | "signed" | "active" | "defaulted" | "completed" | "cancelled";
+          contract_status: "draft" | "uploaded" | "executed";
+          contract_version: string | null;
+          contract_uploaded_at: string | null;
+          contract_executed_at: string | null;
           deal_checkpoint:
             | "intake"
             | "buyer_qualified"
@@ -215,6 +219,10 @@ export type Database = {
           seller_id: string;
           buyer_id: string;
           status?: "draft" | "signed" | "active" | "defaulted" | "completed" | "cancelled";
+          contract_status?: "draft" | "uploaded" | "executed";
+          contract_version?: string | null;
+          contract_uploaded_at?: string | null;
+          contract_executed_at?: string | null;
           deal_checkpoint?:
             | "intake"
             | "buyer_qualified"

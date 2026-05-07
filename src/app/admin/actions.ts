@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { recordAgreementExecutableInCell } from "@/lib/analytics/liquidity-milestones";
 import {
   advanceDealCheckpointFromIntake,
+  updateAgreementContractMetadata,
   updateAgreementDealCheckpoint,
   updateAgreementStatus,
 } from "@/lib/agreements/queries";
@@ -111,4 +112,37 @@ export async function postAdminInternalNoteAction(formData: FormData) {
   }
 
   redirect("/admin?success=internal-note-saved");
+}
+
+export async function setAgreementContractAction(formData: FormData) {
+  await requireRole(["admin"]);
+  const agreementId = String(formData.get("agreementId") ?? "").trim();
+  const contractVersion = String(formData.get("contractVersion") ?? "").trim();
+  const contractStatus = String(formData.get("contractStatus") ?? "").trim();
+  const signedContractUrlRaw = String(formData.get("signedContractUrl") ?? "").trim();
+
+  if (!agreementId || !contractVersion || !contractStatus) {
+    redirect("/admin?error=Contract update requires agreement id, version, and status.");
+  }
+
+  if (!["draft", "uploaded", "executed"].includes(contractStatus)) {
+    redirect("/admin?error=Invalid contract status.");
+  }
+
+  if (signedContractUrlRaw && !/^https?:\/\//i.test(signedContractUrlRaw)) {
+    redirect("/admin?error=Signed contract URL must start with http or https.");
+  }
+
+  try {
+    await updateAgreementContractMetadata(agreementId, {
+      contractVersion,
+      contractStatus: contractStatus as "draft" | "uploaded" | "executed",
+      signedContractUrl: signedContractUrlRaw.length > 0 ? signedContractUrlRaw : null,
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to update contract metadata.";
+    redirect(`/admin?error=${encodeURIComponent(message)}`);
+  }
+
+  redirect("/admin?success=contract-metadata-updated");
 }
