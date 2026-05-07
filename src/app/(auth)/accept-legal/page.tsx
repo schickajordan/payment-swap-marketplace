@@ -22,6 +22,11 @@ export default async function AcceptLegalPage({ searchParams }: AcceptLegalPageP
         <p className="mt-2 text-sm text-muted">
           To continue using protected account features, confirm current legal documents.
         </p>
+        {params.error && params.error !== "consent-required" ? (
+          <p className="mt-4 rounded-md border border-[var(--danger-border)] bg-[var(--danger-bg)] p-3 text-sm text-[var(--danger-text)]">
+            {params.error}
+          </p>
+        ) : null}
         {params.error === "consent-required" ? (
           <p className="mt-4 rounded-md border border-[var(--danger-border)] bg-[var(--danger-bg)] p-3 text-sm text-[var(--danger-text)]">
             Accept both documents to continue.

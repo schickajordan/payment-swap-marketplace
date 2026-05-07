@@ -17,6 +17,77 @@ import { listMyAddresses, getMyProfileRow } from "@/lib/profiles/queries";
 import { getMyPayoutAccount } from "@/lib/payouts/queries";
 import { MARKETPLACE_DEAL_LANE_ENTRIES } from "@/lib/marketplace/deal-lanes";
 import { authRoutes, signInUrlWithNext } from "@/lib/navigation";
+import type { UserRole } from "@/lib/types/roles";
+
+type RegistrationProgressPanelProps = {
+  emailConfirmed: boolean;
+  companyNameSet: boolean;
+  role: UserRole;
+  stripeOnboardingComplete: boolean;
+};
+
+function CheckRow({ done, label, detail }: { done: boolean; label: string; detail: string }) {
+  return (
+    <li className="flex gap-3 rounded-lg border border-white/10 bg-[#091c3d]/40 px-3 py-2.5">
+      <span
+        className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full text-xs font-bold ${
+          done ? "bg-emerald-500/25 text-emerald-200" : "border border-white/25 text-slate-500"
+        }`}
+        aria-hidden
+      >
+        {done ? "✓" : ""}
+      </span>
+      <div>
+        <p className="text-sm font-semibold text-white">{label}</p>
+        <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">{detail}</p>
+      </div>
+    </li>
+  );
+}
+
+function RegistrationProgressPanel({
+  emailConfirmed,
+  companyNameSet,
+  role,
+  stripeOnboardingComplete,
+}: RegistrationProgressPanelProps) {
+  const sellerStripeItem =
+    role === "seller" ?
+      <CheckRow
+        done={stripeOnboardingComplete}
+        label="Seller payout setup"
+        detail="Connect Stripe in the seller dashboard when you are ready to receive platform-routed payouts."
+      />
+    : null;
+
+  return (
+    <section className="mt-8 rounded-xl border border-white/10 bg-[#091c3d]/35 p-4" aria-labelledby="reg-progress">
+      <h2 id="reg-progress" className="text-xs font-semibold uppercase tracking-wide text-gold">
+        Finish your registration
+      </h2>
+      <p className="mt-1 text-xs leading-relaxed text-slate-400">
+        Complete these items so counterparties and operations see a credible business profile.
+      </p>
+      <ul className="mt-4 space-y-2">
+        <CheckRow
+          done={emailConfirmed}
+          label="Email confirmed"
+          detail={
+            emailConfirmed ?
+              "Your inbox link is confirmed with the auth provider."
+            : "Open the message from your auth provider and confirm your email before relying on password recovery."
+          }
+        />
+        <CheckRow
+          done={companyNameSet}
+          label="Company on file"
+          detail="Add your legal business name under Profile below—listings and agreements reference this record."
+        />
+        {sellerStripeItem}
+      </ul>
+    </section>
+  );
+}
 
 type AccountPageProps = {
   searchParams: Promise<{
@@ -91,6 +162,13 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
             {successBanner}
           </p>
         : null}
+
+        <RegistrationProgressPanel
+          emailConfirmed={Boolean(user.email_confirmed_at)}
+          companyNameSet={Boolean(profile.company_name?.trim())}
+          role={role}
+          stripeOnboardingComplete={Boolean(payoutAccount?.onboarding_complete)}
+        />
 
         <section
           aria-label="Marketplace swap lane shortcuts"

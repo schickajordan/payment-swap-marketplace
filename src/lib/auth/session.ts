@@ -1,4 +1,4 @@
-import { DEFAULT_ROLE, isUserRole, UserRole } from "@/lib/types/roles";
+import { resolveEffectiveRole } from "@/lib/auth/resolve-effective-role";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -14,8 +14,7 @@ export async function getCurrentSession() {
     return { user: null, role: null };
   }
 
-  const roleCandidate = data.user.user_metadata?.role;
-  const role: UserRole = isUserRole(roleCandidate) ? roleCandidate : DEFAULT_ROLE;
+  const role = await resolveEffectiveRole(supabase, data.user.id, data.user.user_metadata?.role);
 
   return { user: data.user, role };
 }

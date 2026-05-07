@@ -62,6 +62,12 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
           .
         </p>
 
+        <p className="mt-3 text-xs leading-relaxed text-muted">
+          If your project requires email confirmation, your <strong className="text-foreground">profile row</strong> is
+          created on <strong className="text-foreground">first successful sign-in</strong> after you click the inbox link—not
+          at the moment you submit this form.
+        </p>
+
         {params.error ? (
           <p className="mt-4 rounded-md border border-[var(--danger-border)] bg-[var(--danger-bg)] p-3 text-sm text-[var(--danger-text)]">
             {params.error}

@@ -1,8 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { resolveEffectiveRole } from "@/lib/auth/resolve-effective-role";
 import { appRoutes, authRoutes } from "@/lib/navigation";
 import { hasCurrentLegalAcceptances } from "@/lib/legal/acceptance";
-import { DEFAULT_ROLE, isUserRole } from "@/lib/types/roles";
 
 type RoleGate = Array<"seller" | "buyer" | "admin">;
 
@@ -76,8 +76,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (allowedRoles && user) {
-    const roleCandidate = user.user_metadata?.role;
-    const role = isUserRole(roleCandidate) ? roleCandidate : DEFAULT_ROLE;
+    const role = await resolveEffectiveRole(supabase, user.id, user.user_metadata?.role);
 
     if (!allowedRoles.includes(role)) {
       return NextResponse.redirect(new URL(appRoutes.unauthorized, request.url));

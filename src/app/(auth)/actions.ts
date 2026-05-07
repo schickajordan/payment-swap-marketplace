@@ -206,8 +206,30 @@ export async function acceptLegalAction(formData: FormData) {
     redirect(`${authRoutes.acceptLegal}?error=consent-required&next=${encodeURIComponent(next)}`);
   }
 
-  await insertLegalAcceptance(supabase, user.id, "terms", CURRENT_TERMS_VERSION, "reconsent_gate");
-  await insertLegalAcceptance(supabase, user.id, "privacy", CURRENT_PRIVACY_VERSION, "reconsent_gate");
+  const termsRes = await insertLegalAcceptance(
+    supabase,
+    user.id,
+    "terms",
+    CURRENT_TERMS_VERSION,
+    "reconsent_gate",
+  );
+  if (termsRes.error) {
+    redirect(
+      `${authRoutes.acceptLegal}?error=${encodeURIComponent(termsRes.error.message)}&next=${encodeURIComponent(next)}`,
+    );
+  }
+  const privacyRes = await insertLegalAcceptance(
+    supabase,
+    user.id,
+    "privacy",
+    CURRENT_PRIVACY_VERSION,
+    "reconsent_gate",
+  );
+  if (privacyRes.error) {
+    redirect(
+      `${authRoutes.acceptLegal}?error=${encodeURIComponent(privacyRes.error.message)}&next=${encodeURIComponent(next)}`,
+    );
+  }
 
   redirect(next);
 }
