@@ -120,6 +120,6 @@ export const config = {
     "/account/:path*",
     "/sign-in",
     "/sign-up",
-    "/auth/accept-legal",
+    "/accept-legal",
   ],
 };

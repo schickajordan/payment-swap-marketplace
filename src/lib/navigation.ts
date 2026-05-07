@@ -11,7 +11,7 @@ export const authRoutes = {
   account: "/account",
   signIn: "/sign-in",
   signUp: "/sign-up",
-  acceptLegal: "/auth/accept-legal",
+  acceptLegal: "/accept-legal",
   forgotPassword: "/forgot-password",
   /** Supabase `redirectTo` after email recovery link (see `requestPasswordResetAction`). */
   updatePassword: "/auth/update-password",
