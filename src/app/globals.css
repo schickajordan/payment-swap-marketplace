@@ -37,7 +37,7 @@
   --foreground: var(--navy-900);
   --card: #ffffff;
   --card-muted: #e8eef4;
-  --muted: #4f5f72;
+  --muted: #33475b;
   --gold: #ffb81c;
   --gold-strong: #e29a00;
   --steel: #5c6b7f;
@@ -94,7 +94,7 @@
     --foreground: #051b35;
     --card: #ffffff;
     --card-muted: #e8eef4;
-    --muted: #4f5f72;
+    --muted: #33475b;
     --gold: #ffb81c;
     --gold-strong: #e29a00;
     --steel: #5c6b7f;
@@ -118,7 +118,7 @@
   }
 
   :root:not([data-theme]) .text-premium-muted {
-    color: rgba(5, 27, 53, 0.65);
+    color: rgba(5, 27, 53, 0.78);
   }
 }
 
@@ -176,7 +176,7 @@
   }
 
   [data-theme="light"] .text-premium-muted {
-    color: rgba(5, 27, 53, 0.65);
+    color: rgba(5, 27, 53, 0.78);
   }
 }
 

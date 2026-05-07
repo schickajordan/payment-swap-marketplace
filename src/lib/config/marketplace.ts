@@ -13,15 +13,15 @@ export const NAV_TAGLINE = "Assume payments · exit contracts · documented hand
 
 /** Homepage hero — disciplined equipment payment-transfer positioning. */
 export const HOME_HERO_TITLE =
-  "Take over—or exit—equipment payments with a disciplined heavy-equipment transfer workflow.";
+  "Take over or exit equipment payments with clear terms and verified counterparties.";
 
 /** Above-the-fold promise: obligation / lessor / payoff clarity before anyone applies. */
 export const HOME_HERO_LEAD =
-  "Listings are organized around payment obligation: who pays whom, what the lessor or lienholder still expects, and whether an assumption, private takeover, or lease-to-own unwind is on the table. Verified business accounts, qualification snapshots, and milestone threads keep the swap auditable—exactly what mature swap desks insist on before keys move.";
+  "Every listing shows monthly payment, remaining term, and transfer path up front. Buyers and sellers work in one thread with milestones, documents, and payment checkpoints kept together.";
 
 /** About page lead; industry parallel without naming third-party brands. */
 export const SHARE_ECONOMY_ANCHOR =
-  "Passenger lease-transfer marketplaces proved that buyers and sellers need one disciplined workflow—advertised payment terms, credit and insurance gates, lessor documentation, and a single paper trail. We rebuilt that playbook for iron: skid steers, dumps, rigs, trailers, and the other titled or financed assets contractors restructure every day.";
+  "Equipment transfers need structure: clear payment terms, qualification checks, lender paperwork, and a clean audit trail. We built that workflow for contractor equipment, not consumer listings.";
 
 /** First liquidity wedge — ship density here before broadening SKUs */
 export const INITIAL_FOCUS_CATEGORIES = [
@@ -33,10 +33,10 @@ export const INITIAL_FOCUS_CATEGORIES = [
 
 /** Payment-swap value props (homepage + pricing context). */
 export const MOAT_PILLARS = [
-  "Swap lanes are explicit—assumption, private payment takeover, or lease-to-own—before filters or applications begin",
-  "Buyer qualification and seller disclosures are captured up front so lessors and insurers see a coherent package",
-  "Messaging and operational checkpoints stay tied to each swap room, not scattered across personal phones",
-  "Structured payouts and optional escrow-style collections when those rails are activated for a deal",
+  "Each listing declares its lane: assumption, private takeover, or lease-to-own",
+  "Qualification and disclosures are captured early so lenders and insurers can review faster",
+  "Messages, files, and milestones stay in one deal room",
+  "Payout and optional escrow flows follow documented checkpoints",
 ] as const;
 
 export const POSITIONING_LINES = [

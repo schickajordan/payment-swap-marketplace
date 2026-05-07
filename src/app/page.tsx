@@ -49,15 +49,15 @@ export default async function Home() {
               <ul className="space-y-3 text-[var(--foreground)]">
                 <li className="flex gap-2">
                   <span className="font-bold text-[var(--gold-strong)]">•</span>
-                  <span>Sellers publish remaining payments, transfer fees, and lessor constraints—not just photos.</span>
+                  <span>Sellers publish remaining payment, transfer fees, and lender constraints up front.</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="font-bold text-[var(--gold-strong)]">•</span>
-                  <span>Buyers file qualification snapshots so credit, insurance, and counsel review one package.</span>
+                  <span>Buyers submit qualification details once for a faster review cycle.</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="font-bold text-[var(--gold-strong)]">•</span>
-                  <span>Milestones unlock funding, handoff, and payouts only when your agreement says they should.</span>
+                  <span>Milestones control funding, handoff, and payout timing.</span>
                 </li>
               </ul>
               <p className="border-t border-[var(--steel-line)] pt-4 text-xs text-[var(--muted)]">
@@ -160,7 +160,7 @@ export default async function Home() {
         </section>
 
         <section className="rounded-xl border border-[var(--steel-line)] bg-[var(--card)] p-6 shadow-[0_8px_28px_rgba(5,27,53,0.06)] md:p-8">
-          <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">Why firms keep paperwork here</h2>
+          <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">Why teams run deals here</h2>
           <ul className="mt-6 grid gap-3 md:grid-cols-2">
             {MOAT_PILLARS.map((line) => (
               <li
@@ -177,12 +177,12 @@ export default async function Home() {
           id="how-it-works"
           className="scroll-mt-24 rounded-xl border border-[var(--steel-line)] bg-card p-6 md:scroll-mt-28 md:p-8"
         >
-          <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">How a transfer proceeds</h2>
+          <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">How a transfer works</h2>
           <ol className="mt-5 list-inside list-decimal space-y-3 text-sm font-medium leading-relaxed text-muted md:text-base">
-            <li>Seller publishes under a declared deal lane; flagged listings undergo operations review.</li>
-            <li>Buyer qualifies and engages; underwriting, lien, insurer, and inspection artifacts stay tied to one thread.</li>
-            <li>Executed agreements drive checkout and disbursement rails consistent with onboarding and escrow settings.</li>
-            <li>Every milestone remains searchable for principals and counsel—nothing trapped in SMS.</li>
+            <li>Seller publishes with lane, payment terms, and required transfer conditions.</li>
+            <li>Buyer qualifies; lender, insurer, and inspection items stay in one thread.</li>
+            <li>Signed agreement triggers checkout and payout workflow.</li>
+            <li>Milestones and records remain searchable for every authorized party.</li>
           </ol>
         </section>
 
