@@ -74,6 +74,7 @@ supabase db push
 | `npm run verify` | Proxy consistency + lint + typecheck + build |
 | `npm run audit:prod` | `npm audit` on **production** dependencies only (severity **high+**); dev-only advisories from `vercel` CLI are excluded |
 | `npm run verify:full` | `audit:prod` then `verify` — recommended before tagging releases |
+| `npm run go` | **`verify:full`** then **`vercel deploy --prod`** (requires Vercel CLI auth on this machine) |
 
 Continuous integration: `.github/workflows/ci.yml` runs `npm run audit:prod` then `npm run verify` on pushes to `main` / `master` and on pull requests (expects this directory to be the git repository root; in a monorepo, move or adjust `working-directory`).
 

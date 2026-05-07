@@ -4,18 +4,23 @@ const SEED_PATHS = [
   "/",
   "/about",
   "/pricing",
+  "/demo",
+  "/support",
   "/marketplace",
   "/sign-in",
   "/sign-up",
   "/forgot-password",
   "/auth/update-password",
   "/unauthorized",
+  "/terms",
+  "/privacy",
 ] as const;
 
 const STATIC_ROUTES = [
   "/robots.txt",
   "/sitemap.xml",
   "/manifest.webmanifest",
+  "/.well-known/security.txt",
   "/api/health",
 ] as const;
 
