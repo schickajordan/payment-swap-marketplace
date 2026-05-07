@@ -11,9 +11,9 @@ export const VISION_HEADLINE = "Heavy-equipment lease transfers & payment swaps"
 /** Compact subtitle under wordmark (desktop nav). */
 export const NAV_TAGLINE = "Assume payments · exit contracts · documented handoffs";
 
-/** Homepage hero — mirrors auto lease-transfer desks, not generic classifieds. */
+/** Homepage hero — disciplined equipment payment-transfer positioning. */
 export const HOME_HERO_TITLE =
-  "Take over—or exit—equipment payments with the same rigor lease-transfer platforms brought to cars.";
+  "Take over—or exit—equipment payments with a disciplined heavy-equipment transfer workflow.";
 
 /** Above-the-fold promise: obligation / lessor / payoff clarity before anyone applies. */
 export const HOME_HERO_LEAD =

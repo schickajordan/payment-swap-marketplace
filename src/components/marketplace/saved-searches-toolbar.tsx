@@ -33,7 +33,7 @@ function loadSaved(): SavedEntry[] {
   }
 }
 
-/** Persist marketplace filter URLs locally—faster return visits than generic car-share apps. */
+/** Persist marketplace filter URLs locally for faster repeat equipment searches. */
 export function SavedMarketplaceSearchesToolbar() {
   const router = useRouter();
   const pathname = usePathname();

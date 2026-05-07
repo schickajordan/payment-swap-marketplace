@@ -18,7 +18,7 @@ export default function AboutPage() {
         <header className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">About us</p>
           <h1 className="font-display text-balance text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
-            Lease transfers deserve the same choreography auto swap desks perfected—applied to contractor iron
+            Equipment payment transfers need disciplined execution built for contractor iron
           </h1>
           <p className="rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-3 text-lg font-medium leading-relaxed text-muted md:text-xl">
             {SHARE_ECONOMY_ANCHOR}
@@ -49,7 +49,7 @@ export default function AboutPage() {
         <section id="platform-edge" className="space-y-4 scroll-mt-28">
           <h2 className="text-xl font-bold text-white md:text-2xl">Built to outperform generic peer apps in function</h2>
           <p className="text-sm leading-relaxed text-slate-300 md:text-base">
-            Consumer car-share apps stop at lightweight search. Contractor deals need heavier rails—here is what already
+            Generic listing apps stop at lightweight search. Contractor deals need heavier rails—here is what already
             ships (or is actively wired) in this codebase:
           </p>
           <ul className="list-disc space-y-3 pl-5 text-sm leading-relaxed text-slate-300 md:text-base">

@@ -17,7 +17,7 @@ const GOTCHAS = [
 ] as const;
 
 /**
- * Marketplace-grade expectations adapted from mature car-lease transfer flows.
+ * Marketplace-grade expectations for equipment payment-transfer workflows.
  * Keeps users grounded in the lender-gated reality before they apply.
  */
 export function TransferPlaybookPanel({ dense }: TransferPlaybookPanelProps) {
@@ -25,7 +25,7 @@ export function TransferPlaybookPanel({ dense }: TransferPlaybookPanelProps) {
     <section className={`rounded-xl border border-white/10 bg-[#091c3d]/45 ${dense ? "p-4" : "p-5"}`}>
       <h2 className="text-xs font-semibold uppercase tracking-wide text-gold">Transfer playbook</h2>
       <p className="mt-2 text-xs leading-relaxed text-slate-300">
-        Strong marketplaces in auto lease transfers all emphasize the same point: lender/lessor approval decides final
+        Strong equipment transfer workflows all emphasize the same point: lender/lessor approval decides final
         transfer viability. Our swap lanes mirror that discipline for equipment.
       </p>
       <ol className="mt-3 list-decimal space-y-1.5 pl-4 text-xs text-slate-300">
