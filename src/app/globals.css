@@ -208,8 +208,14 @@ body {
   outline-offset: 3px;
 }
 
-a {
-  color: inherit;
+/**
+ * Default links inherit surrounding text color. Must stay in `@layer base` so Tailwind
+ * utility `text-*` classes on `<Link>`/`<a>` (e.g. hero CTAs) are not overridden.
+ */
+@layer base {
+  a {
+    color: inherit;
+  }
 }
 
 .gold-gradient {

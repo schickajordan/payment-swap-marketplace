@@ -77,25 +77,25 @@ export default async function Home() {
             <>
               <Link
                 href="/marketplace"
-                className="inline-flex items-center gap-2 rounded-md bg-[var(--gold)] px-5 py-3 text-sm font-bold text-[#051b35] shadow-lg shadow-black/35 transition-[filter] hover:brightness-105 active:translate-y-px"
+                className="inline-flex items-center gap-2 rounded-md bg-[var(--gold)] px-5 py-3 text-sm font-bold !text-[#051b35] shadow-lg shadow-black/35 transition-[filter] hover:brightness-105 active:translate-y-px"
               >
                 Browse swap listings
               </Link>
               <Link
                 href={signUpSeller}
-                className="rounded-md border-2 border-white px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 active:translate-y-px"
+                className="rounded-md border-2 border-white bg-black/25 px-5 py-3 text-sm font-semibold !text-white shadow-sm shadow-black/40 backdrop-blur-sm transition-colors hover:border-white hover:bg-black/40 active:translate-y-px"
               >
                 List inventory
               </Link>
               <Link
                 href={authRoutes.signUp}
-                className="rounded-md bg-white px-5 py-3 text-sm font-bold text-[#051b35] transition-colors hover:bg-[#e8eef4] active:translate-y-px"
+                className="rounded-md bg-white px-5 py-3 text-sm font-bold !text-[#051b35] transition-colors hover:bg-[#e8eef4] active:translate-y-px"
               >
                 Create account
               </Link>
               <Link
                 href="/pricing"
-                className="rounded-md px-2 py-3 text-sm font-semibold text-white/90 underline-offset-4 drop-shadow-md hover:underline"
+                className="rounded-md px-2 py-3 text-sm font-semibold !text-white underline-offset-4 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] hover:underline"
               >
                 Fee schedule
               </Link>
