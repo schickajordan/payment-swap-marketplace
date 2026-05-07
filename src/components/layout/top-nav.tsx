@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { signOutAction } from "@/app/(auth)/actions";
 import { getCurrentSession } from "@/lib/auth/session";
 import { CategoryNavStrip } from "@/components/layout/category-nav-strip";
@@ -31,8 +32,8 @@ export async function TopNav({ marketplaceSearchDefault }: TopNavProps) {
             href="/"
             className="flex shrink-0 items-center gap-2 leading-tight rounded-sm transition-opacity hover:opacity-95"
           >
-            <span className="grid h-8 w-8 place-items-center rounded-md border border-[var(--gold)]/60 bg-[var(--gold)]/10 text-[11px] font-black tracking-wide text-[var(--gold)]">
-              PSM
+            <span className="grid h-8 w-8 place-items-center overflow-hidden rounded-md border border-[var(--gold)]/60 bg-[var(--gold)]/10">
+              <Image src="/branding/psm-mark.svg" alt="PSM" width={32} height={32} />
             </span>
             <span className="flex flex-col">
               <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--gold)]">{APP_NAME}</span>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { APP_NAME, INITIAL_FOCUS_CATEGORIES } from "@/lib/config/marketplace";
 import { footerAccountNav, footerCompanyNav } from "@/lib/navigation";
 import { MARKETPLACE_DEAL_LANE_ENTRIES } from "@/lib/marketplace/deal-lanes";
@@ -14,8 +15,8 @@ export function SiteFooter() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-md border border-[var(--gold)]/60 bg-[var(--gold)]/10 text-[10px] font-black tracking-wide text-[var(--gold)]">
-                PSM
+              <span className="grid h-7 w-7 place-items-center overflow-hidden rounded-md border border-[var(--gold)]/60 bg-[var(--gold)]/10">
+                <Image src="/branding/psm-mark.svg" alt="PSM" width={28} height={28} />
               </span>
               <p className="font-bold text-[var(--footer-heading)]">{APP_NAME}</p>
             </div>
