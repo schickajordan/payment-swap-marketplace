@@ -5,17 +5,17 @@ const DEAL_ROWS = [
   {
     heading: "Lease / finance assumption",
     summary: "A qualified buyer steps in where the contract allows—with lessor paperwork surfaced first.",
-    body: "Mirrors automotive assumption desks: advertised payment position, payoff or transfer fee clarity, insurer requirements, and a thread that collects what captive finance or independent lenders ask for before approving a name change.",
+    body: "Payment position, payoff or transfer fees, insurer requirements, and lender questions stay in one thread so approval isn’t rebuilt from screenshots.",
   },
   {
     heading: "Private payment takeover",
     summary: "Structured seller-to-buyer continuity when iron stays titled or financed in the seller’s name temporarily.",
-    body: "For arrangements that don’t meet formal assumption yet still move monthly obligation buyer-side. Escrow rails, milestones, and insurance gates stay explicit so nobody pretends this is an informal Craigslist handshake.",
+    body: "For deals that are not a formal assumption yet still move monthly obligation to the buyer. Milestones, escrow when enabled, and insurance gates stay explicit.",
   },
   {
     heading: "Lease-to-own unwind",
     summary: "Deposit + installments with a documented buyout or payoff finish line.",
-    body: "When the lane is installment-heavy, listings carry the deposit, monthly cadence, and residue/buyout numbers planners expect—same discipline as storefront lease-transfer sites, scaled for contractor fleets.",
+    body: "Listings show deposit, monthly cadence, and buyout numbers up front so buyers and lenders see the full schedule.",
   },
 ] as const;
 
@@ -30,14 +30,14 @@ export function DealTypesOverview() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 id="ways-to-equip-heading" className="font-display text-xl font-bold text-foreground md:text-2xl">
-            Three swap lanes—not a vague “call for price” board
+            Three deal lanes—terms first, not “call for price”
           </h2>
           <p className="mt-2 max-w-3xl text-sm font-medium leading-relaxed text-muted md:text-base">
-            Every lane spells how obligation shifts (
+            Each lane defines how obligation moves:{" "}
             <span className="text-foreground">assumption</span>,{" "}
-            <span className="text-foreground">private takeover</span>,{" "}
-            <span className="text-foreground">lease-to-own</span>). Filters and compliance checklists inherit the lane so
-            buyers, sellers, and approving parties aren’t rebuilding context from scratch.
+            <span className="text-foreground">private takeover</span>, or{" "}
+            <span className="text-foreground">lease-to-own</span>. Filters and checklists follow that choice so everyone
+            works from the same playbook.
           </p>
         </div>
         <Link

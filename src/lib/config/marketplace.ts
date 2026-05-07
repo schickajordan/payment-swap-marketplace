@@ -40,9 +40,9 @@ export const MOAT_PILLARS = [
 ] as const;
 
 export const POSITIONING_LINES = [
-  "We specialize in moving monthly obligation on contractor equipment: assumptions, private party takeovers, and lease-to-own exits—not casual weekend rentals.",
-  `Inventory depth starts with ${INITIAL_FOCUS_CATEGORIES.slice(0, 3).join(", ")}, and ${INITIAL_FOCUS_CATEGORIES[3] ?? "dump trucks"}—categories where payment swaps actually clear.`,
-  "Every serious transfer still runs through your attorneys, lienholders, and insurers; our job is to give them a clean, timestamped record instead of a scavenger hunt.",
+  "We focus on contractor equipment: assumptions, private takeovers, and lease-to-own—not casual weekend rentals.",
+  `Launch categories: ${INITIAL_FOCUS_CATEGORIES.slice(0, 3).join(", ")}, and ${INITIAL_FOCUS_CATEGORIES[3] ?? "dump trucks"}.`,
+  "Lenders, attorneys, and insurers still own their roles—we keep a clear, timestamped record on-platform.",
 ] as const;
 
 /** Extra reassurance line on the homepage (internal discipline, customer-friendly wording). */

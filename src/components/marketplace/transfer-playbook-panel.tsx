@@ -22,19 +22,19 @@ const GOTCHAS = [
  */
 export function TransferPlaybookPanel({ dense }: TransferPlaybookPanelProps) {
   return (
-    <section className={`rounded-xl border border-white/10 bg-[#091c3d]/45 ${dense ? "p-4" : "p-5"}`}>
+    <section className={`rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] ${dense ? "p-4" : "p-5"}`}>
       <h2 className="text-xs font-semibold uppercase tracking-wide text-gold">Transfer playbook</h2>
-      <p className="mt-2 text-xs leading-relaxed text-slate-300">
-        Strong equipment transfer workflows all emphasize the same point: lender/lessor approval decides final
-        transfer viability. Our swap lanes mirror that discipline for equipment.
+      <p className="mt-2 text-xs leading-relaxed text-muted">
+        Lender or lessor approval decides whether a transfer can close. Every lane on the platform is built around that
+        reality.
       </p>
-      <ol className="mt-3 list-decimal space-y-1.5 pl-4 text-xs text-slate-300">
+      <ol className="mt-3 list-decimal space-y-1.5 pl-4 text-xs text-muted">
         {STEPS.map((step) => (
           <li key={step}>{step}</li>
         ))}
       </ol>
-      <p className="mt-3 text-[11px] font-semibold uppercase tracking-wide text-slate-400">Before you commit</p>
-      <ul className="mt-2 list-disc space-y-1 pl-4 text-[11px] text-slate-400">
+      <p className="mt-3 text-[11px] font-semibold uppercase tracking-wide text-muted">Before you commit</p>
+      <ul className="mt-2 list-disc space-y-1 pl-4 text-[11px] text-muted">
         {GOTCHAS.map((item) => (
           <li key={item}>{item}</li>
         ))}
