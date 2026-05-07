@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { HostingConfigBanner } from "@/components/layout/hosting-config-banner";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { TopNav } from "@/components/layout/top-nav";
 import { TrustDeliveryStrip } from "@/components/layout/trust-delivery-strip";
@@ -23,6 +24,7 @@ export async function MarketingShell({
   return (
     <div className="app-shell-bg flex min-h-screen flex-col">
       <TopNav marketplaceSearchDefault={catalogSearchDefault} />
+      <HostingConfigBanner />
       {showLocalSetupBanner ?
         <div className="border-b border-amber-400/50 bg-amber-950 px-4 py-2 text-center text-[11px] leading-snug text-amber-50 md:text-xs">
           <strong className="font-semibold">Local preview:</strong> add{" "}

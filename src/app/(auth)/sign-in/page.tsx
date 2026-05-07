@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { signInWithGoogleAction } from "@/app/(auth)/actions";
 import { SignInEmailForm } from "@/components/auth/sign-in-email-form";
+import { HostingConfigBanner } from "@/components/layout/hosting-config-banner";
 import { sanitizeAppPath } from "@/lib/auth/sanitize-app-path";
 import { authRoutes } from "@/lib/navigation";
 
@@ -28,8 +29,10 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
   const nextPath = sanitizeAppPath(params.next);
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center px-4 py-10">
-      <div className="panel-elevated rounded-2xl p-6 sm:p-8">
+    <>
+      <HostingConfigBanner />
+      <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center px-4 py-10">
+        <div className="panel-elevated rounded-2xl p-6 sm:p-8">
         <h1 className="font-display text-2xl font-bold tracking-tight text-foreground md:text-[1.75rem]">
           Sign in
         </h1>
@@ -93,5 +96,6 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
         </p>
       </div>
     </main>
+    </>
   );
 }

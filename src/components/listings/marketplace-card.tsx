@@ -37,17 +37,20 @@ export function MarketplaceCard({ listing, thumbnailUrl }: MarketplaceCardProps)
   const laneBadge = dealTemplateShort(listing);
   const monthlyLabel = centsToUsd(listing.monthly_payment_cents);
   const locality = [listing.location_city, listing.location_state].filter(Boolean).join(", ") || "Location TBD";
+  const href = `/listings/${listing.id}`;
+  const label = `${listing.title}: ${laneBadge}, ${monthlyLabel} per month, ${locality}`;
 
   return (
-    <article
-      aria-label={`${listing.title}: ${laneBadge}, ${monthlyLabel} per month, ${locality}`}
-      className="group flex touch-manipulation flex-col overflow-hidden rounded-2xl border border-white/[0.09] bg-gradient-to-b from-card to-[#0a1733] px-4 pb-4 pt-3 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.65)] transition duration-300 hover:border-gold/45 hover:shadow-[0_28px_90px_-35px_rgba(242,183,5,0.18)] sm:px-5 sm:pb-5 sm:pt-4"
+    <Link
+      href={href}
+      aria-label={label}
+      className="group flex touch-manipulation flex-col overflow-hidden rounded-2xl border border-white/[0.09] bg-gradient-to-b from-card to-[#0a1733] px-4 pb-4 pt-3 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.65)] transition duration-300 hover:border-gold/45 hover:shadow-[0_28px_90px_-35px_rgba(242,183,5,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] sm:px-5 sm:pb-5 sm:pt-4"
     >
       {thumbnailUrl ? (
         <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-black/50 ring-1 ring-white/10">
           <Image
             src={thumbnailUrl}
-            alt={listing.title}
+            alt=""
             fill
             sizes="(max-width:640px) 100vw,(max-width:1280px) 33vw, 320px"
             className="object-cover transition duration-500 group-hover:scale-[1.03]"
@@ -58,7 +61,7 @@ export function MarketplaceCard({ listing, thumbnailUrl }: MarketplaceCardProps)
             className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/75 to-transparent"
             aria-hidden
           />
-          <div className="absolute inset-x-0 bottom-3 flex flex-wrap items-center justify-between gap-1 px-3 text-[10px] font-semibold uppercase tracking-wide">
+          <div className="pointer-events-none absolute inset-x-0 bottom-3 flex flex-wrap items-center justify-between gap-1 px-3 text-[10px] font-semibold uppercase tracking-wide">
             <span className="rounded bg-black/60 px-2 py-0.5 text-gold">{listing.category}</span>
             <span className="rounded bg-black/60 px-2 py-0.5 text-emerald-200/95">{laneBadge}</span>
             {listing.location_state ? (
@@ -88,9 +91,7 @@ export function MarketplaceCard({ listing, thumbnailUrl }: MarketplaceCardProps)
 
         <ListingTrustSignals listing={listing} dense />
 
-        <Link href={`/listings/${listing.id}`} className="text-lg font-semibold leading-snug text-white hover:text-gold">
-          {listing.title}
-        </Link>
+        <p className="text-lg font-semibold leading-snug text-white group-hover:text-gold">{listing.title}</p>
         <p className="text-sm text-slate-400">
           {listing.make ? `${listing.make}` : ""}
           {listing.model ? ` ${listing.model}` : ""}{" "}
@@ -113,18 +114,12 @@ export function MarketplaceCard({ listing, thumbnailUrl }: MarketplaceCardProps)
           )}
         </div>
       </div>
-      <Link
-        href={`/listings/${listing.id}`}
-        className="mt-4 block rounded-xl border border-gold/30 bg-black/35 py-2.5 text-center text-sm font-semibold tracking-wide text-white backdrop-blur hover:border-gold/60 hover:bg-gold/10 active:translate-y-[1px] sm:hidden"
-      >
+      <p className="mt-4 rounded-xl border border-gold/30 bg-black/35 py-2.5 text-center text-sm font-semibold tracking-wide text-white backdrop-blur sm:hidden">
         View details
-      </Link>
-      <Link
-        href={`/listings/${listing.id}`}
-        className="mt-4 hidden rounded-xl border border-white/14 bg-white/5 px-3 py-2.5 text-center text-sm font-medium text-slate-100 hover:border-gold/40 hover:bg-white/10 active:translate-y-[1px] sm:block"
-      >
+      </p>
+      <p className="mt-4 hidden rounded-xl border border-white/14 bg-white/5 px-3 py-2.5 text-center text-sm font-medium text-slate-100 sm:block">
         View listing
-      </Link>
-    </article>
+      </p>
+    </Link>
   );
 }

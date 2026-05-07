@@ -15,7 +15,7 @@ type CinematicHeroProps = {
 export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: CinematicHeroProps) {
   return (
     <section className="marketing-hero relative isolate overflow-hidden rounded-3xl border border-[var(--steel-line)] shadow-[0_32px_120px_-24px_rgba(0,0,0,0.75)] lg:rounded-[2rem]">
-      <div className="absolute inset-0">
+      <div className="pointer-events-none absolute inset-0">
         <Image
           src="/branding/hero-industrial-premium.svg"
           alt="Heavy dump truck and excavator on a construction site"
