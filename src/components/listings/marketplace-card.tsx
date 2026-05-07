@@ -9,6 +9,8 @@ type Listing = Database["public"]["Tables"]["listings"]["Row"];
 type MarketplaceCardProps = {
   listing: Listing;
   thumbnailUrl?: string;
+  /** Read-only catalog preview (e.g. product tour)—not a live listing link. */
+  demoPreview?: boolean;
 };
 
 function centsToUsd(cents: number) {
@@ -32,7 +34,10 @@ function dealTemplateShort(listing: Listing): string {
   );
 }
 
-export function MarketplaceCard({ listing, thumbnailUrl }: MarketplaceCardProps) {
+const cardShellClass =
+  "group flex touch-manipulation flex-col overflow-hidden rounded-2xl border border-white/[0.09] bg-gradient-to-b from-card to-[#0a1733] px-4 pb-4 pt-3 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.65)] transition duration-300 sm:px-5 sm:pb-5 sm:pt-4";
+
+export function MarketplaceCard({ listing, thumbnailUrl, demoPreview }: MarketplaceCardProps) {
   const conditionLabel = conditionBadge(listing.condition_rating);
   const laneBadge = dealTemplateShort(listing);
   const monthlyLabel = centsToUsd(listing.monthly_payment_cents);
@@ -40,12 +45,8 @@ export function MarketplaceCard({ listing, thumbnailUrl }: MarketplaceCardProps)
   const href = `/listings/${listing.id}`;
   const label = `${listing.title}: ${laneBadge}, ${monthlyLabel} per month, ${locality}`;
 
-  return (
-    <Link
-      href={href}
-      aria-label={label}
-      className="group flex touch-manipulation flex-col overflow-hidden rounded-2xl border border-white/[0.09] bg-gradient-to-b from-card to-[#0a1733] px-4 pb-4 pt-3 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.65)] transition duration-300 hover:border-gold/45 hover:shadow-[0_28px_90px_-35px_rgba(242,183,5,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] sm:px-5 sm:pb-5 sm:pt-4"
-    >
+  const inner = (
+    <>
       {thumbnailUrl ? (
         <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-black/50 ring-1 ring-white/10">
           <Image
@@ -115,11 +116,36 @@ export function MarketplaceCard({ listing, thumbnailUrl }: MarketplaceCardProps)
         </div>
       </div>
       <p className="mt-4 rounded-xl border border-gold/30 bg-black/35 py-2.5 text-center text-sm font-semibold tracking-wide text-white backdrop-blur sm:hidden">
-        View details
+        {demoPreview ? "Sample preview" : "View details"}
       </p>
       <p className="mt-4 hidden rounded-xl border border-white/14 bg-white/5 px-3 py-2.5 text-center text-sm font-medium text-slate-100 sm:block">
-        View listing
+        {demoPreview ? "Sample preview — not clickable" : "View listing"}
       </p>
+    </>
+  );
+
+  if (demoPreview) {
+    return (
+      <div
+        className={`relative ${cardShellClass}`}
+        aria-label={`${label} (sample preview only)`}
+        role="group"
+      >
+        <span className="pointer-events-none absolute right-2 top-2 z-20 rounded-full bg-gold px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#071733] shadow-sm">
+          Sample
+        </span>
+        {inner}
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      aria-label={label}
+      className={`${cardShellClass} hover:border-gold/45 hover:shadow-[0_28px_90px_-35px_rgba(242,183,5,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]`}
+    >
+      {inner}
     </Link>
   );
 }
