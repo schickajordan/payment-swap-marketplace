@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "check:proxy-matchers": "node scripts/check-proxy-auth-matchers.mjs",
     "verify": "npm run check:proxy-matchers && npm run lint && npm run typecheck && npm run build",
+    "test:e2e": "playwright test",
     "go-live": "node scripts/go-live-values.mjs",
     "vercel": "vercel",
     "vercel:login": "vercel login",
@@ -31,6 +32,7 @@
     "stripe": "^22.1.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
