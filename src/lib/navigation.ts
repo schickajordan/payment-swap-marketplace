@@ -11,6 +11,7 @@ export const authRoutes = {
   account: "/account",
   signIn: "/sign-in",
   signUp: "/sign-up",
+  acceptLegal: "/auth/accept-legal",
   forgotPassword: "/forgot-password",
   /** Supabase `redirectTo` after email recovery link (see `requestPasswordResetAction`). */
   updatePassword: "/auth/update-password",
@@ -35,14 +36,16 @@ export const marketingNav: NavItem[] = [
   { label: "Marketplace", href: "/marketplace" },
   { label: "Pricing", href: "/pricing" },
   { label: "How it works", href: "/#how-it-works" },
-  { label: "Legal", href: "/#legal-overview" },
+  { label: "Terms", href: "/terms" },
+  { label: "Privacy", href: "/privacy" },
 ];
 
 /** Footer “Get to know us”: same destinations as `marketingNav` minus marketplace (covered under Shop). */
 const FOOTER_COMPANY_LABEL_OVERRIDES: Partial<Record<string, string>> = {
   "/about": "About us & verification",
   "/pricing": "Pricing & fees",
-  "/#legal-overview": "Legal & responsibilities",
+  "/terms": "Terms of service",
+  "/privacy": "Privacy policy",
 };
 
 export const footerCompanyNav: NavItem[] = marketingNav

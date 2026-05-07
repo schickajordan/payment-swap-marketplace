@@ -25,6 +25,8 @@ export function SignUpEmailForm({
   const emailErr = state.fieldErrors?.email;
   const passwordErr = state.fieldErrors?.password;
   const roleErr = state.fieldErrors?.role;
+  const termsErr = state.fieldErrors?.termsAccepted;
+  const privacyErr = state.fieldErrors?.privacyAccepted;
   const apiErr = state.formError;
 
   return (
@@ -107,6 +109,28 @@ export function SignUpEmailForm({
           </span>
         : null}
       </label>
+      <label className="flex items-start gap-2 text-xs leading-relaxed text-muted">
+        <input type="checkbox" name="termsAccepted" className="mt-0.5" />
+        <span>
+          I agree to the{" "}
+          <a href="/terms" target="_blank" rel="noreferrer" className="font-semibold text-[var(--link)] underline">
+            Terms of Service
+          </a>
+          .
+        </span>
+      </label>
+      {termsErr ? <p className="text-xs font-semibold text-[var(--danger-text)]">{termsErr}</p> : null}
+      <label className="flex items-start gap-2 text-xs leading-relaxed text-muted">
+        <input type="checkbox" name="privacyAccepted" className="mt-0.5" />
+        <span>
+          I agree to the{" "}
+          <a href="/privacy" target="_blank" rel="noreferrer" className="font-semibold text-[var(--link)] underline">
+            Privacy Policy
+          </a>
+          .
+        </span>
+      </label>
+      {privacyErr ? <p className="text-xs font-semibold text-[var(--danger-text)]">{privacyErr}</p> : null}
       <button
         type="submit"
         className="rounded-md bg-[var(--button-primary-bg)] px-4 py-2.5 text-sm font-semibold text-[var(--button-primary-fg)] transition-colors hover:opacity-[0.93] active:translate-y-px"

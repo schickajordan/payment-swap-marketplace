@@ -13,7 +13,12 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 py-10 md:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-bold text-[var(--footer-heading)]">{APP_NAME}</p>
+            <div className="flex items-center gap-2">
+              <span className="grid h-7 w-7 place-items-center rounded-md border border-[var(--gold)]/60 bg-[var(--gold)]/10 text-[10px] font-black tracking-wide text-[var(--gold)]">
+                PSM
+              </span>
+              <p className="font-bold text-[var(--footer-heading)]">{APP_NAME}</p>
+            </div>
             <p className="mt-3 text-xs leading-relaxed">
               Find equipment with clear monthly terms; pay securely when you&apos;re ready. Business counterparties
               only.

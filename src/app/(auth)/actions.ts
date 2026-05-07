@@ -12,6 +12,14 @@ import {
 } from "@/lib/auth/auth-form-state";
 import { sanitizeAppPath } from "@/lib/auth/sanitize-app-path";
 import { authRoutes } from "@/lib/navigation";
+import {
+  hasCurrentLegalAcceptances,
+  insertLegalAcceptance,
+} from "@/lib/legal/acceptance";
+import {
+  CURRENT_PRIVACY_VERSION,
+  CURRENT_TERMS_VERSION,
+} from "@/lib/legal/constants";
 import { ensureMyProfile } from "@/lib/profiles/queries";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { DEFAULT_ROLE, isUserRole } from "@/lib/types/roles";
@@ -46,6 +54,10 @@ export async function signInAction(
   }
 
   const next = sanitizeAppPath(formData.get("next"));
+  const hasLegal = await hasCurrentLegalAcceptances(supabase, data.user.id);
+  if (!hasLegal) {
+    redirect(`${authRoutes.acceptLegal}?next=${encodeURIComponent(next ?? authRoutes.account)}`);
+  }
   redirect(next ?? "/");
 }
 
@@ -76,6 +88,8 @@ export async function signUpAction(
       data: {
         role,
         ...(fullNameRaw ? { full_name: fullNameRaw } : {}),
+        legal_terms_version: CURRENT_TERMS_VERSION,
+        legal_privacy_version: CURRENT_PRIVACY_VERSION,
       },
       /**
        * Lands the user on your domain after they click the inbox link. Must be listed in Supabase
@@ -102,6 +116,20 @@ export async function signUpAction(
         profileErr instanceof Error ? profileErr.message : "Could not create profile row.";
       return { formError: msg };
     }
+    await insertLegalAcceptance(
+      supabase,
+      data.user.id,
+      "terms",
+      CURRENT_TERMS_VERSION,
+      "signup_email",
+    );
+    await insertLegalAcceptance(
+      supabase,
+      data.user.id,
+      "privacy",
+      CURRENT_PRIVACY_VERSION,
+      "signup_email",
+    );
   }
 
   redirect(`${authRoutes.signIn}?success=account-created&hint=confirm-email`);
@@ -159,4 +187,27 @@ export async function signInWithGoogleAction(formData: FormData) {
   }
 
   redirect(data.url);
+}
+
+export async function acceptLegalAction(formData: FormData) {
+  const next = sanitizeAppPath(formData.get("next")) ?? authRoutes.account;
+  const supabase = await createServerSupabaseClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect(authRoutes.signIn);
+  }
+
+  const acceptedTerms = formData.get("termsAccepted") === "on";
+  const acceptedPrivacy = formData.get("privacyAccepted") === "on";
+  if (!acceptedTerms || !acceptedPrivacy) {
+    redirect(`${authRoutes.acceptLegal}?error=consent-required&next=${encodeURIComponent(next)}`);
+  }
+
+  await insertLegalAcceptance(supabase, user.id, "terms", CURRENT_TERMS_VERSION, "reconsent_gate");
+  await insertLegalAcceptance(supabase, user.id, "privacy", CURRENT_PRIVACY_VERSION, "reconsent_gate");
+
+  redirect(next);
 }

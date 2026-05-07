@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { appRoutes, authRoutes } from "@/lib/navigation";
+import { hasCurrentLegalAcceptances } from "@/lib/legal/acceptance";
 import { DEFAULT_ROLE, isUserRole } from "@/lib/types/roles";
 
 type RoleGate = Array<"seller" | "buyer" | "admin">;
@@ -70,12 +71,22 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(signTarget, request.url));
   }
 
+  if (pathname === authRoutes.acceptLegal && !user) {
+    return NextResponse.redirect(new URL(authRoutes.signIn, request.url));
+  }
+
   if (allowedRoles && user) {
     const roleCandidate = user.user_metadata?.role;
     const role = isUserRole(roleCandidate) ? roleCandidate : DEFAULT_ROLE;
 
     if (!allowedRoles.includes(role)) {
       return NextResponse.redirect(new URL(appRoutes.unauthorized, request.url));
+    }
+
+    const hasLegal = await hasCurrentLegalAcceptances(supabase, user.id);
+    if (!hasLegal && pathname !== authRoutes.acceptLegal) {
+      const gateTarget = `${authRoutes.acceptLegal}?next=${encodeURIComponent(pathname)}`;
+      return NextResponse.redirect(new URL(gateTarget, request.url));
     }
   }
 
@@ -85,6 +96,13 @@ export async function proxy(request: NextRequest) {
 
   if (pathname === authRoutes.signUp && user) {
     return NextResponse.redirect(new URL(authRoutes.account, request.url));
+  }
+
+  if (pathname === authRoutes.acceptLegal && user) {
+    const hasLegal = await hasCurrentLegalAcceptances(supabase, user.id);
+    if (hasLegal) {
+      return NextResponse.redirect(new URL(authRoutes.account, request.url));
+    }
   }
 
   return response;
@@ -102,5 +120,6 @@ export const config = {
     "/account/:path*",
     "/sign-in",
     "/sign-up",
+    "/auth/accept-legal",
   ],
 };

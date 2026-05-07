@@ -3,6 +3,8 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { Database } from "@/lib/supabase/database.types";
 import { sanitizeAppPath } from "@/lib/auth/sanitize-app-path";
+import { insertLegalAcceptance } from "@/lib/legal/acceptance";
+import { CURRENT_PRIVACY_VERSION, CURRENT_TERMS_VERSION } from "@/lib/legal/constants";
 import { authRoutes } from "@/lib/navigation";
 import { getSupabaseEnv, isSupabaseConfigured } from "@/lib/supabase/env";
 import { DEFAULT_ROLE, isUserRole } from "@/lib/types/roles";
@@ -76,6 +78,25 @@ export async function GET(request: NextRequest) {
         role,
         full_name: googleName,
       });
+    }
+
+    const termsMeta = user.user_metadata?.legal_terms_version;
+    const privacyMeta = user.user_metadata?.legal_privacy_version;
+    if (termsMeta === CURRENT_TERMS_VERSION && privacyMeta === CURRENT_PRIVACY_VERSION) {
+      await insertLegalAcceptance(
+        supabase,
+        user.id,
+        "terms",
+        CURRENT_TERMS_VERSION,
+        "oauth_metadata",
+      );
+      await insertLegalAcceptance(
+        supabase,
+        user.id,
+        "privacy",
+        CURRENT_PRIVACY_VERSION,
+        "oauth_metadata",
+      );
     }
   }
 

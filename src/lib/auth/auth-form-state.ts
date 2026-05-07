@@ -1,5 +1,5 @@
 export type CredentialFieldErrors = Partial<
-  Record<"email" | "password" | "fullName" | "role", string>
+  Record<"email" | "password" | "fullName" | "role" | "termsAccepted" | "privacyAccepted", string>
 >;
 
 export type AuthCredentialFormState = Readonly<{
@@ -64,6 +64,8 @@ export type SignUpValidated = {
   password: string;
   fullNameRaw: string;
   roleCandidate: unknown;
+  termsAccepted: true;
+  privacyAccepted: true;
 };
 
 export function isSignUpValidated(
@@ -77,6 +79,8 @@ export function validateSignUpForm(formData: FormData): AuthCredentialFormState 
   const password = String(formData.get("password") ?? "");
   const fullNameRaw = trimmed(formData.get("fullName"));
   const roleCandidate = formData.get("role");
+  const termsAccepted = formData.get("termsAccepted") === "on";
+  const privacyAccepted = formData.get("privacyAccepted") === "on";
 
   const fieldErrors: CredentialFieldErrors = {};
 
@@ -99,6 +103,12 @@ export function validateSignUpForm(formData: FormData): AuthCredentialFormState 
   if (!roleCandidate || typeof roleCandidate !== "string") {
     fieldErrors.role = "Choose buyer or seller.";
   }
+  if (!termsAccepted) {
+    fieldErrors.termsAccepted = "You must accept the Terms of Service.";
+  }
+  if (!privacyAccepted) {
+    fieldErrors.privacyAccepted = "You must accept the Privacy Policy.";
+  }
 
   if (Object.keys(fieldErrors).length > 0) {
     return { fieldErrors };
@@ -110,6 +120,8 @@ export function validateSignUpForm(formData: FormData): AuthCredentialFormState 
     password,
     fullNameRaw,
     roleCandidate,
+    termsAccepted: true,
+    privacyAccepted: true,
   };
 }
 

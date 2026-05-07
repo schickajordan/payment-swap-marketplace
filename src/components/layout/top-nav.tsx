@@ -29,10 +29,15 @@ export async function TopNav({ marketplaceSearchDefault }: TopNavProps) {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-3 py-2 md:flex-nowrap md:gap-4 md:px-4 md:py-2.5">
           <Link
             href="/"
-            className="flex shrink-0 flex-col gap-0 leading-tight rounded-sm transition-opacity hover:opacity-95"
+            className="flex shrink-0 items-center gap-2 leading-tight rounded-sm transition-opacity hover:opacity-95"
           >
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--gold)]">{APP_NAME}</span>
-            <span className="hidden text-[10px] text-[var(--nav-muted)] sm:inline">{NAV_TAGLINE}</span>
+            <span className="grid h-8 w-8 place-items-center rounded-md border border-[var(--gold)]/60 bg-[var(--gold)]/10 text-[11px] font-black tracking-wide text-[var(--gold)]">
+              PSM
+            </span>
+            <span className="flex flex-col">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--gold)]">{APP_NAME}</span>
+              <span className="hidden text-[10px] text-[var(--nav-muted)] sm:inline">{NAV_TAGLINE}</span>
+            </span>
           </Link>
 
           <GlobalCatalogSearch defaultQuery={marketplaceSearchDefault ?? ""} />

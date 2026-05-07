@@ -237,6 +237,26 @@ export type Database = {
         Update: Partial<Database["public"]["Tables"]["payment_agreements"]["Insert"]>;
         Relationships: [];
       };
+      legal_acceptances: {
+        Row: {
+          id: string;
+          profile_id: string;
+          doc_type: "terms" | "privacy";
+          document_version: string;
+          accepted_at: string;
+          source: string;
+        };
+        Insert: {
+          id?: string;
+          profile_id: string;
+          doc_type: "terms" | "privacy";
+          document_version: string;
+          accepted_at?: string;
+          source?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["legal_acceptances"]["Insert"]>;
+        Relationships: [];
+      };
       agreement_payments: {
         Row: {
           id: string;
