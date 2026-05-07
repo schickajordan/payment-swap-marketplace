@@ -42,7 +42,7 @@ export const MOAT_PILLARS = [
 export const POSITIONING_LINES = [
   "We focus on contractor equipment: assumptions, private takeovers, and lease-to-own—not casual weekend rentals.",
   `Launch categories: ${INITIAL_FOCUS_CATEGORIES.slice(0, 3).join(", ")}, and ${INITIAL_FOCUS_CATEGORIES[3] ?? "dump trucks"}.`,
-  "Lenders, attorneys, and insurers still own their roles—we keep a clear, timestamped record on-platform.",
+  "Lenders, attorneys, and insurers still own their roles. We keep the deal record clear and timestamped.",
 ] as const;
 
 /** Extra reassurance line on the homepage (internal discipline, customer-friendly wording). */
@@ -70,7 +70,7 @@ export const NORTH_STAR_MOAT = {
 
 /** Marketing-safe wording — platform does not originate or assume third-party secured debt. */
 export const LEGAL_SURFACE_DISCLAIMER =
-  "Payment Swap Marketplace coordinates business-to-business equipment payment transfers—including lease assumptions, private payment takeovers, lease-to-own exits, and documented payment plans between users—not as lender, insurer, carrier, title agent, or equipment custodian unless expressly contracted elsewhere. Obligations owed to third-party financiers or lessors remain between those parties until an approved assumption or payoff path is satisfied. Verify insurance, liens, title, lienholder consent (where relevant), DOT & permit rules, jobsite logistics, and tax/title with qualified counsel.";
+  "Payment Swap Marketplace coordinates business-to-business equipment payment transfers. We are not your lender, insurer, carrier, title agent, or equipment custodian unless separately contracted. Third-party finance obligations remain with the original parties until an approved assumption or payoff closes. Confirm insurance, liens, title status, permits, and tax requirements with qualified counsel.";
 
 export const FEE_STRUCTURE = [
   { name: "Standard listing", detail: "$99 publishing fee (pricing subject to tier)" },

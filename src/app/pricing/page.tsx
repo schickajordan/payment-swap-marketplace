@@ -23,6 +23,9 @@ export default async function PricingPage() {
 
         <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6">
           <h2 className="text-lg font-semibold text-foreground">Fee schedule</h2>
+          <p className="mt-2 text-sm text-muted">
+            Estimated ranges are shown before checkout. Final totals depend on selected options and deal size.
+          </p>
           <ul className="mt-4 space-y-4">
             {FEE_STRUCTURE.map((row) => (
               <li key={row.name} className="border-b border-[var(--steel-line)] pb-4 last:border-0 last:pb-0">
@@ -51,7 +54,7 @@ export default async function PricingPage() {
         <section className="rounded-xl border border-[var(--steel-line)] bg-[var(--card)] p-5 shadow-[0_8px_28px_rgba(5,27,53,0.06)]">
           <h2 className="text-sm font-bold uppercase tracking-wide text-foreground">Shop by swap lane</h2>
           <p className="mt-2 text-sm font-medium text-muted">
-            Filters mirror seller-declared templates—straight to inventory without resetting the sidebar.
+            Jump straight to the inventory type you need.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {MARKETPLACE_DEAL_LANE_ENTRIES.map((lane) => (
@@ -69,6 +72,9 @@ export default async function PricingPage() {
         <section className="rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] p-6 text-sm font-medium leading-relaxed text-muted">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-foreground">Regulatory disclosure</h2>
           <p className="mt-2 text-foreground/95">{LEGAL_SURFACE_DISCLAIMER}</p>
+          <p className="mt-3 text-xs text-muted">
+            This page is operational guidance, not legal or tax advice.
+          </p>
         </section>
       </main>
     </MarketingShell>
