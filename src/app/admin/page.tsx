@@ -83,12 +83,10 @@ export default async function AdminDashboardPage({ searchParams }: AdminDashboar
       <section className="rounded-xl border border-amber-400/35 bg-amber-950/40 p-4 text-sm text-amber-50 md:p-5">
         <h2 className="font-semibold text-amber-100">Administrator access</h2>
         <p className="mt-2 leading-relaxed text-amber-100/90">
-          This app reads roles from the <strong>profiles</strong> table (<code className="rounded bg-black/35 px-1.5 py-px text-xs">profiles.role</code>
-          ). Public sign-up does not create admins. In Supabase, open <strong>Table Editor → profiles</strong>, find the
-          user&apos;s row (same <code className="rounded bg-black/35 px-1.5 py-px text-xs">id</code> as <strong>Authentication → Users</strong>
-          ), and set <code className="rounded bg-black/35 px-1.5 py-px text-xs">role</code> to{" "}
-          <code className="rounded bg-black/35 px-1.5 py-px text-xs">admin</code>. Refresh this page—it applies on the next
-          request.
+          Each person&apos;s permissions come from their <strong>profile</strong> in the database. Public sign-up does
+          not create admins. In your database console, open the <strong>profiles</strong> table, find the
+          member&apos;s row (same user id as under <strong>Authentication → Users</strong>), set{" "}
+          <strong>role</strong> to <strong>admin</strong>, save, then refresh this page.
         </p>
       </section>
 

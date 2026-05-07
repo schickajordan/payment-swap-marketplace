@@ -109,8 +109,8 @@ export function AccountMfaPanel() {
     <section className="rounded-xl border border-white/10 bg-card p-4">
       <h2 className="text-xs font-semibold uppercase tracking-wide text-gold">Two-factor authentication</h2>
       <p className="mt-1 text-xs text-slate-400">
-        Add TOTP apps (Google Authenticator, Authy, 1Password). Platform-wide enforcement is configured in Supabase if
-        you want every login hardened.
+        Add TOTP apps (Google Authenticator, Authy, 1Password). Your organization can require MFA for every sign-in
+        through the auth settings on the hosting side.
       </p>
 
       {error ?

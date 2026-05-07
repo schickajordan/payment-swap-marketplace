@@ -42,7 +42,7 @@ export default async function ListingMediaPage({ params, searchParams }: MediaPa
   return (
     <DashboardShell
       title={`Media · ${listing.title}`}
-      subtitle="Upload imagery and videos. Files are stored in Supabase Storage and linked to your listing."
+      subtitle="Upload imagery and videos. Files are stored securely and linked to your listing."
     >
       <Link href="/seller" className="text-sm text-gold hover:text-[#ffd14d]">
         ← Seller dashboard

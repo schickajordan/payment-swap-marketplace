@@ -8,13 +8,10 @@ export default function UnauthorizedPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Account security</p>
         <h1 className="font-display mt-2 text-3xl font-bold tracking-tight text-foreground">This workspace requires a different role</h1>
         <p className="mt-4 text-base font-medium leading-relaxed text-muted">
-          You are signed in, but this route is limited by your{" "}
-          <strong className="text-foreground">account role in the database</strong> (
-          <code className="rounded bg-[var(--card-muted)] px-1 py-px text-xs">profiles.role</code>). Sellers should use a
-          seller profile; buyers use the buyer tools. <strong className="text-foreground">Administrators</strong> are
-          assigned in Supabase (set <code className="rounded bg-[var(--card-muted)] px-1 py-px text-xs">role</code> to{" "}
-          <code className="rounded bg-[var(--card-muted)] px-1 py-px text-xs">admin</code> on your user&apos;s profile
-          row)—not from the public sign-up form.
+          You are signed in, but this area is limited by your <strong className="text-foreground">account role</strong>.
+          Sellers should use seller tools; buyers should use buyer tools.{" "}
+          <strong className="text-foreground">Administrator</strong> access is granted by your organization—it is not
+          available through the public registration form.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <Link

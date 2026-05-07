@@ -18,8 +18,8 @@ export default async function ForgotPasswordPage({ searchParams }: ForgotPasswor
           Reset password
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          We send a secure link from your auth provider. If mail is suppressed in local dev, use the SMTP test inbox in
-          your Supabase project.
+          We email a secure reset link from our account system. If you are developing locally and outbound mail is
+          disabled, use your environment&apos;s auth mail capture or test inbox.
         </p>
 
         {sp.success === "sent" ?

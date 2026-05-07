@@ -12,7 +12,7 @@ import { authRoutes } from "@/lib/navigation";
 
 export const metadata: Metadata = {
   title: "Help & support",
-  description: `Get help with ${APP_NAME}: deals, account, demos, and operator resources.`,
+  description: `Get help with ${APP_NAME}: deals, account access, demos, and platform issues.`,
 };
 
 export default function SupportPage() {
@@ -80,8 +80,7 @@ export default function SupportPage() {
               for invoice or access issues your account page can&apos;t resolve.
             </p>
           : <p className="mt-4 rounded-md border border-amber-600/40 bg-amber-950/30 px-3 py-2 text-xs text-amber-100/95">
-              Operators: set <code className="rounded bg-black/40 px-1 font-mono">NEXT_PUBLIC_SUPPORT_EMAIL</code> in
-              hosting so customers see a contact address here.
+              A public support email will appear here after your administrator configures it in hosting.
             </p>}
           {helpCenter ?
             <p className="mt-3 text-sm text-muted">
@@ -129,28 +128,25 @@ export default function SupportPage() {
           </div>
           {!demoBooking ?
             <p className="mt-3 text-xs text-muted">
-              Operators: add{" "}
-              <code className="rounded bg-[var(--card-muted)] px-1 font-mono">NEXT_PUBLIC_DEMO_BOOKING_URL</code> (HTTPS
-              scheduling link or <code className="rounded bg-[var(--card-muted)] px-1 font-mono">mailto:</code>) to
-              enable the booking button.
+              The booking button appears after your administrator adds a scheduling or contact link in hosting.
             </p>
           : null}
         </section>
 
         <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6">
-          <h2 className="text-lg font-semibold text-foreground">Operators &amp; engineers</h2>
+          <h2 className="text-lg font-semibold text-foreground">Security &amp; status</h2>
           <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
-              Deploy &amp; config status:{" "}
               <Link href="/api/health" className="font-semibold text-[var(--link)] underline-offset-2 hover:underline">
-                /api/health
-              </Link>
+                Service status
+              </Link>{" "}
+              — technical summary for your IT team.
             </li>
             <li>
-              Security contact:{" "}
               <Link href="/.well-known/security.txt" className="font-semibold text-[var(--link)] underline-offset-2 hover:underline">
-                /.well-known/security.txt
-              </Link>
+                Security contact
+              </Link>{" "}
+              for automated security tooling.
             </li>
             <li>
               <Link href="/privacy" className="font-semibold text-[var(--link)] underline-offset-2 hover:underline">

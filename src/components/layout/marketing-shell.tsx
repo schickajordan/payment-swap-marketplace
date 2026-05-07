@@ -27,11 +27,9 @@ export async function MarketingShell({
       <HostingConfigBanner />
       {showLocalSetupBanner ?
         <div className="border-b border-amber-400/50 bg-amber-950 px-4 py-2 text-center text-[11px] leading-snug text-amber-50 md:text-xs">
-          <strong className="font-semibold">Local preview:</strong> add{" "}
-          <code className="rounded bg-black/35 px-1 py-px font-mono">NEXT_PUBLIC_SUPABASE_URL</code> and{" "}
-          <code className="rounded bg-black/35 px-1 py-px font-mono">NEXT_PUBLIC_SUPABASE_ANON_KEY</code> to{" "}
-          <code className="rounded bg-black/35 px-1 py-px font-mono">.env.local</code>
-          {" "}so sign-up, dashboards, listings, and checkout behave like production. Stripe keys unlock payments.
+          <strong className="font-semibold">Local preview:</strong> add your project&apos;s database API URL and public
+          key from the hosting dashboard to <span className="rounded bg-black/35 px-1 font-medium">.env.local</span> so
+          sign-up, dashboards, and listings match production. Add payment keys locally to exercise checkout.
         </div>
       : null}
       <TrustDeliveryStrip />

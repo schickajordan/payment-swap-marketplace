@@ -156,7 +156,7 @@ export default function AboutPage() {
               in the top navigation—or use the golden button anywhere on marketing pages—and choose Buyer or Seller. Admins onboard separately.
             </li>
             <li>
-              <strong className="text-foreground">Confirm your email:</strong> we send verification through Supabase Auth (check spam). Until this completes, dashboards stay locked-down.
+              <strong className="text-foreground">Confirm your email:</strong> we send a verification message (check spam). Until this completes, dashboards stay locked down.
             </li>
             <li>
               <strong className="text-foreground">Sellers outline equipment:</strong> from the Seller dashboard you mint listings, attach photos/videos, and submit for ops review prior to appearing publicly.

@@ -70,7 +70,7 @@ export function PasswordRecoveryForm() {
       <div className="rounded-2xl border border-white/10 bg-[#071733] p-6 shadow-xl shadow-black/20">
         <h1 className="text-2xl font-bold text-white">Choose a new password</h1>
         <p className="mt-2 text-sm text-slate-300">
-          Use this page after tapping the emailed Supabase recovery link (same browser you started from is ideal).
+          Use this page after opening the password-reset link from your email (same browser you started from is ideal).
         </p>
 
         {error ?

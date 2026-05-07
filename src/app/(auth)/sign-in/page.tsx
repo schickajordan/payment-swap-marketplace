@@ -37,12 +37,13 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
           Sign in
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Use the email and password you registered. If email confirmation is on in Supabase, you must complete the
-          inbox link once before passwords work here.
+          Use the email and password you registered. If email verification is required for your workspace, complete the
+          message in your inbox once before signing in here.
         </p>
         {nextPath ? (
           <p className="mt-2 text-xs font-semibold text-foreground">
-            After sign-in: <span className="font-mono text-[13px] font-normal text-muted">{nextPath}</span>
+            After sign-in you&apos;ll continue to:{" "}
+            <span className="break-all font-normal text-muted">{nextPath}</span>
           </p>
         ) : null}
 
@@ -62,8 +63,7 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
           <ol className="mt-3 list-decimal space-y-2 rounded-md border-l-4 border-amber-600 bg-[var(--card-muted)] p-3 ps-8 text-xs font-medium leading-relaxed text-foreground marker:font-semibold">
             <li>Open the verification email from your auth provider.</li>
             <li>
-              Click confirm — you should return here on <span className="font-mono text-[11px]">/account</span> or the
-              home page.
+              Click confirm — you should return to your account page or the home page.
             </li>
             <li>Return here and sign in—then buyer or seller tools unlock.</li>
           </ol>

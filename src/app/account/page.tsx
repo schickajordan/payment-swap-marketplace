@@ -212,7 +212,7 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
                 Continue with Google
               </button>
               <p className="mt-2 text-[11px] text-slate-500">
-                Requires Google provider enabled in Supabase Dashboard → Authentication → Providers.
+                Requires Google sign-in to be enabled for this site by your administrator.
               </p>
             </form>
           </section>
@@ -288,8 +288,8 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
                 />
               </label>
               <p className="text-[11px] text-slate-500 md:col-span-2">
-                SMS OTP is configurable in Supabase if you enable the phone provider—this field stores your business
-                line for humans to reach you.
+                When SMS sign-in is enabled for your workspace, this number can receive verification codes. It is also
+                the business line people can use to reach you.
               </p>
               <button
                 type="submit"
@@ -344,8 +344,8 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
           <section className="rounded-xl border border-white/10 bg-card p-4">
             <h2 className="text-xs font-semibold uppercase tracking-wide text-gold">Email preferences</h2>
             <p className="mt-1 text-xs text-slate-500">
-              Honest transactional defaults on; marketing off until you flip it—we still send auth + legal notices via
-              Supabase.
+              Honest transactional defaults on; marketing off until you flip it—we still send authentication and legal
+              notices as required.
             </p>
             <form action={updateNotificationPrefsAction} className="mt-4 space-y-3">
               <label className="flex items-center gap-3 text-sm text-slate-200">

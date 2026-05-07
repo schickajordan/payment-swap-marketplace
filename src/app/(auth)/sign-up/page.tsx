@@ -26,7 +26,7 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
           Create your business account
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Pick buyer or seller. When your project sends a confirmation email, finish that link once—then{" "}
+          Pick buyer or seller. When a confirmation email is required, complete that message once—then{" "}
           <Link href={authRoutes.signIn} className="font-semibold text-[var(--link)] underline-offset-4 hover:underline">
             sign in
           </Link>{" "}
@@ -37,12 +37,12 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
           <li className="flex gap-2">
             <span className="font-display font-bold tabular-nums text-muted">1.</span>
             <span>
-              Submit this form — we queue your account at the auth provider.
+              Submit this form — we register your sign-in and start onboarding.
             </span>
           </li>
           <li className="flex gap-2">
             <span className="font-display font-bold tabular-nums text-muted">2.</span>
-            <span>Open the inbox (and spam folder) — click verify when your project requires it.</span>
+            <span>Open your inbox (and spam) — click verify if your workspace requires email confirmation.</span>
           </li>
           <li className="flex gap-2">
             <span className="font-display font-bold tabular-nums text-muted">3.</span>
@@ -63,9 +63,9 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
         </p>
 
         <p className="mt-3 text-xs leading-relaxed text-muted">
-          If your project requires email confirmation, your <strong className="text-foreground">profile row</strong> is
-          created on <strong className="text-foreground">first successful sign-in</strong> after you click the inbox link—not
-          at the moment you submit this form.
+          If email confirmation is required, your <strong className="text-foreground">profile</strong> is completed on{" "}
+          <strong className="text-foreground">first successful sign-in</strong> after you use the inbox link—not at the
+          moment you submit this form.
         </p>
 
         {params.error ? (
