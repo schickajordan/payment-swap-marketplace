@@ -7,6 +7,8 @@ This runbook is for production handover to operations, product, and engineering 
 ## Production URLs
 
 - Main site: `https://www.paymentswapmp.com`
+- Help & support: `https://www.paymentswapmp.com/support`
+- Product tour / demo entry: `https://www.paymentswapmp.com/demo`
 - Admin dashboard: `https://www.paymentswapmp.com/admin`
 - Health endpoint: `https://www.paymentswapmp.com/api/health`
 - Security contact file: `https://www.paymentswapmp.com/.well-known/security.txt` (update the mailto if needed).

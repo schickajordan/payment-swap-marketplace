@@ -74,6 +74,17 @@ export function HostingConfigBanner() {
           </span>
         : null}
       </p>
+      <p className="mt-1.5 text-amber-50/90">
+        Visitors:{" "}
+        <Link href="/support" className="font-semibold !text-white underline decoration-amber-200/80 underline-offset-2">
+          Help &amp; support
+        </Link>{" "}
+        ·{" "}
+        <Link href="/demo" className="font-semibold !text-white underline decoration-amber-200/80 underline-offset-2">
+          Product tour
+        </Link>
+        .
+      </p>
     </div>
   );
 }

@@ -35,6 +35,8 @@ export const marketingNav: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Marketplace", href: "/marketplace" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Demo", href: "/demo" },
+  { label: "Support", href: "/support" },
   { label: "How it works", href: "/#how-it-works" },
   { label: "Terms", href: "/terms" },
   { label: "Privacy", href: "/privacy" },
@@ -44,6 +46,8 @@ export const marketingNav: NavItem[] = [
 const FOOTER_COMPANY_LABEL_OVERRIDES: Partial<Record<string, string>> = {
   "/about": "About us & verification",
   "/pricing": "Pricing & fees",
+  "/demo": "Product tour",
+  "/support": "Help & support",
   "/terms": "Terms of service",
   "/privacy": "Privacy policy",
 };

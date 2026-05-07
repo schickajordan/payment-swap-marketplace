@@ -31,8 +31,11 @@ Copy `.env.example` to `.env.local` and fill values.
 | `STRIPE_WEBHOOK_SECRET` | `/api/webhooks/stripe` | Verifies Stripe signatures |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Optional today | Reserved for Stripe.js / Elements later (Checkout flows do not require it server-side). |
 | `ALLOW_PUBLIC_ADMIN_SIGNUP` | Optional | Set to **`true`** only if you want **Admin** exposed on `/sign-up` (staging). **Omit in production** — create ops users in Supabase (see `DEPLOYMENT.md`). |
+| `NEXT_PUBLIC_SUPPORT_EMAIL` | Optional | Shown on **`/support`** and demo fallbacks — business support inbox. |
+| `NEXT_PUBLIC_DEMO_BOOKING_URL` | Optional | **`https://…`** (scheduling) or **`mailto:…`** — **Book a demo** on **`/demo`** and **`/support`**. |
+| `NEXT_PUBLIC_HELP_CENTER_URL` | Optional | **`https://…`** — Zendesk / Notion / GitBook **Help center** link on **`/support`**. |
 
-`/api/health` returns liveness plus which **env groups** are configured (never returns secret values). **`/.well-known/security.txt`** follows [RFC 9116](https://www.rfc-editor.org/rfc/rfc9116.html) — update the contact email for your org.
+`/api/health` returns liveness plus which **env groups** are configured (never returns secret values). **`/.well-known/security.txt`** follows [RFC 9116](https://www.rfc-editor.org/rfc/rfc9116.html) — update the contact email for your org. **`/support`** and **`/demo`** are the customer-facing help and tour entry points.
 
 ---
 
