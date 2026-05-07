@@ -19,4 +19,7 @@ jobs:
 
       - run: npm ci
 
+      - name: Production dependency audit (high+)
+        run: npm run audit:prod
+
       - run: npm run verify

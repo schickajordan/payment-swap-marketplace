@@ -21,6 +21,7 @@ function missingKeys(keys: readonly string[]) {
 
 /**
  * Lightweight liveness + non-secret readiness hints for operators.
+ * Enterprise attestations (SOC 2, pen tests, DPAs) are organizational — not derivable here.
  */
 export function GET() {
   const missingCore = missingKeys(CORE_KEYS);
@@ -35,12 +36,22 @@ export function GET() {
       }
     : null;
 
+  const onVercel = process.env.VERCEL === "1";
+  const vercelEnv = process.env.VERCEL_ENV ?? null;
+
   return NextResponse.json(
     {
       ok: true,
       service: "payment-swap-marketplace",
       timestamp: new Date().toISOString(),
       deploy,
+      runtime: {
+        nodeEnv: process.env.NODE_ENV ?? null,
+        vercel: onVercel,
+        vercelEnv,
+        /** HSTS is enabled in `next.config.ts` when `VERCEL_ENV === "production"`. */
+        hstsEnabledOnProdDeploy: vercelEnv === "production",
+      },
       checks: {
         core_config: missingCore.length === 0,
         payments_pipeline: missingPayments.length === 0,
@@ -48,6 +59,18 @@ export function GET() {
       missing_env: {
         core: missingCore.length > 0 ? missingCore : undefined,
         payments: missingPayments.length > 0 ? missingPayments : undefined,
+      },
+      assurance: {
+        ci_dependency_gate:
+          "GitHub Actions runs `npm run audit:prod` (high+ severity, production tree only) before `npm run verify`.",
+        dev_tooling_note:
+          "The Vercel CLI devDependency may report additional advisories; it is not shipped in the production bundle.",
+        out_of_band_for_enterprise_buyers: [
+          "Independent penetration test and remediation",
+          "SOC 2 / ISO 27001 or equivalent customer evidence",
+          "Stripe Connect platform / money-transmission legal review",
+          "Privacy counsel, DPAs, and data-residency decisions",
+        ],
       },
     },
     {

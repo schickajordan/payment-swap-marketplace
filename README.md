@@ -32,7 +32,7 @@ Copy `.env.example` to `.env.local` and fill values.
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Optional today | Reserved for Stripe.js / Elements later (Checkout flows do not require it server-side). |
 | `ALLOW_PUBLIC_ADMIN_SIGNUP` | Optional | Set to **`true`** only if you want **Admin** exposed on `/sign-up` (staging). **Omit in production** — create ops users in Supabase (see `DEPLOYMENT.md`). |
 
-`/api/health` returns liveness plus which **env groups** are configured (never returns secret values).
+`/api/health` returns liveness plus which **env groups** are configured (never returns secret values). **`/.well-known/security.txt`** follows [RFC 9116](https://www.rfc-editor.org/rfc/rfc9116.html) — update the contact email for your org.
 
 ---
 
@@ -68,9 +68,11 @@ supabase db push
 | `npm run start` | Run production server (after build) |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm run verify` | Lint + typecheck + build |
+| `npm run verify` | Proxy consistency + lint + typecheck + build |
+| `npm run audit:prod` | `npm audit` on **production** dependencies only (severity **high+**); dev-only advisories from `vercel` CLI are excluded |
+| `npm run verify:full` | `audit:prod` then `verify` — recommended before tagging releases |
 
-Continuous integration: `.github/workflows/ci.yml` runs `npm run verify` on pushes to `main` / `master` and on pull requests (expects this directory to be the git repository root; in a monorepo, move or adjust `working-directory`).
+Continuous integration: `.github/workflows/ci.yml` runs `npm run audit:prod` then `npm run verify` on pushes to `main` / `master` and on pull requests (expects this directory to be the git repository root; in a monorepo, move or adjust `working-directory`).
 
 ---
 
@@ -85,7 +87,7 @@ Continuous integration: `.github/workflows/ci.yml` runs `npm run verify` on push
 
 ## Operational QA before go-live
 
-1. **`npm run verify`** succeeds.
+1. **`npm run verify:full`** succeeds (or `npm run audit:prod` + `npm run verify`).
 2. **`GET /api/health`** — `checks.core_config` true; `checks.payments_pipeline` true in the environment where you take live money.
 3. Sign-up / sign-in, role gates (`/seller`, `/buyer`, `/admin`) behave as intended.
 4. Listing publish → appears on `/marketplace` and `/listings/[id]` (anon read for active listings).

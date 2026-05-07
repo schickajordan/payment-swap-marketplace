@@ -9,6 +9,21 @@ This runbook is for production handover to operations, product, and engineering 
 - Main site: `https://www.paymentswapmp.com`
 - Admin dashboard: `https://www.paymentswapmp.com/admin`
 - Health endpoint: `https://www.paymentswapmp.com/api/health`
+- Security contact file: `https://www.paymentswapmp.com/.well-known/security.txt` (update the mailto if needed).
+
+## Enterprise / procurement expectations
+
+This application can be **operationally hardened**, but **FAANG-style procurement** normally requires evidence the codebase cannot generate by itself:
+
+| Area | In-repo / automated today | Typically required for large enterprises |
+|------|---------------------------|------------------------------------------|
+| Dependency hygiene | CI runs `npm run audit:prod` (production tree, high+) before build | Plus SDLC policy, approved exception process |
+| Transport security | HSTS on Vercel production (`next.config.ts`) | TLS inventory, cert rotation, sometimes mTLS at edge |
+| Roles / admin | `profiles.role`, documented in this runbook | SSO (SAML), SCIM, SIEM export — product work |
+| Payments | Stripe Connect integration | Stripe platform agreement, MTL/legal, disputes program |
+| Assessments | — | Annual pen test, SOC 2 Type II, privacy reviews |
+
+**Honest positioning:** ship strong engineering practice + docs + health gates; sell attestations and legal review as follow-on tranches.
 
 ## Core Workflows
 
@@ -46,9 +61,8 @@ Operational rule: do not move to `executed` until a valid contract URL is attach
 
 ## Launch Checklist
 
-- `npm run lint`
-- `npm run typecheck`
-- `npm run build`
+- `npm run verify:full` (production `npm audit` high+ + proxy check + lint + typecheck + build)
+- or individually: `npm run audit:prod`, `npm run lint`, `npm run typecheck`, `npm run build`
 - `npm run test:e2e` (if browser env available)
 - Verify `/api/health` reports expected checks
 - Verify latest commit header on prod:
