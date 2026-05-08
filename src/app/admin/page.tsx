@@ -4,6 +4,7 @@ import {
   rejectAgreementAction,
   setAgreementContractAction,
   setDealCheckpointAction,
+  uploadAgreementContractArtifactAction,
 } from "@/app/admin/actions";
 import { QualificationSnapshotPanel } from "@/components/agreements/qualification-snapshot-panel";
 import { PendingListingsSection } from "@/components/admin/pending-listings-section";
@@ -11,6 +12,7 @@ import { AgreementThreadPanel } from "@/components/messaging/agreement-thread-pa
 import { DashboardShell } from "@/components/dashboard/dashboard-shell";
 import { StatCard } from "@/components/ui/stat-card";
 import { getRecentLiquidityMilestones } from "@/lib/analytics/liquidity-milestones";
+import { listContractArtifactsForAgreements } from "@/lib/agreements/contract-artifacts";
 import { getAdminAgreementQueue } from "@/lib/agreements/queries";
 import { requireRole } from "@/lib/auth/authorization";
 import {
@@ -51,6 +53,7 @@ function adminSuccessMessage(success: string) {
     "agreement-rejected": "Agreement cancelled/rejected.",
     "deal-checkpoint-updated": "Deal operational checkpoint saved.",
     "contract-metadata-updated": "Contract metadata saved.",
+    "contract-artifact-uploaded": "Contract file saved to private vault.",
   };
   return map[success] ?? "Changes saved.";
 }
@@ -66,9 +69,10 @@ export default async function AdminDashboardPage({ searchParams }: AdminDashboar
     getRecentLiquidityMilestones(supabase, 25),
   ]);
   const agreementIds = queue.map((q) => q.id);
-  const [threadsByAgreement, agreementEventsMap] = await Promise.all([
+  const [threadsByAgreement, agreementEventsMap, contractArtifactMap] = await Promise.all([
     getThreadsWithMessagesByAgreementIds(agreementIds),
     getNonInternalAgreementEventsByAgreementIds(agreementIds),
+    listContractArtifactsForAgreements(supabase, agreementIds),
   ]);
   const draftCount = queue.filter((item) => item.status === "draft").length;
   const signedCount = queue.filter((item) => item.status === "signed").length;
@@ -135,6 +139,7 @@ export default async function AdminDashboardPage({ searchParams }: AdminDashboar
         ) : (
           queue.map((agreement) => {
             const bundle = threadsByAgreement.get(agreement.id);
+            const artifacts = contractArtifactMap.get(agreement.id) ?? [];
             const appEvent = (agreementEventsMap.get(agreement.id) ?? []).find(
               (e) => e.event_type === "application_submitted"
             );
@@ -221,6 +226,60 @@ export default async function AdminDashboardPage({ searchParams }: AdminDashboar
                   >
                     Save contract fields
                   </button>
+                </form>
+
+                {artifacts.length > 0 ?
+                  <div className="mt-3 rounded-md border border-white/10 bg-black/25 p-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Vault uploads</p>
+                    <ul className="mt-2 space-y-1 text-[11px] text-slate-300">
+                      {artifacts.map((a) => (
+                        <li key={a.id}>
+                          {a.original_filename}
+                          {a.label ? (
+                            <span className="text-slate-500"> — {a.label}</span>
+                          ) : null}{" "}
+                          <span className="text-slate-600">({new Date(a.created_at).toLocaleString()})</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                : <p className="mt-2 text-[11px] text-slate-500">No vault files yet—upload executes below.</p>}
+
+                <form
+                  action={uploadAgreementContractArtifactAction}
+                  encType="multipart/form-data"
+                  className="mt-3 grid gap-2 rounded-md border border-dashed border-gold/30 bg-black/25 p-3"
+                >
+                  <input type="hidden" name="agreementId" value={agreement.id} />
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-gold">Upload to vault</p>
+                  <label className="flex flex-col gap-1 text-xs text-slate-400">
+                    Optional label
+                    <input
+                      type="text"
+                      name="artifactLabel"
+                      placeholder="e.g. executed packet v2"
+                      className="rounded-md border border-white/20 bg-[#091c3d] px-2 py-2 text-sm text-white outline-none focus:border-gold"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-1 text-xs text-slate-400">
+                    PDF or Word (.doc / .docx)
+                    <input
+                      required
+                      type="file"
+                      name="contractFile"
+                      accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                      className="text-xs text-slate-300 file:mr-2 file:rounded file:border file:border-white/25 file:bg-[#091c3d] file:px-2 file:py-1"
+                    />
+                  </label>
+                  <button
+                    type="submit"
+                    className="w-fit rounded-md bg-gold px-3 py-2 text-xs font-bold text-[#071733] hover:bg-[#ffd14d]"
+                  >
+                    Store in vault (buyers/sellers get signed downloads)
+                  </button>
+                  <p className="text-[10px] text-slate-500">
+                    Stored privately in Supabase; counterparties access through Messages · Deal desk with audited opens.
+                  </p>
                 </form>
               </div>
 

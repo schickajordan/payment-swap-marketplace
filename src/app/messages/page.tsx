@@ -18,6 +18,7 @@ import {
   getParticipantAgreementEvents,
 } from "@/lib/events/queries";
 import { authRoutes, signInUrlWithNext } from "@/lib/navigation";
+import { listContractArtifactsForAgreement } from "@/lib/agreements/contract-artifacts";
 import { getPaymentRollupsByAgreementIds } from "@/lib/payments/queries";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -65,14 +66,17 @@ export default async function MessagesPage({ searchParams }: MessagesPageProps) 
   } | null = null;
 
   let agreementTimelineEvents: Awaited<ReturnType<typeof getParticipantAgreementEvents>> = [];
+  let agreementVaultArtifacts: Awaited<ReturnType<typeof listContractArtifactsForAgreement>> = [];
 
   if (agreementShell) {
     try {
-      const [rollups, evs] = await Promise.all([
+      const [rollups, evs, arts] = await Promise.all([
         getPaymentRollupsByAgreementIds([agreementShell.agreementId]),
         getParticipantAgreementEvents(agreementShell.agreementId, 80),
+        listContractArtifactsForAgreement(supabase, agreementShell.agreementId),
       ]);
       agreementTimelineEvents = evs;
+      agreementVaultArtifacts = arts;
       const roll = rollups.get(agreementShell.agreementId);
       const latest = evs.length > 0 ? evs.at(-1)?.message ?? null : null;
       const appEvent = evs.find((e) => e.event_type === "application_submitted");
@@ -89,6 +93,7 @@ export default async function MessagesPage({ searchParams }: MessagesPageProps) 
         latestEventLabel: null,
         qualificationSnapshot: null,
       };
+      agreementVaultArtifacts = [];
     }
   }
 
@@ -251,6 +256,7 @@ export default async function MessagesPage({ searchParams }: MessagesPageProps) 
                   contractStatus={agreementShell.contract_status}
                   contractUploadedAt={agreementShell.contract_uploaded_at}
                   contractExecutedAt={agreementShell.contract_executed_at}
+                  vaultArtifacts={agreementVaultArtifacts}
                   events={agreementTimelineEvents}
                 />
                 <AgreementThreadPanel

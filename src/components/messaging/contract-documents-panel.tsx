@@ -3,6 +3,7 @@ import type { Database } from "@/lib/supabase/database.types";
 import { authRoutes } from "@/lib/navigation";
 
 type AgreementEventRow = Database["public"]["Tables"]["agreement_events"]["Row"];
+type ArtifactRow = Database["public"]["Tables"]["agreement_contract_artifacts"]["Row"];
 
 type ContractDocumentsPanelProps = {
   agreementId: string;
@@ -10,6 +11,7 @@ type ContractDocumentsPanelProps = {
   contractStatus: string;
   contractUploadedAt: string | null;
   contractExecutedAt: string | null;
+  vaultArtifacts: ArtifactRow[];
   events: AgreementEventRow[];
 };
 
@@ -17,6 +19,8 @@ function formatEventType(t: string): string {
   switch (t) {
     case "contract_link_opened":
       return "Contract access";
+    case "contract_artifact_uploaded":
+      return "Vault upload";
     case "dispute_escalation":
       return "Dispute / issue note";
     default:
@@ -30,10 +34,12 @@ export function ContractDocumentsPanel({
   contractStatus,
   contractUploadedAt,
   contractExecutedAt,
+  vaultArtifacts,
   events,
 }: ContractDocumentsPanelProps) {
   const highlight = new Set([
     "contract_link_opened",
+    "contract_artifact_uploaded",
     "dispute_escalation",
     "stripe_payment_succeeded",
     "stripe_payment_failed",
@@ -41,14 +47,17 @@ export function ContractDocumentsPanel({
     "stripe_payment_processing",
   ]);
   const deskEvents = events.filter((e) => highlight.has(e.event_type));
+  const hasVault = vaultArtifacts.length > 0;
+  const hasExternal = Boolean(signedContractUrl?.trim());
+  const [, ...olderVaultArtifacts] = vaultArtifacts;
 
   return (
     <div className="mt-4 space-y-4 rounded-xl border border-white/10 bg-[#091c3d]/45 p-4">
       <div>
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">Deal desk</p>
         <p className="mt-1 text-xs text-slate-500">
-          Contract link opens in a new browser context when available; each open is written to the agreement timeline
-          for counterparties and ops.
+          Private vault files use short-lived signed links; opens are logged on the timeline. External URLs (manual ops
+          links) stay supported alongside the vault.
         </p>
       </div>
 
@@ -56,6 +65,12 @@ export function ContractDocumentsPanel({
         <span className="rounded border border-white/10 bg-black/25 px-2 py-1">
           File status: <span className="font-semibold text-slate-200">{contractStatus}</span>
         </span>
+        {hasVault ?
+          <span className="rounded border border-white/10 bg-black/25 px-2 py-1">
+            Vault: <span className="font-semibold text-slate-200">{vaultArtifacts.length}</span> revision
+            {vaultArtifacts.length === 1 ? "" : "s"}
+          </span>
+        : null}
         {contractExecutedAt ?
           <span className="rounded border border-white/10 bg-black/25 px-2 py-1">
             Executed {new Date(contractExecutedAt).toLocaleDateString()}
@@ -68,24 +83,93 @@ export function ContractDocumentsPanel({
         : null}
       </div>
 
-      {signedContractUrl ?
-        <form action={logContractOpenAction} className="flex flex-col gap-2">
-          <input type="hidden" name="agreementId" value={agreementId} />
-          <button
-            type="submit"
-            className="w-fit rounded-md bg-gold px-4 py-2 text-sm font-semibold text-[#071733] transition-colors hover:bg-[#ffd14d]"
-          >
-            Open executed contract (access logged)
-          </button>
-          <p className="text-[11px] text-slate-500">
-            Use this button so your view is recorded on the audit trail—avoid pasting the URL into a raw browser tab if
-            you need lineage on-file.
-          </p>
-        </form>
-      : <p className="text-sm text-slate-500">
-          No contract URL on file yet. When ops attaches the executed PDF or e-sign packet, it will surface here.
+      {hasVault ?
+        <div className="space-y-3">
+          <form action={logContractOpenAction} className="flex flex-col gap-2">
+            <input type="hidden" name="agreementId" value={agreementId} />
+            <input type="hidden" name="sourceKind" value="auto" />
+            <button
+              type="submit"
+              className="w-fit rounded-md bg-gold px-4 py-2 text-sm font-semibold text-[#071733] transition-colors hover:bg-[#ffd14d]"
+            >
+              Open latest vault document (access logged)
+            </button>
+            <p className="text-[11px] text-slate-500">
+              Prefer this for audited lineage—expires in a few minutes after it is issued.
+            </p>
+          </form>
+
+          {olderVaultArtifacts.length > 0 ?
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Earlier revisions</p>
+              <ul className="mt-2 space-y-2 text-xs">
+                {olderVaultArtifacts.map((row) => (
+                  <li
+                    key={row.id}
+                    className="flex flex-wrap items-center justify-between gap-2 rounded border border-white/5 bg-black/20 px-2 py-2 text-slate-300"
+                  >
+                    <span>
+                      <span className="font-medium text-slate-200">{row.original_filename}</span>
+                      {row.label ?
+                        <span className="text-slate-500"> — {row.label}</span>
+                      : null}
+                      <span className="block text-[10px] text-slate-500">
+                        {new Date(row.created_at).toLocaleString()}
+                      </span>
+                    </span>
+                    <form action={logContractOpenAction}>
+                      <input type="hidden" name="agreementId" value={agreementId} />
+                      <input type="hidden" name="artifactId" value={row.id} />
+                      <button
+                        type="submit"
+                        className="rounded border border-gold/40 px-2 py-1 text-[11px] font-semibold text-gold hover:bg-gold/10"
+                      >
+                        Open
+                      </button>
+                    </form>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          : null}
+        </div>
+      : null}
+
+      {hasExternal ?
+        <div className={hasVault ? "border-t border-white/10 pt-4" : ""}>
+          {hasVault ?
+            <p className="mb-2 text-xs text-slate-500">
+              Alternate: open the manually configured external link (DocuSign, lender portal, etc.).
+            </p>
+          : null}
+          <form action={logContractOpenAction} className="flex flex-col gap-2">
+            <input type="hidden" name="agreementId" value={agreementId} />
+            <input type="hidden" name="sourceKind" value="external" />
+            <button
+              type="submit"
+              className={`w-fit rounded-md px-4 py-2 text-sm font-semibold transition-colors ${
+                hasVault ?
+                  "border border-white/25 text-slate-200 hover:bg-white/10"
+                : "bg-gold text-[#071733] hover:bg-[#ffd14d]"
+              }`}
+            >
+              {hasVault ? "Open external contract link (logged)" : "Open executed contract (access logged)"}
+            </button>
+            {!hasVault ?
+              <p className="text-[11px] text-slate-500">
+                Use this button so your view is recorded on the audit trail.
+              </p>
+            : null}
+          </form>
+        </div>
+      : null}
+
+      {!hasVault && !hasExternal ?
+        <p className="text-sm text-slate-500">
+          No contract in the vault yet and no external link on file—ask operations to upload on the agreement or attach
+          a URL in Admin.
         </p>
-      }
+      : null}
 
       <div className="border-t border-white/10 pt-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-gold">Payment or paperwork dispute</p>

@@ -315,6 +315,30 @@ export type Database = {
         Update: Partial<Database["public"]["Tables"]["agreement_events"]["Insert"]>;
         Relationships: [];
       };
+      agreement_contract_artifacts: {
+        Row: {
+          id: string;
+          agreement_id: string;
+          storage_path: string;
+          original_filename: string;
+          content_type: string;
+          label: string | null;
+          uploaded_by: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          agreement_id: string;
+          storage_path: string;
+          original_filename: string;
+          content_type: string;
+          label?: string | null;
+          uploaded_by: string;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["agreement_contract_artifacts"]["Insert"]>;
+        Relationships: [];
+      };
       message_threads: {
         Row: {
           id: string;
