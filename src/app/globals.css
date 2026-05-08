@@ -322,7 +322,8 @@ body {
 }
 
 .hero-scrim-strong {
-  background: linear-gradient(to top, rgba(5, 27, 53, 0.94) 0%, rgba(5, 27, 53, 0.55) 48%, transparent 82%);
+  /* Dark at bottom for CTAs/readability; lighter through the middle so vector art reads as “imagery”. */
+  background: linear-gradient(to top, rgba(5, 27, 53, 0.92) 0%, rgba(5, 27, 53, 0.38) 45%, transparent 76%);
 }
 
 .hero-grid-overlay {

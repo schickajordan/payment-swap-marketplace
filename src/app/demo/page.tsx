@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketplaceCard } from "@/components/listings/marketplace-card";
 import { MarketingShell } from "@/components/layout/marketing-shell";
+import { DEMO_LISTING_PREVIEW_IMAGES } from "@/lib/demo/demo-preview-images";
 import { DEMO_MARKETPLACE_LISTINGS, DEMO_SELLER_FIELD_GUIDE } from "@/lib/demo/demo-listings";
 import { getDemoBookingUrl, getSupportEmail, supportMailtoHref } from "@/lib/config/support";
 import { APP_NAME } from "@/lib/config/marketplace";
@@ -92,13 +93,19 @@ export default function DemoPage() {
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-xl font-bold text-white md:text-2xl">What buyers see in the catalog</h2>
             <p className="mt-2 text-sm text-slate-400">
-              Three fictitious units illustrate monthly headline, lane badge, location, and trust chips. Live listings
-              look identical once operations approves yours.
+              Three fictitious units illustrate monthly headline, lane badge, location, and trust chips. Card photos here
+              are stock examples for the tour—seller uploads replace them on the live marketplace once operations publishes
+              a listing.
             </p>
           </div>
           <div className="mx-auto mt-8 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {DEMO_MARKETPLACE_LISTINGS.map((listing) => (
-              <MarketplaceCard key={listing.id} listing={listing} demoPreview />
+              <MarketplaceCard
+                key={listing.id}
+                listing={listing}
+                demoPreview
+                thumbnailUrl={DEMO_LISTING_PREVIEW_IMAGES[listing.id]}
+              />
             ))}
           </div>
         </section>

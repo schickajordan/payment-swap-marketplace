@@ -17,7 +17,7 @@ export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: Cinemat
     <section className="marketing-hero relative isolate overflow-hidden rounded-3xl border border-[var(--steel-line)] shadow-[0_32px_120px_-24px_rgba(0,0,0,0.75)] lg:rounded-[2rem]">
       <div className="pointer-events-none absolute inset-0">
         <div
-          className="animate-hero-zoom absolute inset-0 bg-cover bg-center opacity-[0.64]"
+          className="animate-hero-zoom absolute inset-0 bg-cover bg-center opacity-[0.78]"
           style={{ backgroundImage: "url('/branding/hero-industrial-premium.svg')" }}
           role="img"
           aria-label="Heavy equipment illustration on a job site"
