@@ -5,7 +5,7 @@ import { connectStripePayoutAction } from "@/app/seller/payout-actions";
 import { QualificationSnapshotPanel } from "@/components/agreements/qualification-snapshot-panel";
 import { AgreementThreadPanel } from "@/components/messaging/agreement-thread-panel";
 import { DealTimeline } from "@/components/messaging/deal-timeline";
-import { dealCheckpointLabel } from "@/lib/listings/deal-template";
+import { contractStatusLabel, dealCheckpointLabel } from "@/lib/listings/deal-template";
 import { ListingInquiryThreadPanel } from "@/components/messaging/listing-inquiry-thread-panel";
 import { DashboardShell } from "@/components/dashboard/dashboard-shell";
 import { ListingRow } from "@/components/listings/listing-row";
@@ -71,11 +71,14 @@ export default async function SellerDashboardPage({ searchParams }: SellerDashbo
     (listing) => listing.status === "pending_review" || listing.status === "draft"
   ).length;
   const openApplications = sellerAgreements.filter((a) => a.status === "draft").length;
+  const liveSwapCount = sellerAgreements.filter((a) =>
+    ["signed", "active"].includes(a.status)
+  ).length;
 
   return (
     <DashboardShell
       title="Seller Dashboard"
-      subtitle="Manage listings, review buyer requests, and reduce payment risk."
+      subtitle="List equipment, respond to inquiries, advance payment swap applications, and coordinate contract execution before installments run on platform rails."
     >
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatCard
@@ -84,19 +87,19 @@ export default async function SellerDashboardPage({ searchParams }: SellerDashbo
           description={`${pendingCount} listings pending verification before publishing.`}
         />
         <StatCard
-          label="Open Buyer Requests"
+          label="Open buyer applications"
           value={String(openApplications)}
-          description="Draft swap applications awaiting your response or admin review."
+          description="Draft payment swap applications—reply in-thread or wait for admin review."
         />
         <StatCard
-          label="Active Swaps"
-          value="--"
-          description="Agreement activation metrics will populate from payment workflows."
+          label="Live payment swaps"
+          value={String(liveSwapCount)}
+          description="Agreements that are signed or actively paying (contract path cleared for servicing)."
         />
         <StatCard
-          label="At-Risk Accounts"
+          label="Account alerts"
           value="0"
-          description="Compliance alerts will appear here once risk engine is active."
+          description="No compliance holds on your seller profile. Risk signals will surface here when enabled."
         />
       </section>
 
@@ -258,7 +261,13 @@ export default async function SellerDashboardPage({ searchParams }: SellerDashbo
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-lg font-semibold text-white">Buyer applications</h2>
+        <div>
+          <h2 className="text-lg font-semibold text-white">Payment swap applications</h2>
+          <p className="mt-1 text-sm text-slate-400">
+            Each row is a buyer who applied on your listing—use the thread for terms, upload/execute contract off-platform
+            as your counsel directs, then ops advances checkpoints until payments are live.
+          </p>
+        </div>
         {sellerAgreements.length === 0 ? (
           <p className="rounded-xl border border-white/10 bg-card p-4 text-sm text-slate-300">
             No applications on your listings yet.
@@ -271,6 +280,7 @@ export default async function SellerDashboardPage({ searchParams }: SellerDashbo
             const appEvent = evs.find((e) => e.event_type === "application_submitted");
             const qualification = extractQualificationSnapshot(appEvent?.metadata ?? null);
             const roll = paymentRollups.get(agreement.id);
+            const listingTitle = listingTitleById.get(agreement.listing_id) ?? "Listing";
 
             return (
               <article key={agreement.id} className="rounded-xl border border-white/10 bg-card p-4">
@@ -281,13 +291,16 @@ export default async function SellerDashboardPage({ searchParams }: SellerDashbo
                   </span>
                 </div>
                 <p className="mt-1 text-sm text-slate-300">
-                  Listing {agreement.listing_id.slice(0, 8)}… · Monthly{" "}
+                  <span className="font-medium text-white">{listingTitle}</span>
+                  {" · "}
+                  Monthly{" "}
                   {(agreement.monthly_payment_cents / 100).toLocaleString("en-US", {
                     style: "currency",
                     currency: "USD",
                     maximumFractionDigits: 0,
                   })}
                 </p>
+                <p className="mt-1 text-xs text-slate-500">{contractStatusLabel(agreement.contract_status)}</p>
                 <div className="mt-4">
                   <DealTimeline
                     agreementStatus={agreement.status}

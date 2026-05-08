@@ -2,6 +2,7 @@ import type { Database } from "@/lib/supabase/database.types";
 
 export type DealTemplate = Database["public"]["Tables"]["listings"]["Row"]["deal_template"];
 export type DealCheckpoint = Database["public"]["Tables"]["payment_agreements"]["Row"]["deal_checkpoint"];
+export type ContractStatus = Database["public"]["Tables"]["payment_agreements"]["Row"]["contract_status"];
 
 export const DEAL_TEMPLATES: readonly DealTemplate[] = [
   "assumption",
@@ -35,6 +36,12 @@ const DEAL_TEMPLATE_LABEL: Record<DealTemplate, string> = {
   lease_to_own: "Lease-to-own toward title / payoff",
 };
 
+const CONTRACT_STATUS_LABEL: Record<ContractStatus, string> = {
+  draft: "Contract: not uploaded yet",
+  uploaded: "Contract: uploaded — review & execute",
+  executed: "Contract: executed",
+};
+
 const DEAL_CHECKPOINT_LABEL: Record<DealCheckpoint, string> = {
   intake: "Deal room opened",
   buyer_qualified: "Buyer verification / qualification",
@@ -54,6 +61,10 @@ export function dealTemplateLabel(template: DealTemplate): string {
 
 export function dealCheckpointLabel(checkpoint: DealCheckpoint): string {
   return DEAL_CHECKPOINT_LABEL[checkpoint] ?? checkpoint;
+}
+
+export function contractStatusLabel(status: ContractStatus): string {
+  return CONTRACT_STATUS_LABEL[status] ?? status;
 }
 
 /** Valid `deal=` query values for `/marketplace` URLs and API-style filters (no throw). */
