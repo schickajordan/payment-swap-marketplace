@@ -11,6 +11,7 @@ import {
   VISION_HEADLINE,
 } from "@/lib/config/marketplace";
 import { getActiveListings } from "@/lib/listings/queries";
+import { STOCK_PHOTO } from "@/lib/marketing/stock-photos";
 import { marketplaceQueryString } from "@/lib/marketplace/url";
 import { authRoutes } from "@/lib/navigation";
 
@@ -109,7 +110,7 @@ export default async function Home() {
           <div className="relative h-44 md:h-56">
             <div
               className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: "url('/branding/home-marketplace-strip.svg')" }}
+              style={{ backgroundImage: `url('${STOCK_PHOTO.heroMarketplaceWide}')` }}
               role="img"
               aria-label="Heavy equipment marketplace visual collage"
             />

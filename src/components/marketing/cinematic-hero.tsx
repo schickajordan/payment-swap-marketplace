@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { STOCK_PHOTO } from "@/lib/marketing/stock-photos";
 
 type CinematicHeroProps = {
   eyebrow: ReactNode;
@@ -10,7 +11,7 @@ type CinematicHeroProps = {
 
 /**
  * Marketing hero with strong foreground scrims for WCAG readability on photographic backgrounds.
- * SVG is applied via CSS background so it always paints (Next/Image + SVG + fill can render blank in production).
+ * Photo layer uses CSS background so it always paints crisply under hero scrims (matches demo + catalog art).
  */
 export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: CinematicHeroProps) {
   return (
@@ -18,9 +19,9 @@ export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: Cinemat
       <div className="pointer-events-none absolute inset-0">
         <div
           className="animate-hero-zoom absolute inset-0 bg-cover bg-center opacity-[0.78]"
-          style={{ backgroundImage: "url('/branding/home-marketplace-strip.svg')" }}
+          style={{ backgroundImage: `url('${STOCK_PHOTO.heroMarketplaceWide}')` }}
           role="img"
-          aria-label="Heavy equipment illustration on a job site"
+          aria-label="Heavy equipment on a construction job site"
         />
         <div className="hero-grid-overlay absolute inset-0" aria-hidden />
         <div className="hero-vignette absolute inset-0" aria-hidden />

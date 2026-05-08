@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { QualificationSnapshotPanel } from "@/components/agreements/qualification-snapshot-panel";
+import { ContractDocumentsPanel } from "@/components/messaging/contract-documents-panel";
 import { AgreementThreadPanel } from "@/components/messaging/agreement-thread-panel";
 import { DealTimeline } from "@/components/messaging/deal-timeline";
 import { ListingInquiryThreadPanel } from "@/components/messaging/listing-inquiry-thread-panel";
@@ -14,7 +15,7 @@ import { dealCheckpointLabel } from "@/lib/listings/deal-template";
 import {
   extractQualificationSnapshot,
   type QualificationSnapshot,
-  getNonInternalAgreementEventsByAgreementIds,
+  getParticipantAgreementEvents,
 } from "@/lib/events/queries";
 import { authRoutes, signInUrlWithNext } from "@/lib/navigation";
 import { getPaymentRollupsByAgreementIds } from "@/lib/payments/queries";
@@ -63,14 +64,16 @@ export default async function MessagesPage({ searchParams }: MessagesPageProps) 
     qualificationSnapshot: QualificationSnapshot | null;
   } | null = null;
 
+  let agreementTimelineEvents: Awaited<ReturnType<typeof getParticipantAgreementEvents>> = [];
+
   if (agreementShell) {
     try {
-      const [rollups, eventsMap] = await Promise.all([
+      const [rollups, evs] = await Promise.all([
         getPaymentRollupsByAgreementIds([agreementShell.agreementId]),
-        getNonInternalAgreementEventsByAgreementIds([agreementShell.agreementId]),
+        getParticipantAgreementEvents(agreementShell.agreementId, 80),
       ]);
+      agreementTimelineEvents = evs;
       const roll = rollups.get(agreementShell.agreementId);
-      const evs = eventsMap.get(agreementShell.agreementId) ?? [];
       const latest = evs.length > 0 ? evs.at(-1)?.message ?? null : null;
       const appEvent = evs.find((e) => e.event_type === "application_submitted");
       agreementExtras = {
@@ -114,6 +117,11 @@ export default async function MessagesPage({ searchParams }: MessagesPageProps) 
         {sp.success === "message-sent" ?
           <p className="mt-6 rounded-md border border-emerald-400/35 bg-emerald-500/15 px-3 py-2 text-sm text-emerald-100">
             Deal message sent.
+          </p>
+        : null}
+        {sp.success === "dispute-logged" ?
+          <p className="mt-6 rounded-md border border-emerald-400/35 bg-emerald-500/15 px-3 py-2 text-sm text-emerald-100">
+            Your dispute summary was logged on the agreement timeline—counterparties see it on this same deal record.
           </p>
         : null}
         {sp.message === "inquiry-sent" ?
@@ -237,6 +245,14 @@ export default async function MessagesPage({ searchParams }: MessagesPageProps) 
                     ) : null}
                   </div>
                 : null}
+                <ContractDocumentsPanel
+                  agreementId={agreementShell.agreementId}
+                  signedContractUrl={agreementShell.signed_contract_url}
+                  contractStatus={agreementShell.contract_status}
+                  contractUploadedAt={agreementShell.contract_uploaded_at}
+                  contractExecutedAt={agreementShell.contract_executed_at}
+                  events={agreementTimelineEvents}
+                />
                 <AgreementThreadPanel
                   agreementId={agreementShell.agreementId}
                   threadId={agreementShell.threadId}

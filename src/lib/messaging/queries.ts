@@ -13,6 +13,10 @@ export type AgreementMessagingShell = {
   messages: MessageRow[];
   status: AgreementRow["status"];
   deal_checkpoint: AgreementRow["deal_checkpoint"];
+  signed_contract_url: string | null;
+  contract_status: AgreementRow["contract_status"];
+  contract_uploaded_at: string | null;
+  contract_executed_at: string | null;
 };
 
 export async function getAgreementMessagingShellIfViewer(
@@ -27,7 +31,9 @@ export async function getAgreementMessagingShellIfViewer(
 
   const { data: row, error } = await supabase
     .from("payment_agreements")
-    .select("id, status, deal_checkpoint")
+    .select(
+      "id, status, deal_checkpoint, signed_contract_url, contract_status, contract_uploaded_at, contract_executed_at"
+    )
     .eq("id", agreementId)
     .or(`buyer_id.eq.${user.id},seller_id.eq.${user.id}`)
     .maybeSingle();
@@ -42,6 +48,10 @@ export async function getAgreementMessagingShellIfViewer(
     messages: bundle?.messages ?? [],
     status: row.status,
     deal_checkpoint: row.deal_checkpoint,
+    signed_contract_url: row.signed_contract_url,
+    contract_status: row.contract_status,
+    contract_uploaded_at: row.contract_uploaded_at,
+    contract_executed_at: row.contract_executed_at,
   };
 }
 

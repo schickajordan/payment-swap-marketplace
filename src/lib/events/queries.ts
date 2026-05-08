@@ -68,6 +68,27 @@ export async function getAdminAgreementEvents(limit = 50): Promise<AgreementEven
   return data ?? [];
 }
 
+/** Timeline entries visible to buyer/seller (excludes internal ops notes). */
+export async function getParticipantAgreementEvents(
+  agreementId: string,
+  limit = 25,
+): Promise<AgreementEventRow[]> {
+  const supabase = await createServerSupabaseClient();
+  const { data, error } = await supabase
+    .from("agreement_events")
+    .select("*")
+    .eq("agreement_id", agreementId)
+    .eq("is_internal", false)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    throw new Error(`Failed to fetch agreement events: ${error.message}`);
+  }
+
+  return (data ?? []).slice().reverse();
+}
+
 export async function getNonInternalAgreementEventsByAgreementIds(
   agreementIds: string[]
 ): Promise<Map<string, AgreementEventRow[]>> {

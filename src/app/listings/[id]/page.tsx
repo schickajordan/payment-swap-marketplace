@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MarketingShell } from "@/components/layout/marketing-shell";
+import { STOCK_PHOTO } from "@/lib/marketing/stock-photos";
 import {
   ListingReviewsAggregatesJsonLd,
   ListingReviewsPanel,
@@ -367,7 +368,7 @@ export default async function ListingDetailPage({ params, searchParams }: Listin
                 <div className="relative aspect-[16/9] max-h-[min(420px,48vh)] w-full min-h-[200px] bg-[#050b18] md:aspect-[2/1]">
                   <div
                     className="absolute inset-0 bg-cover bg-[center_60%] opacity-90"
-                    style={{ backgroundImage: "url('/branding/hero-industrial-premium.svg')" }}
+                    style={{ backgroundImage: `url('${STOCK_PHOTO.catalogListingFallback}')` }}
                     role="img"
                     aria-hidden
                   />

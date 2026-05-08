@@ -1,6 +1,5 @@
 import Image from "next/image";
-
-const BRAND_CATALOG_FALLBACK = "/branding/hero-industrial-premium.svg";
+import { STOCK_PHOTO } from "@/lib/marketing/stock-photos";
 
 export type CatalogListingVisualProps = {
   /** Supabase public URL or other allowed image URL. */
@@ -38,10 +37,14 @@ export function CatalogListingVisual({
           quality={76}
         />
       : <div className="absolute inset-0 overflow-hidden">
-          <div
-            className={`absolute inset-0 bg-cover bg-[center_62%] opacity-[0.92] ${imageClassName}`}
-            style={{ backgroundImage: `url('${BRAND_CATALOG_FALLBACK}')` }}
-            aria-hidden
+          <Image
+            src={STOCK_PHOTO.catalogListingFallback}
+            alt=""
+            fill
+            sizes="(max-width:640px) 100vw,(max-width:1280px) 33vw, 320px"
+            className={`object-cover object-center opacity-[0.94] ${imageClassName}`}
+            loading="lazy"
+            quality={82}
           />
           <div
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050b18]/95 via-[#050b18]/35 to-[#050b18]/10"
