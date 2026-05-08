@@ -1,0 +1,1 @@
+-- Local-only seed hook for `supabase db reset`; production data comes from migrations + app usage.

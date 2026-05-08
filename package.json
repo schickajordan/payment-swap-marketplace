@@ -24,7 +24,10 @@
     "vercel:pull-env": "vercel env pull .env.vercel.pull --yes",
     "vercel:dev": "vercel dev",
     "vercel:inspect": "vercel inspect --logs",
-    "vercel:deploy:prod": "vercel deploy --prod --yes --non-interactive"
+    "vercel:deploy:prod": "vercel deploy --prod --yes --non-interactive",
+    "supabase:push": "npx supabase db push",
+    "supabase:start": "npx supabase start",
+    "supabase:stop": "npx supabase stop"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",
