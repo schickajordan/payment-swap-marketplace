@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MarketingShell } from "@/components/layout/marketing-shell";
@@ -337,11 +338,9 @@ export default async function ListingDetailPage({ params, searchParams }: Listin
             <p className="mt-2 whitespace-pre-wrap text-slate-200">{listing.description}</p>
           </section>
 
-          {assets.length > 0 ? (
-            <section className="mt-8">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
-                Media
-              </h2>
+          <section className="mt-8">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">Media</h2>
+            {assets.length > 0 ?
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 {assets.map((asset) =>
                   asset.asset_type === "video" ? (
@@ -365,8 +364,39 @@ export default async function ListingDetailPage({ params, searchParams }: Listin
                   )
                 )}
               </div>
-            </section>
-          ) : null}
+            : <div className="relative mt-3 overflow-hidden rounded-xl ring-1 ring-white/10">
+                <div className="relative aspect-[16/9] max-h-[min(420px,48vh)] w-full min-h-[200px] bg-[#050b18] md:aspect-[2/1]">
+                  <Image
+                    src="/branding/hero-industrial-premium.svg"
+                    alt=""
+                    fill
+                    className="object-cover object-[center_60%]"
+                    sizes="(max-width:768px) 100vw, 896px"
+                    priority={false}
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050b18] via-transparent to-[#050b18]/30"
+                    aria-hidden
+                  />
+                </div>
+                <div className="flex flex-col gap-3 border-t border-white/10 bg-[#050b18]/80 px-4 py-4 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm text-slate-300">
+                    {ownsListing ?
+                      "Your listing will look even stronger once you add site photos or walk-around video."
+                    : "This seller has not attached photos yet—the terms above are still in force."}
+                  </p>
+                  {ownsListing ?
+                    <Link
+                      href={`/seller/listings/${listing.id}/media`}
+                      className="shrink-0 rounded-md bg-gold px-4 py-2.5 text-center text-sm font-semibold text-[#071733] hover:bg-[#ffd14d]"
+                    >
+                      Add photos &amp; video
+                    </Link>
+                  : null}
+                </div>
+              </div>
+            }
+          </section>
 
           {canShowInquiry ?
             <ListingInquiryThreadPanel

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { CatalogListingVisual } from "@/components/listings/catalog-listing-visual";
 import { ListingTrustSignals } from "@/components/trust/listing-trust-signals";
 import { MARKETPLACE_DEAL_LANE_ENTRIES } from "@/lib/marketplace/deal-lanes";
 import { Database } from "@/lib/supabase/database.types";
@@ -47,36 +47,13 @@ export function MarketplaceCard({ listing, thumbnailUrl, demoPreview }: Marketpl
 
   const inner = (
     <>
-      {thumbnailUrl ? (
-        <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-black/50 ring-1 ring-white/10">
-          <Image
-            src={thumbnailUrl}
-            alt=""
-            fill
-            sizes="(max-width:640px) 100vw,(max-width:1280px) 33vw, 320px"
-            className="object-cover transition duration-500 group-hover:scale-[1.03]"
-            loading="lazy"
-            quality={76}
-          />
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/75 to-transparent"
-            aria-hidden
-          />
-          <div className="pointer-events-none absolute inset-x-0 bottom-3 flex flex-wrap items-center justify-between gap-1 px-3 text-[10px] font-semibold uppercase tracking-wide">
-            <span className="rounded bg-black/60 px-2 py-0.5 text-gold">{listing.category}</span>
-            <span className="rounded bg-black/60 px-2 py-0.5 text-emerald-200/95">{laneBadge}</span>
-            {listing.location_state ? (
-              <span className="rounded bg-black/60 px-2 py-0.5 text-white">{listing.location_state}</span>
-            ) : null}
-          </div>
-        </div>
-      ) : (
-        <div className="mb-4 flex aspect-[4/3] flex-col items-center justify-center gap-1 rounded-xl bg-[#08142c] ring-1 ring-white/10">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Awaiting imagery</span>
-          <span className="text-[10px] font-semibold uppercase tracking-wide text-emerald-200/90">{laneBadge}</span>
-          <span className="mt-1 text-xs text-muted">{listing.location_state ?? "—"}</span>
-        </div>
-      )}
+      <CatalogListingVisual
+        thumbnailUrl={thumbnailUrl}
+        category={listing.category}
+        laneBadge={laneBadge}
+        stateLabel={listing.location_state}
+        imageClassName="transition duration-500 group-hover:scale-[1.03]"
+      />
 
       <div className="flex flex-1 flex-col gap-2">
         <div>
