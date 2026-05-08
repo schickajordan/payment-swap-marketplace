@@ -13,14 +13,29 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#071733",
-          color: "#f2b705",
-          fontSize: 20,
-          fontWeight: 800,
-          letterSpacing: "-0.05em",
+          background: "#051b35",
+          borderRadius: 7,
+          border: "2px solid rgba(255,184,28,0.75)",
         }}
       >
-        PS
+        <div
+          style={{
+            width: 19,
+            height: 19,
+            borderRadius: 5,
+            border: "2px solid rgba(255,184,28,0.95)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#ffb81c",
+            fontSize: 12,
+            fontWeight: 800,
+            lineHeight: 1,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          PS
+        </div>
       </div>
     ),
     { ...size }

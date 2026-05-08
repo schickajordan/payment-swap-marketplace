@@ -159,6 +159,21 @@ export default function SupportPage() {
             </li>
           </ul>
         </section>
+
+        <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6">
+          <h2 className="text-lg font-semibold text-foreground">Agreements, signatures, and privacy</h2>
+          <ul className="mt-3 list-inside list-disc space-y-2 text-sm text-muted">
+            <li>Terms and Privacy documents are public so counterparties can review policy language before registering.</li>
+            <li>
+              Acceptance records are private and tied to authenticated business profiles (version + timestamp), not
+              published in public pages.
+            </li>
+            <li>
+              Deal contracts load in protected account workflows and are available only to authorized parties and
+              operations support.
+            </li>
+          </ul>
+        </section>
       </main>
     </MarketingShell>
   );

@@ -18,6 +18,10 @@ export default function PrivacyPage() {
           authorized parties, platform operations, or as required by law.
         </p>
         <p>
+          Terms and Privacy pages are intentionally public for transparent policy review, but each acceptance event is
+          recorded privately against your authenticated business profile.
+        </p>
+        <p>
           You can request account-data review through support channels. Some records may be retained for fraud,
           accounting, or legal-defense obligations.
         </p>

@@ -21,6 +21,10 @@ export default function TermsPage() {
           By using this service, you agree to business-use restrictions, accurate account information, and platform
           policies related to listings, payments, and dispute handling.
         </p>
+        <p>
+          Deal-specific agreement files are served through authorized account workflows only. Public pages show legal
+          policy text, while executed contract artifacts remain private to authorized parties and operations support.
+        </p>
       </div>
       <p className="mt-8 text-sm text-muted">
         Also review our{" "}
