@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { AuthBrandHeader } from "@/components/layout/auth-brand-header";
 import { authRoutes } from "@/lib/navigation";
 import { createClientSupabaseClient } from "@/lib/supabase/client";
 
@@ -67,25 +68,28 @@ export function PasswordRecoveryForm() {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center px-4 py-10">
-      <div className="rounded-2xl border border-white/10 bg-[#071733] p-6 shadow-xl shadow-black/20">
-        <h1 className="text-2xl font-bold text-white">Choose a new password</h1>
-        <p className="mt-2 text-sm text-slate-300">
+      <AuthBrandHeader />
+      <div className="panel-elevated rounded-2xl p-6 sm:p-8">
+        <h1 className="font-display text-2xl font-bold tracking-tight text-foreground md:text-[1.75rem]">
+          Choose a new password
+        </h1>
+        <p className="mt-2 text-sm text-muted">
           Use this page after opening the password-reset link from your email (same browser you started from is ideal).
         </p>
 
         {error ?
-          <p className="mt-4 rounded-md border border-red-300/40 bg-red-500/10 p-2 text-sm text-red-200">
+          <p className="mt-4 rounded-md border border-[var(--danger-border)] bg-[var(--danger-bg)] p-3 text-sm text-[var(--danger-text)]">
             {error}
           </p>
         : null}
         {recoveryHint && !error ?
-          <p className="mt-4 rounded-md border border-amber-300/35 bg-amber-500/10 p-2 text-xs text-amber-100">
+          <p className="mt-4 rounded-md border border-amber-500/35 bg-amber-500/10 p-3 text-xs text-foreground">
             {recoveryHint}
           </p>
         : null}
 
         <form onSubmit={submit} className="mt-6 flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm text-slate-200">
+          <label className="flex flex-col gap-1 text-sm text-foreground">
             New password
             <input
               type="password"
@@ -93,23 +97,26 @@ export function PasswordRecoveryForm() {
               onChange={(ev) => setPassword(ev.target.value)}
               required
               minLength={8}
-              className="rounded-md border border-white/20 bg-[#091c3d] px-3 py-2 text-white outline-none focus:border-gold"
+              className="input-field min-h-10 rounded-md px-3 py-2"
             />
           </label>
           <button
             type="submit"
-            className="rounded-md bg-gold px-4 py-2 text-sm font-semibold text-[#071733] hover:bg-[#ffd14d]"
+            className="rounded-md bg-[var(--button-primary-bg)] px-4 py-2.5 text-sm font-semibold text-[var(--button-primary-fg)] transition-colors hover:opacity-[0.93]"
           >
             Update password
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-slate-400">
-          <Link href={authRoutes.forgotPassword} className="font-semibold text-gold hover:underline">
+        <p className="mt-4 text-sm text-muted">
+          <Link
+            href={authRoutes.forgotPassword}
+            className="font-semibold text-[var(--link)] underline-offset-4 hover:underline"
+          >
             Request another reset
           </Link>{" "}
           ·{" "}
-          <Link href={authRoutes.signIn} className="text-gold hover:underline">
+          <Link href={authRoutes.signIn} className="font-semibold text-[var(--link)] underline-offset-4 hover:underline">
             Sign in
           </Link>
         </p>

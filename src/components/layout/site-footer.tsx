@@ -1,6 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { APP_NAME, INITIAL_FOCUS_CATEGORIES } from "@/lib/config/marketplace";
+import {
+  CURRENT_PRIVACY_VERSION,
+  CURRENT_TERMS_VERSION,
+  LEGAL_EFFECTIVE_DATE,
+} from "@/lib/legal/constants";
 import { footerAccountNav, footerCompanyNav } from "@/lib/navigation";
 import { MARKETPLACE_DEAL_LANE_ENTRIES } from "@/lib/marketplace/deal-lanes";
 import { marketplaceQueryString } from "@/lib/marketplace/url";
@@ -81,7 +86,16 @@ export function SiteFooter() {
           </nav>
         </div>
         <p className="mt-10 border-t border-[var(--nav-border)] pt-6 text-[11px] leading-relaxed text-[var(--footer-text)]">
-          © {new Date().getFullYear()} {APP_NAME}. For business counterparties only. Not a bank or lender.
+          © {new Date().getFullYear()} {APP_NAME}. For business counterparties only. Not a bank or lender. Policies
+          effective {LEGAL_EFFECTIVE_DATE}:{" "}
+          <Link href="/terms" className={`${footerLinkClass} font-medium`}>
+            Terms {CURRENT_TERMS_VERSION}
+          </Link>
+          {" · "}
+          <Link href="/privacy" className={`${footerLinkClass} font-medium`}>
+            Privacy {CURRENT_PRIVACY_VERSION}
+          </Link>
+          .
         </p>
       </div>
     </footer>

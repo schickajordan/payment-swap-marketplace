@@ -1,4 +1,5 @@
 import { PasswordRecoveryForm } from "@/components/account/password-recovery-form";
+import { HostingConfigBanner } from "@/components/layout/hosting-config-banner";
 
 export const metadata = {
   title: "Update password",
@@ -6,5 +7,10 @@ export const metadata = {
 };
 
 export default function UpdatePasswordRoutePage() {
-  return <PasswordRecoveryForm />;
+  return (
+    <>
+      <HostingConfigBanner />
+      <PasswordRecoveryForm />
+    </>
+  );
 }

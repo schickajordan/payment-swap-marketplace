@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { acceptLegalAction } from "@/app/(auth)/actions";
+import { AuthBrandHeader } from "@/components/layout/auth-brand-header";
 import { authRoutes } from "@/lib/navigation";
 
 type AcceptLegalPageProps = {
@@ -15,6 +16,7 @@ export default async function AcceptLegalPage({ searchParams }: AcceptLegalPageP
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center px-4 py-10">
+      <AuthBrandHeader />
       <div className="panel-elevated rounded-2xl p-6 sm:p-8">
         <h1 className="font-display text-2xl font-bold tracking-tight text-foreground md:text-[1.75rem]">
           Review legal agreements

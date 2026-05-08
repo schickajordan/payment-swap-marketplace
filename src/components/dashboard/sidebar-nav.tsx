@@ -17,11 +17,11 @@ export function SidebarNav() {
   return (
     <div className="shrink-0 md:w-52">
       <details className="group mb-4 md:mb-0 md:open:block">
-        <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm font-medium text-white md:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg border border-[var(--steel-line)] bg-[var(--card-muted)] px-3 py-2 text-sm font-medium text-foreground md:hidden">
           Menu
-          <span className="text-gold transition group-open:rotate-180">▾</span>
+          <span className="text-[var(--gold)] transition group-open:rotate-180">▾</span>
         </summary>
-        <nav className="mt-2 flex flex-col gap-1 pb-4 md:mt-0 md:sticky md:top-24 md:flex md:rounded-lg md:border md:border-white/10 md:bg-card md:p-2">
+        <nav className="mt-2 flex flex-col gap-1 pb-4 md:mt-0 md:sticky md:top-24 md:flex md:rounded-lg md:border md:border-[var(--steel-line)] md:bg-[var(--card)] md:p-2 md:shadow-sm">
           <p className="hidden px-2 pb-2 text-[10px] font-semibold uppercase tracking-wide text-muted md:block">
             Workspace
           </p>
@@ -38,8 +38,8 @@ export function SidebarNav() {
                 href={href}
                 className={`rounded-md px-3 py-2 text-sm transition ${
                   active
-                    ? "bg-gold/15 font-semibold text-gold"
-                    : "text-slate-200 hover:bg-white/10 hover:text-white"
+                    ? "border border-[var(--gold)]/35 bg-[var(--gold)]/12 font-semibold text-[var(--gold-strong)]"
+                    : "text-foreground hover:bg-[var(--card-muted)]"
                 }`}
               >
                 {label}

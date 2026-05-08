@@ -18,8 +18,8 @@ export async function DashboardShell({ title, subtitle, children }: DashboardShe
         <main className="min-w-0 flex-1">
           <section className="flex flex-wrap items-start justify-between gap-3 pb-6">
             <div>
-              <h1 className="text-2xl font-bold text-white md:text-3xl">{title}</h1>
-              <p className="mt-1 text-sm text-slate-300">{subtitle}</p>
+              <h1 className="font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">{title}</h1>
+              <p className="mt-1 text-sm text-muted">{subtitle}</p>
             </div>
           </section>
           {children}
