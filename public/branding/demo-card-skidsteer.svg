@@ -1,0 +1,18 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#0A223C"/>
+  <rect y="530" width="1200" height="270" fill="#153D63"/>
+  <rect x="220" y="360" width="520" height="190" rx="26" fill="#0D314D" stroke="#FFB81C" stroke-width="6"/>
+  <rect x="250" y="398" width="170" height="96" rx="14" fill="#123A5F"/>
+  <rect x="450" y="425" width="240" height="62" rx="10" fill="#184B74"/>
+  <rect x="510" y="502" width="120" height="30" rx="8" fill="#FFC627"/>
+  <circle cx="320" cy="586" r="68" fill="#123A5F" stroke="#FFC627" stroke-width="10"/>
+  <circle cx="640" cy="586" r="68" fill="#123A5F" stroke="#FFC627" stroke-width="10"/>
+  <circle cx="950" cy="140" r="170" fill="#FFB81C" opacity="0.18"/>
+  <rect width="1200" height="800" fill="url(#vignette)" opacity="0.5"/>
+  <defs>
+    <radialGradient id="vignette" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 390) rotate(90) scale(480 760)">
+      <stop offset="0.5" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.7"/>
+    </radialGradient>
+  </defs>
+</svg>

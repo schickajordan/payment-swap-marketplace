@@ -74,7 +74,7 @@ export default function DemoPage() {
           <div className="relative h-40 w-full md:h-52">
             <div
               className="absolute inset-0 bg-cover bg-[center_58%]"
-              style={{ backgroundImage: "url('/branding/hero-industrial-premium.svg')" }}
+              style={{ backgroundImage: "url('/branding/demo-control-room.svg')" }}
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#050b18]/88 via-[#050b18]/45 to-transparent" />
             <figcaption className="absolute inset-y-0 left-0 flex max-w-lg flex-col justify-center px-6 py-4 md:px-10">
@@ -142,6 +142,21 @@ export default function DemoPage() {
               </li>
             ))}
           </ol>
+          <div className="mt-8 overflow-hidden rounded-xl border border-slate-200">
+            <div className="relative h-40 md:h-52">
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/branding/home-marketplace-strip.svg')" }}
+                role="img"
+                aria-label="Equipment workflow visual"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#051b35]/80 via-[#051b35]/35 to-transparent" />
+              <p className="relative z-10 flex h-full max-w-2xl items-center px-5 text-sm font-medium leading-relaxed text-white md:px-7 md:text-base">
+                From listing entry to funded agreement, every stage is designed to keep information visible and
+                actionable for both parties.
+              </p>
+            </div>
+          </div>
         </section>
 
         <section

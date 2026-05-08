@@ -105,6 +105,24 @@ export default async function Home() {
 
         <DealTypesOverview />
 
+        <section className="overflow-hidden rounded-2xl border border-[var(--steel-line)] bg-[var(--card)] shadow-[0_20px_60px_-28px_rgba(5,27,53,0.35)]">
+          <div className="relative h-44 md:h-56">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url('/branding/home-marketplace-strip.svg')" }}
+              role="img"
+              aria-label="Heavy equipment marketplace visual collage"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#041425]/85 via-[#041425]/35 to-transparent" />
+            <div className="relative z-10 flex h-full max-w-3xl items-center px-6 md:px-10">
+              <p className="text-sm font-medium leading-relaxed text-white md:text-base">
+                Visual-first marketplace experience: equipment categories, payment lanes, and deal checkpoints surfaced
+                clearly before counterparties commit.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section className="rounded-xl border border-[var(--steel-line)] bg-card p-6 md:p-8" aria-labelledby="shop-by-category">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <h2 id="shop-by-category" className="font-display text-xl font-bold text-foreground md:text-2xl">
