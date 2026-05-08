@@ -230,8 +230,81 @@ body {
   background: linear-gradient(180deg, #eff3f8 0%, #e8eef4 45%, #e2eaf2 100%);
 }
 
+/** Slow ambient layer behind marketing chrome — skipped when reduced-motion applies globally. */
+.app-shell-atmosphere {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.app-shell-atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: -35% -20%;
+  background:
+    radial-gradient(ellipse 55% 45% at 12% 8%, rgba(255, 184, 28, 0.11), transparent 58%),
+    radial-gradient(ellipse 50% 40% at 88% 18%, rgba(10, 69, 128, 0.09), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(5, 27, 53, 0.06), transparent 60%);
+  animation: atmosphere-drift 28s ease-in-out infinite alternate;
+}
+
+.app-shell-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 120% 80% at 50% -10%, transparent 40%, rgba(255, 255, 255, 0.04) 72%, transparent 100%);
+  opacity: 0.85;
+  animation: atmosphere-drift-reverse 34s ease-in-out infinite alternate;
+}
+
+@keyframes atmosphere-drift {
+  from {
+    transform: translate3d(-2%, -1%, 0) rotate(-1deg);
+  }
+  to {
+    transform: translate3d(2%, 1.5%, 0) rotate(1deg);
+  }
+}
+
+@keyframes atmosphere-drift-reverse {
+  from {
+    opacity: 0.65;
+    transform: translate3d(1%, 0.5%, 0);
+  }
+  to {
+    opacity: 0.92;
+    transform: translate3d(-1.5%, -0.5%, 0);
+  }
+}
+
 [data-theme="dark"] .app-shell-bg {
   background: linear-gradient(180deg, #02080f 0%, #05101c 48%, #030d18 100%);
+}
+
+[data-theme="dark"] .app-shell-atmosphere::before {
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 5%, rgba(255, 184, 28, 0.14), transparent 55%),
+    radial-gradient(ellipse 45% 35% at 92% 22%, rgba(142, 197, 255, 0.08), transparent 50%),
+    radial-gradient(ellipse 80% 55% at 50% 108%, rgba(5, 27, 53, 0.45), transparent 58%);
+}
+
+[data-theme="dark"] .app-shell-atmosphere::after {
+  background: radial-gradient(ellipse 100% 60% at 50% -5%, transparent 48%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .app-shell-atmosphere::before {
+    background:
+      radial-gradient(ellipse 60% 50% at 10% 5%, rgba(255, 184, 28, 0.14), transparent 55%),
+      radial-gradient(ellipse 45% 35% at 92% 22%, rgba(142, 197, 255, 0.08), transparent 50%),
+      radial-gradient(ellipse 80% 55% at 50% 108%, rgba(5, 27, 53, 0.45), transparent 58%);
+  }
+
+  :root:not([data-theme]) .app-shell-atmosphere::after {
+    background: radial-gradient(ellipse 100% 60% at 50% -5%, transparent 48%, rgba(255, 255, 255, 0.03) 100%);
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -301,4 +374,96 @@ body {
 
 .motion-delay-md {
   animation-delay: 0.24s;
+}
+
+@keyframes hero-rail-shimmer {
+  from {
+    background-position: 200% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+.hero-accent-rail {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 184, 28, 0.15) 12%,
+    var(--gold) 45%,
+    var(--gold-strong) 58%,
+    rgba(255, 184, 28, 0.15) 88%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: hero-rail-shimmer 10s linear infinite;
+  box-shadow: 0 -1px 18px rgba(255, 184, 28, 0.25);
+}
+
+.marketing-card-lift {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease;
+}
+
+.marketing-card-lift:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--gold-strong) 38%, var(--steel-line));
+  box-shadow:
+    0 20px 40px rgba(5, 27, 53, 0.12),
+    0 0 0 1px color-mix(in srgb, var(--gold-strong) 22%, transparent);
+}
+
+[data-theme="dark"] .marketing-card-lift:hover {
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.4),
+    0 0 0 1px color-mix(in srgb, var(--gold-strong) 28%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .marketing-card-lift:hover {
+    box-shadow:
+      0 22px 48px rgba(0, 0, 0, 0.4),
+      0 0 0 1px color-mix(in srgb, var(--gold-strong) 28%, transparent);
+  }
+}
+
+.deal-lane-card-glow {
+  position: relative;
+}
+
+.deal-lane-card-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  height: 3px;
+  width: 100%;
+  border-radius: 9999px 9999px 0 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--gold-strong) 70%, transparent), transparent);
+  opacity: 0.85;
+}
+
+.stat-card-pulse-ring {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.stat-card-pulse-ring:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(5, 27, 53, 0.1);
+}
+
+.stat-card-pulse-ring:hover > div:first-child {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold-strong) 35%, transparent);
+}
+
+[data-theme="dark"] .stat-card-pulse-ring:hover {
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .stat-card-pulse-ring:hover {
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
+  }
 }

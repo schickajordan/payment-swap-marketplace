@@ -51,7 +51,7 @@ export function DealTypesOverview() {
         {DEAL_ROWS.map((row) => (
           <div
             key={row.heading}
-            className="rounded-lg border border-[var(--steel-line)] bg-[var(--card-muted)] p-5"
+            className="deal-lane-card-glow marketing-card-lift overflow-hidden rounded-lg border border-[var(--steel-line)] bg-[var(--card-muted)] p-5"
           >
             <p className="text-xs font-semibold uppercase tracking-wide text-gold">{row.heading}</p>
             <p className="mt-2 text-lg font-bold text-foreground">{row.summary}</p>

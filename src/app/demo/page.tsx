@@ -69,7 +69,7 @@ export default function DemoPage() {
           </p>
         </header>
 
-        <figure className="relative mt-10 overflow-hidden rounded-2xl border border-[var(--steel-line)] shadow-[0_20px_60px_-20px_rgba(5,27,53,0.35)]">
+        <figure className="marketing-card-lift relative mt-10 overflow-hidden rounded-2xl border border-[var(--steel-line)] shadow-[0_20px_60px_-20px_rgba(5,27,53,0.35)]">
           <div className="relative h-40 w-full md:h-52">
             <div
               className="absolute inset-0 bg-cover bg-[center_58%]"

@@ -122,7 +122,7 @@ export default async function Home() {
               <Link
                 key={cat}
                 href={`/marketplace${marketplaceQueryString({ category: cat })}`}
-                className="group rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] p-5 transition-colors hover:border-[var(--gold-strong)] hover:bg-[var(--card)]"
+                className="marketing-card-lift group rounded-xl border border-[var(--steel-line)] bg-[var(--card-muted)] p-5 hover:bg-[var(--card)]"
               >
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">Category</p>
                 <p className="mt-2 text-lg font-bold capitalize leading-snug text-foreground group-hover:text-gold">
@@ -165,7 +165,7 @@ export default async function Home() {
             {MOAT_PILLARS.map((line) => (
               <li
                 key={line}
-                className="rounded-lg border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-3 text-sm font-medium leading-relaxed text-foreground"
+                className="marketing-card-lift rounded-lg border border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-3 text-sm font-medium leading-relaxed text-foreground"
               >
                 {line}
               </li>

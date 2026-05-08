@@ -22,26 +22,30 @@ export async function MarketingShell({
     process.env.NODE_ENV === "development" && !isSupabaseConfigured();
 
   return (
-    <div className="app-shell-bg flex min-h-screen flex-col">
-      <TopNav marketplaceSearchDefault={catalogSearchDefault} />
-      <HostingConfigBanner />
-      {showLocalSetupBanner ?
-        <div className="border-b border-amber-400/50 bg-amber-950 px-4 py-2 text-center text-[11px] leading-snug text-amber-50 md:text-xs">
-          <strong className="font-semibold">Local preview:</strong> add your project&apos;s database API URL and public
-          key from the hosting dashboard to <span className="rounded bg-black/35 px-1 font-medium">.env.local</span> so
-          sign-up, dashboards, and listings match production. Add payment keys locally to exercise checkout.
-        </div>
-      : null}
-      <TrustDeliveryStrip />
-      {showComplianceStrip ? (
-        <aside className="border-b border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-2.5 text-center text-[11px] font-medium leading-snug text-foreground md:text-xs">
-          <strong className="font-semibold">Business accounts only.</strong> This marketplace coordinates transactions between
-          counterparties; it does not replace your attorney, lender, insurer, or DOT counsel. Published fees apply before
-          you pay.
-        </aside>
-      ) : null}
-      {children}
-      <SiteFooter />
+    <div className="app-shell-bg relative isolate min-h-screen">
+      <div className="app-shell-atmosphere" aria-hidden />
+      <div className="relative z-10 flex min-h-screen w-full flex-col">
+        <TopNav marketplaceSearchDefault={catalogSearchDefault} />
+        <HostingConfigBanner />
+        {showLocalSetupBanner ?
+          <div className="border-b border-amber-400/50 bg-amber-950 px-4 py-2 text-center text-[11px] leading-snug text-amber-50 md:text-xs">
+            <strong className="font-semibold">Local preview:</strong> add your project&apos;s database API URL and
+            public key from the hosting dashboard to{" "}
+            <span className="rounded bg-black/35 px-1 font-medium">.env.local</span> so sign-up, dashboards, and listings
+            match production. Add payment keys locally to exercise checkout.
+          </div>
+        : null}
+        <TrustDeliveryStrip />
+        {showComplianceStrip ? (
+          <aside className="border-b border-[var(--steel-line)] bg-[var(--card-muted)] px-4 py-2.5 text-center text-[11px] font-medium leading-snug text-foreground md:text-xs">
+            <strong className="font-semibold">Business accounts only.</strong> This marketplace coordinates transactions
+            between counterparties; it does not replace your attorney, lender, insurer, or DOT counsel. Published fees
+            apply before you pay.
+          </aside>
+        ) : null}
+        {children}
+        <SiteFooter />
+      </div>
     </div>
   );
 }

@@ -17,7 +17,7 @@ export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: Cinemat
     <section className="marketing-hero relative isolate overflow-hidden rounded-3xl border border-[var(--steel-line)] shadow-[0_32px_120px_-24px_rgba(0,0,0,0.75)] lg:rounded-[2rem]">
       <div className="pointer-events-none absolute inset-0">
         <div
-          className="animate-hero-zoom absolute inset-0 bg-cover bg-center opacity-[0.58]"
+          className="animate-hero-zoom absolute inset-0 bg-cover bg-center opacity-[0.64]"
           style={{ backgroundImage: "url('/branding/hero-industrial-premium.svg')" }}
           role="img"
           aria-label="Heavy equipment illustration on a job site"
@@ -43,10 +43,12 @@ export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: Cinemat
           <div className="animate-fade-up motion-delay-md mt-6 flex flex-wrap gap-3">{ctas}</div>
         </div>
 
-        <div className="relative border-t border-[var(--steel-line)] bg-[var(--card-muted)] p-6 backdrop-blur-xl md:border-t-0 md:border-l lg:max-w-sm lg:flex-none xl:max-w-md">
+        <div className="relative border-t border-[var(--steel-line)] bg-[var(--card-muted)]/95 p-6 backdrop-blur-xl md:border-t-0 md:border-l lg:max-w-sm lg:flex-none xl:max-w-md">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/35 to-transparent md:left-0 md:right-auto md:top-0 md:bottom-0 md:h-auto md:w-px md:bg-gradient-to-b" aria-hidden />
           <div className="animate-fade-up">{aside}</div>
         </div>
       </div>
+      <div className="hero-accent-rail pointer-events-none absolute inset-x-0 bottom-0 z-20 rounded-b-3xl lg:rounded-b-[2rem]" aria-hidden />
     </section>
   );
 }
