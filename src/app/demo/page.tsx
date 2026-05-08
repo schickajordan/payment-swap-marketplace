@@ -69,6 +69,22 @@ export default function DemoPage() {
           </p>
         </header>
 
+        <figure className="relative mt-10 overflow-hidden rounded-2xl border border-[var(--steel-line)] shadow-[0_20px_60px_-20px_rgba(5,27,53,0.35)]">
+          <div className="relative h-40 w-full md:h-52">
+            <div
+              className="absolute inset-0 bg-cover bg-[center_58%]"
+              style={{ backgroundImage: "url('/branding/hero-industrial-premium.svg')" }}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#050b18]/88 via-[#050b18]/45 to-transparent" />
+            <figcaption className="absolute inset-y-0 left-0 flex max-w-lg flex-col justify-center px-6 py-4 md:px-10">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">Same catalog chrome</span>
+              <span className="mt-2 font-display text-xl font-bold text-white md:text-2xl">
+                Buyers see monthly headlines, lanes, and trust chips—then real photos when sellers upload.
+              </span>
+            </figcaption>
+          </div>
+        </figure>
+
         <section
           id="buyer-preview"
           className="scroll-mt-24 mt-12 rounded-2xl border border-white/10 bg-[#070f24] px-4 py-8 md:px-8 md:py-10"

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
 
 type CinematicHeroProps = {
@@ -11,19 +10,17 @@ type CinematicHeroProps = {
 
 /**
  * Marketing hero with strong foreground scrims for WCAG readability on photographic backgrounds.
+ * SVG is applied via CSS background so it always paints (Next/Image + SVG + fill can render blank in production).
  */
 export function CinematicHero({ eyebrow, title, subtitle, aside, ctas }: CinematicHeroProps) {
   return (
     <section className="marketing-hero relative isolate overflow-hidden rounded-3xl border border-[var(--steel-line)] shadow-[0_32px_120px_-24px_rgba(0,0,0,0.75)] lg:rounded-[2rem]">
       <div className="pointer-events-none absolute inset-0">
-        <Image
-          src="/branding/hero-industrial-premium.svg"
-          alt="Heavy dump truck and excavator on a construction site"
-          fill
-          priority
-          sizes="(max-width: 1024px) 100vw, 1200px"
-          quality={82}
-          className="animate-hero-zoom object-cover object-center opacity-[0.48]"
+        <div
+          className="animate-hero-zoom absolute inset-0 bg-cover bg-center opacity-[0.58]"
+          style={{ backgroundImage: "url('/branding/hero-industrial-premium.svg')" }}
+          role="img"
+          aria-label="Heavy equipment illustration on a job site"
         />
         <div className="hero-grid-overlay absolute inset-0" aria-hidden />
         <div className="hero-vignette absolute inset-0" aria-hidden />

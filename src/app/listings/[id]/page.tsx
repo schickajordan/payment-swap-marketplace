@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MarketingShell } from "@/components/layout/marketing-shell";
@@ -366,13 +365,11 @@ export default async function ListingDetailPage({ params, searchParams }: Listin
               </div>
             : <div className="relative mt-3 overflow-hidden rounded-xl ring-1 ring-white/10">
                 <div className="relative aspect-[16/9] max-h-[min(420px,48vh)] w-full min-h-[200px] bg-[#050b18] md:aspect-[2/1]">
-                  <Image
-                    src="/branding/hero-industrial-premium.svg"
-                    alt=""
-                    fill
-                    className="object-cover object-[center_60%]"
-                    sizes="(max-width:768px) 100vw, 896px"
-                    priority={false}
+                  <div
+                    className="absolute inset-0 bg-cover bg-[center_60%] opacity-90"
+                    style={{ backgroundImage: "url('/branding/hero-industrial-premium.svg')" }}
+                    role="img"
+                    aria-hidden
                   />
                   <div
                     className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050b18] via-transparent to-[#050b18]/30"

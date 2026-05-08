@@ -37,14 +37,11 @@ export function CatalogListingVisual({
           loading="lazy"
           quality={76}
         />
-      : <>
-          <Image
-            src={BRAND_CATALOG_FALLBACK}
-            alt=""
-            fill
-            sizes="(max-width:640px) 100vw,(max-width:1280px) 33vw, 320px"
-            className={`object-cover object-[center_62%] opacity-[0.92] ${imageClassName}`}
-            priority={false}
+      : <div className="absolute inset-0 overflow-hidden">
+          <div
+            className={`absolute inset-0 bg-cover bg-[center_62%] opacity-[0.92] ${imageClassName}`}
+            style={{ backgroundImage: `url('${BRAND_CATALOG_FALLBACK}')` }}
+            aria-hidden
           />
           <div
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050b18]/95 via-[#050b18]/35 to-[#050b18]/10"
@@ -54,7 +51,7 @@ export function CatalogListingVisual({
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_70%_25%,rgba(242,183,5,0.14),transparent_50%)]"
             aria-hidden
           />
-        </>
+        </div>
       }
       <div
         className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/80 to-transparent"
